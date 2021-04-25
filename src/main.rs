@@ -93,7 +93,7 @@ fn copy_other_files() {
         &other_files,
         "docs/examples",
         &fs_extra::dir::CopyOptions {
-            skip_exist: true,
+            overwrite: true,
             ..fs_extra::dir::CopyOptions::new()
         },
     )
@@ -112,7 +112,7 @@ fn copy_assets() {
         &assets,
         "docs",
         &fs_extra::dir::CopyOptions {
-            skip_exist: true,
+            overwrite: true,
             ..fs_extra::dir::CopyOptions::new()
         },
     )
