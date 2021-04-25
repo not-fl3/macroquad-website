@@ -46,7 +46,7 @@ fn build_wasm(name: &str) {
 }
 
 fn get_examples() -> Vec<String> {
-    std::fs::read_dir(format!("{}/examples/", MACROQUAD_PATH))
+    let mut result = std::fs::read_dir(format!("{}/examples/", MACROQUAD_PATH))
         .unwrap()
         .map(|entry| entry.unwrap())
         .map(|entry| entry.file_name().to_str().unwrap().to_owned())
@@ -55,7 +55,9 @@ fn get_examples() -> Vec<String> {
             name.truncate(name.len() - RUST_EXTENSION.len());
             name
         })
-        .collect::<Vec<_>>()
+        .collect::<Vec<_>>();
+    result.sort();
+    result
 }
 
 fn create_html(examples: &[String]) {
@@ -117,6 +119,25 @@ fn copy_assets() {
     .unwrap();
 }
 
+fn copy_overrided_images() {
+    let assets = std::fs::read_dir("images")
+        .unwrap()
+        .map(|entry| entry.unwrap())
+        .map(|entry| entry.file_name().to_str().unwrap().to_owned())
+        .map(|name| format!("images/{}", name))
+        .collect::<Vec<_>>();
+
+    fs_extra::copy_items(
+        &assets,
+        "docs/images",
+        &fs_extra::dir::CopyOptions {
+            overwrite: true,
+            ..fs_extra::dir::CopyOptions::new()
+        },
+    )
+    .unwrap();
+}
+
 fn main() {
     drop(std::fs::create_dir("docs"));
     drop(std::fs::create_dir("docs/examples"));
@@ -135,7 +156,7 @@ fn main() {
     println!("[[buildng wasms]]");
     for example in &examples {
         println!("{}", example);
-        // build_wasm(&example);
+        build_wasm(&example);
     }
     println!("---");
 
@@ -144,6 +165,9 @@ fn main() {
 
     println!("[[copy assets]]");
     copy_assets();
+
+    println!("[[copy overrided imagesu]]");
+    copy_overrided_images();
 
     println!("[[copy other files]]");
     copy_other_files();

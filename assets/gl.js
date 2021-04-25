@@ -8,7 +8,7 @@
 
 "use strict";
 
-const version = "0.1.25";
+const version = "0.1.24";
 
 const canvas = document.querySelector("#glcanvas");
 const gl = canvas.getContext("webgl");
@@ -1024,40 +1024,40 @@ var importObject = {
                 GL.textures[id] = null;
             }
         },
-		glGenQueries: function (n, ids) {
-			_glGenObject(n, ids, 'createQuery', GL.timerQueries, 'glGenQueries');
-		},
-		glDeleteQueries: function (n, ids) {
+        glGenQueries: function (n, ids) {
+            _glGenObject(n, ids, 'createQuery', GL.timerQueries, 'glGenQueries');
+        },
+        glDeleteQueries: function (n, ids) {
             for (var i = 0; i < n; i++) {
                 var id = getArray(textures + i * 4, Uint32Array, 1)[0];
                 var query = GL.timerQueries[id];
                 if (!query) {
-					continue;
-				}
+                    continue;
+                }
                 gl.deleteQuery(query);
                 query.name = 0;
                 GL.timerQueries[id] = null;
             }
-		},
-		glBeginQuery: function (target, id) {
-			GL.validateGLObjectID(GL.timerQueries, id, 'glBeginQuery', 'id');
-			gl.beginQuery(target, GL.timerQueries[id]);
-		},
-		glEndQuery: function (target) {
-			gl.endQuery(target);
-		},
-		glGetQueryObjectiv: function (id, pname, ptr) {
-			GL.validateGLObjectID(GL.timerQueries, id, 'glGetQueryObjectiv', 'id');
-			let result = gl.getQueryObject(GL.timerQueries[id], pname);
-			getArray(ptr, Uint32Array, 1)[0] = result;
-		},
-		glGetQueryObjectui64v: function (id, pname, ptr) {
-			GL.validateGLObjectID(GL.timerQueries, id, 'glGetQueryObjectui64v', 'id');
-			let result = gl.getQueryObject(GL.timerQueries[id], pname);
-			let heap = getArray(ptr, Uint32Array, 2);
-			heap[0] = result;
-			heap[1] = (result - heap[0])/4294967296;
-		},
+        },
+        glBeginQuery: function (target, id) {
+            GL.validateGLObjectID(GL.timerQueries, id, 'glBeginQuery', 'id');
+            gl.beginQuery(target, GL.timerQueries[id]);
+        },
+        glEndQuery: function (target) {
+            gl.endQuery(target);
+        },
+        glGetQueryObjectiv: function (id, pname, ptr) {
+            GL.validateGLObjectID(GL.timerQueries, id, 'glGetQueryObjectiv', 'id');
+            let result = gl.getQueryObject(GL.timerQueries[id], pname);
+            getArray(ptr, Uint32Array, 1)[0] = result;
+        },
+        glGetQueryObjectui64v: function (id, pname, ptr) {
+            GL.validateGLObjectID(GL.timerQueries, id, 'glGetQueryObjectui64v', 'id');
+            let result = gl.getQueryObject(GL.timerQueries[id], pname);
+            let heap = getArray(ptr, Uint32Array, 2);
+            heap[0] = result;
+            heap[1] = (result - heap[0])/4294967296;
+        },
         setup_canvas_size: function(high_dpi) {
             window.high_dpi = high_dpi;
             resize(canvas);
@@ -1149,28 +1149,28 @@ var importObject = {
                 event.preventDefault();
 
                 for (const touch of event.changedTouches) {
-                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_BEGAN, touch.identifier, Math.floor(touch.clientX) * dpi_scale(), Math.floor(touch.clientY) * dpi_scale());
+                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_BEGAN, touch.identifier, Math.floor(touch.clientX), Math.floor(touch.clientY));
                 }
             });
             canvas.addEventListener("touchend", function (event) {
                 event.preventDefault();
 
                 for (const touch of event.changedTouches) {
-                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_ENDED, touch.identifier, Math.floor(touch.clientX) * dpi_scale(), Math.floor(touch.clientY) * dpi_scale());
+                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_ENDED, touch.identifier, Math.floor(touch.clientX), Math.floor(touch.clientY));
                 }
             });
             canvas.addEventListener("touchcancel", function (event) {
                 event.preventDefault();
 
                 for (const touch of event.changedTouches) {
-                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_CANCELED, touch.identifier, Math.floor(touch.clientX) * dpi_scale(), Math.floor(touch.clientY) * dpi_scale());
+                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_CANCELED, touch.identifier, Math.floor(touch.clientX), Math.floor(touch.clientY));
                 }
             });
             canvas.addEventListener("touchmove", function (event) {
                 event.preventDefault();
 
                 for (const touch of event.changedTouches) {
-                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_MOVED, touch.identifier, Math.floor(touch.clientX) * dpi_scale(), Math.floor(touch.clientY) * dpi_scale());
+                    wasm_exports.touch(SAPP_EVENTTYPE_TOUCHES_MOVED, touch.identifier, Math.floor(touch.clientX), Math.floor(touch.clientY));
                 }
             });
 
@@ -1315,7 +1315,7 @@ function init_plugins(plugins) {
             var version_func = plugins[i].name + "_crate_version";
 
             if (wasm_exports[version_func] == undefined) {
-                console.error("Plugin " + plugins[i].name + " miss version function: " + version_func + ". Probably invalid crate version.");
+                console.log("Plugin " + plugins[i].name + " is present in JS bundle, but is not used in the rust code.");
             } else {
                 var crate_version = u32_to_semver(wasm_exports[version_func]());
 
