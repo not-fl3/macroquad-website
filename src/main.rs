@@ -67,7 +67,7 @@ fn create_html(examples: &[String]) {
 
     let entries = examples
         .iter()
-        .map(|name| INDEX_ENTRY.replace("%%NAME%%", name))
+        .map(|name| INDEX_ENTRY.replace("%%NAME%%", name).replace("%%NAME_SPACED%%", &name.replace('_', " ")))
         .collect::<Vec<_>>()
         .join("\n");
 
