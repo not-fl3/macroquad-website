@@ -1,0 +1,51 @@
+base_url = "https://macroquad.rs/"
+title = "Macroquad"
+description = "Macroquad is a simple and easy to use game library for Rust programming language."
+
+default_language = "en"
+compile_sass = false
+generate_feed = true
+minify_html = false
+build_search_index = false
+
+[markdown]
+highlight_code = true
+highlight_theme = "inspired-github"
+
+language_code = "en-US"
+
+theme_color = "#fff"
+
+timeformat = "%B %e, %Y" # e.g. June 14, 2021
+timezone = "America/New_York"
+
+# The homepage contents
+[extra.home]
+title = "Macroquad"
+lead = "Simple and easy to use game library for Rust programming language."
+url = "/examples"
+repo_version = "GitHub v0.3.1"
+repo_license = "Open-source MIT License."
+repo_url = "https://github.com/not-fl3/macroquad"
+
+[[extra.home.list]]
+title = "HTML5"
+content = "First class browsers support, WebGL1 and IOS Safari supported."
+
+[[extra.home.list]]
+title = "Android"
+content = "Single command docker-powered android builds."
+
+[[extra.home.list]]
+title = "IOS"
+content = "Export to XCode project for IOS."
+
+[[extra.home.list]]
+title = "PC"
+content = "Linux/Mac/Windows with no external system dependencies."
+
+[[extra.home.list]]
+title = "Batteries included"
+content = "UI, efficient 2D rendering, sound system - everything needed to make a 2D game included!"
+
+

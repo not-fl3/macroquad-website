@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block header %}
+{{ macros_header::header(current_section="/examples") }}
+{% endblock header %}
+
+{% block content %}
+
+<style type="text/css">
+.ui.cards > .card > .image > img, .ui.card > .image > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.ui.card > .image > img, .ui.cards > .card > .image > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.text h1.ui.header {
+    font-size: 4em;
+    font-weight: normal;
+}
+
+main {
+    margin: 3em 0em;
+}
+
+ul {
+    padding: 0px;
+}
+</style>
+
+<section>
+  <div class="ui modal">
+    <h2 class="ui header">
+      <a id="popup_url" href="" class="ui circular image">
+        <img src="/GitHub-Mark-32px.png" width="16px" >
+      </a>
+      <span id="popup_header"></span>
+    </h2>
+    <div id="popup_content" class="ui embed" data-icon="right circle arrow">
+    </div>
+  </div>
+  
+<div class="ui vertical stripe">
+<div class="ui container">
+<ul class="ui stackable cards nolist four">
+  {% for post in section.pages %}
+  <li class="ui card">
+    <a class="image" onclick="show_modal('{{ post.title }}', '{{ post.extra.gh_source }}', '{{ post.extra.screenshot }}', '{{post.extra.wasm_source}}')">
+      <img src="{{ post.extra.screenshot }}">
+    </a>
+    <div class="content">
+      <a href="{{post.extra.gh_source}}">
+        <i class="right floated">
+          <img src="/GitHub-Mark-32px.png" width="16px">
+        </i>
+      </a>
+      <div class="header">
+        {{ post.title }}
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+</div>
+</div>
+</section>
+
+<script>
+  function show_modal(title, src, preview, url) {
+      $('#popup_header')[0].innerHTML = title;
+      $('#popup_url')[0].setAttribute("href", src);
+      $(".ui.modal").modal("show");
+      $('.ui.embed').embed({
+          'placeholder': preview,
+          'url': url
+      });
+  }
+  $(function(){
+      $(".ui.modal").modal({
+	  closable: true
+      });
+  });
+</script>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block header %}
+{{ macros_header::header(current_section="/docs") }}
+{% endblock header %}
+
+{% block content %}
+
+<iframe id="myIframe" src="https://docs.rs/macroquad" style="overflow:hidden;height:2000px;width:100%"></iframe>
+
+
+{% endblock content %}

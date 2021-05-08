@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block seo %}
+  {{ super() }}
+
+  {% if config.title %}
+    {% set title = config.title %}
+  {% else %}
+    {% set title = "" %}
+  {% endif %}
+  
+  {% if config.extra.title_addition and title %}
+    {% set title_addition = title_separator ~ config.extra.title_addition %}
+  {% elif config.extra.title_addition %}
+    {% set title_addition = config.extra.title_addition %}
+  {% else %}
+    {% set title_addition = "" %}
+  {% endif %}
+  
+  {% set description = config.description %}
+  
+  {{ macros_head::seo(title=title, title_addition=title_addition, description=description, is_home=true) }}
+{% endblock seo %}
+
+{% block content %}
+
+<style>
+  .bigger.text {
+      font-size: calc(1.875rem + 1.5vw) !important;
+      margin: 2rem 0 1rem;
+  }
+
+  .large.text {
+      font-size: 1.5rem !important;
+  }
+</style>
+
+<div class="ui vertical center aligned container">
+  <div class="ui container">
+    <div class="ui text container">
+      <h1 class="bigger text">
+        {{config.title}}
+      </h1>
+      <p class="large text">{{config.extra.home.lead}}</p>
+        <a class="ui huge secondary inverted button" href="/examples">Browse examples</a>
+    </div>
+  </div>
+</div>
+
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+<section>
+  <div class="ui centered stackable relaxed grid container">
+    {% for val in config.extra.home.list %}
+    <div class="five wide tablet five wide computer column">
+      <div class="ui center aligned container">
+        <h2 class="h4">{{ val.title }}</h2>
+        <p class="large text">{{ val.content }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<p class=""></p>
+{% endblock content %}

@@ -3,7 +3,7 @@
 	<title>Macroquad</title>
 	<subtitle>Macroquad is a simple and easy to use game library for Rust programming language.</subtitle>
 	<link href="https://macroquad.rs/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://macroquad.rs"/>
+  <link href="https://macroquad.rs/"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2021-05-01T09:19:42+00:00</updated>
 	<id>https://macroquad.rs/atom.xml</id>
@@ -11,9 +11,9 @@
 		<title>Making an online multiplayer game in Rust with Nakama</title>
 		<published>2021-05-01T09:19:42+00:00</published>
 		<updated>2021-05-01T09:19:42+00:00</updated>
-		<link href="https://macroquad.rs/blog/hello-world/" type="text/html"/>
-		<id>https://macroquad.rs/blog/hello-world/</id>
-		<content type="html">&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;910977&#x2F;106779317-7dbb4e00-660c-11eb-84e6-83c9f5e73758.gif&quot; alt=&quot;fish&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+		<link href="https://macroquad.rs/tutorials/fish-tutorial/" type="text/html"/>
+		<id>https://macroquad.rs/tutorials/fish-tutorial/</id>
+		<content type="html">&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;title.gif&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Fish Game is a 2-4 player online game built in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;not-fl3&#x2F;macroquad&#x2F;&quot;&gt;Macroquad&lt;&#x2F;a&gt; game engine and the &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;&quot;&gt;Rust&lt;&#x2F;a&gt; programming language. The game was created as a demonstration of &lt;a href=&quot;https:&#x2F;&#x2F;heroiclabs.com&#x2F;&quot;&gt;Nakama&lt;&#x2F;a&gt;, an open-source scalable game server.&lt;&#x2F;p&gt;
 &lt;p&gt;As you can see, Fish Game is a frenetic platformer arena starring murderous fish - the last fish standing wins! The game design is heavily inspired by the excellent &lt;a href=&quot;https:&#x2F;&#x2F;store.steampowered.com&#x2F;app&#x2F;312530&#x2F;Duck_Game&#x2F;&quot;&gt;Duck Game&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;The game is playable &lt;a href=&quot;https:&#x2F;&#x2F;fedorgames.itch.io&#x2F;fish-game?secret=UAVcggHn332a&quot;&gt;online on itch.io&lt;&#x2F;a&gt; and the Windows&#x2F;Linux&#x2F;Mac native version may be built from &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&quot;&gt;the source&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
@@ -26,7 +26,7 @@
 &lt;li&gt;Leaderboards&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;p&gt;This tutorial will briefly cover how to create a game with Macroquad. Afterward, it will focus on Nakama integration.&lt;&#x2F;p&gt;
-&lt;h1 id=&quot;making-a-platform-game&quot;&gt;Making a platform game&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;making-a-platformer-game&quot;&gt;Making a platformer game&lt;&#x2F;h1&gt;
 &lt;p&gt;This part of the tutorial will explain how to create a single-player platformer game in Rust, starting with setting up macroquad. By the end of this section, we will have created a simple but fully functional platformer.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;setting-up-macroquad&quot;&gt;Setting up macroquad&lt;&#x2F;h2&gt;
 &lt;p&gt;Start an empty Rust project:&lt;&#x2F;p&gt;
@@ -47,7 +47,7 @@ Hello, world!
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;...
 
 [dependencies]
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.3.0-alpha&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# TODO: double check that tutorial will be published with &amp;quot;0.3&amp;quot; instead!!11
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.3&amp;quot;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Open &lt;code&gt;src&#x2F;main.rs&lt;&#x2F;code&gt; and add some macroquad drawing code to check that everything works (took this from &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;not-fl3&#x2F;macroquad&#x2F;tree&#x2F;master&#x2F;examples&quot;&gt;macroquad examples&lt;&#x2F;a&gt;):&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;code&gt;src&#x2F;main.rs&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
@@ -69,27 +69,26 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
     }
 }
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
-&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; cargo run
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;R3KOWKc.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;&amp;gt; cargo run
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;itworks.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;If we got a window with some shapes: All good, the project is set up correctly. Now it&#x27;s time to draw more shapes to make it look like a game.&lt;&#x2F;p&gt;
 &lt;p&gt;If instead of a window, we have some errors: Maybe some native dependency is missing. Most likely, it is one of these: &lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#323232;&quot;&gt;apt install libx11-dev libxi-dev libgl1-mesa-dev
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;For more details, check the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;not-fl3&#x2F;miniquad&#x2F;#building-examples&quot;&gt;build instructions&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;For more details, check the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;not-fl3&#x2F;macroquad&#x2F;#building-instructions&quot;&gt;build instructions&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;making-game-levels&quot;&gt;Making game levels&lt;&#x2F;h2&gt;
 &lt;p&gt;The easiest way to do some 2D-level design with macroquad is with the free tiles editor &lt;a href=&quot;https:&#x2F;&#x2F;www.mapeditor.org&quot;&gt;Tiled&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;UpCMmbn.png&quot; alt=&quot;&quot; &#x2F;&gt;
-&lt;em&gt;Tiled with &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;assets&#x2F;map.json&quot;&gt;Fish Game&#x27;s level&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;We have a [crate](no we don&#x27;t yet) for reading tiled data in macroquad. 
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;tiled.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
+&lt;p&gt;&lt;em&gt;Tiled with &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;assets&#x2F;map.json&quot;&gt;Fish Game&#x27;s level&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;We have a &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;macroquad-tiled&quot;&gt;crate&lt;&#x2F;a&gt; for reading tiled data in macroquad. 
 &lt;code&gt;our Cargo.toml&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;background-color:#f5f5f5;font-weight:bold;color:#b52a1d;&quot;&gt;...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;
 [dependencies]
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.3.0-alpha&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.3&amp;quot;
 &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# the new dependency, macroquad-tiled crate:
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad-tiled &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;not published :(&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad-tiled &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.1&amp;quot;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Then load the Tiled map to macroquad and draw a level:&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;code&gt;src&#x2F;main.rs&lt;&#x2F;code&gt;, all assets are in &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;tree&#x2F;master&#x2F;assets&quot;&gt;the Fish Game repo&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
@@ -122,8 +121,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;next_frame&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;().await;
     }
 }
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;Z9IokGj.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;background.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Now we have a level background. For a more polished game, it would be reasonable to invest some time into a more complicated camera, window handling, etc.
 All of those are implemented in the final Fish Game but will be skipped in the tutorial to get started with Nakama faster.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;character-physics&quot;&gt;Character physics&lt;&#x2F;h2&gt;
@@ -156,8 +154,7 @@ let&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; whale &lt;&#x
 
     &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;...
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;}
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;3Tm1YXI.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;character.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Now we have a character and a level. The next step is to allow the user to move the character.&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; fish_pos &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;vec2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;200.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;100.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;);
@@ -183,16 +180,15 @@ let&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; whale &lt;&#x
         fish_pos.y &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;+= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;2.0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;;
     }
 }
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;RF50Obp.gif&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;character_moving.gif&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;There are lots hard-coded corner cases to take into account, but putting all of this together gives us a complete platformer character mechanic.&lt;&#x2F;p&gt;
-&lt;p&gt;There is a crate with platformer physics implementation based on the brilliant &lt;a href=&quot;https:&#x2F;&#x2F;maddythorson.medium.com&#x2F;celeste-and-towerfall-physics-d24bd2ae0fc5&quot;&gt;article on Celeste and Towerfall physics&lt;&#x2F;a&gt;: TODO: link to a crate.&lt;&#x2F;p&gt;
+&lt;p&gt;There is a crate with platformer physics implementation based on the brilliant &lt;a href=&quot;https:&#x2F;&#x2F;maddythorson.medium.com&#x2F;celeste-and-towerfall-physics-d24bd2ae0fc5&quot;&gt;article on Celeste and Towerfall physics&lt;&#x2F;a&gt;: &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;macroquad-platformer&quot;&gt;macroquad-platformer&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;code&gt;Cargo.toml&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;color:#323232;&quot;&gt;[dependencies]
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.3.0-alpha&amp;quot;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad-tiled &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;not published :(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#f5f5f5;font-weight:bold;color:#b52a1d;&quot;&gt;  TODO!!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;physics-platformer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;not published :(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#f5f5f5;font-weight:bold;color:#b52a1d;&quot;&gt; TODO!!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.3&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad-tiled &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.1&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#63a35c;&quot;&gt;macroquad-platformer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;0.1&amp;quot;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;With the new crate involved, the code will look like the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;not-fl3&#x2F;macroquad&#x2F;blob&#x2F;master&#x2F;examples&#x2F;platformer.rs&quot;&gt;platformer example&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
@@ -221,7 +217,7 @@ world.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;add_static_
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gist.github.com&#x2F;not-fl3&#x2F;a51dbff5f09c04d5a371e55db4c48e13&quot;&gt;Full source code&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Now the fish can jump!&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;hci9hi8.gif&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;fish_jump.gif&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;h2 id=&quot;nodes&quot;&gt;Nodes&lt;&#x2F;h2&gt;
 &lt;p&gt;Now we have enough of a game to start adding Nakama networking. Just one final piece missing.&lt;&#x2F;p&gt;
 &lt;p&gt;So far, the game code looks like this:&lt;&#x2F;p&gt;
@@ -327,7 +323,6 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gist.github.com&#x2F;not-fl3&#x2F;a98d9f9e37a01be8bc2f0d246164b8bb&quot;&gt;Full source code&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;It may not look like a big improvement over the previous approach, but scenes allow building complicated node relationships and applying iteration strategies over scene nodes. We are going to use it a lot more in the upcoming sections.&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;networking-with-nakama&quot;&gt;Networking with Nakama&lt;&#x2F;h1&gt;
-&lt;p&gt;TODO: check that the link is correct&lt;&#x2F;p&gt;
 &lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;nakama-rs&#x2F;&quot;&gt;&amp;quot;nakama-rs&amp;quot;&lt;&#x2F;a&gt; crate is a pure Rust implementation of the Nakama protocol.&lt;&#x2F;p&gt;
 &lt;p&gt;It allows working with Nakama in three different styles. &lt;&#x2F;p&gt;
 &lt;ul&gt;
@@ -335,7 +330,8 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 &lt;li&gt;nakama-rs can make Rest&#x2F;WebSocket calls with that raw data, but with a very low-level interface over requests.&lt;&#x2F;li&gt;
 &lt;li&gt;Very high-level stateful client, which hides implementation details completely.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;p&gt;For Fish Game, we are going to use that high-level client.  That client works as a giant state machine - the user makes non-blocking calls, and the client may change some internal state based on those calls.&lt;&#x2F;p&gt;
+&lt;p&gt;For Fish Game, we are going to use that high-level client.  That client works as a giant state machine - the user makes non-blocking calls, and the client may change some internal state based on those calls.
+Than in the main loop game pull changes from the ApiClient and may react accordingly.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;connecting-to-nakama&quot;&gt;Connecting to Nakama&lt;&#x2F;h2&gt;
 &lt;p&gt;nakama-rs&#x27; ApiClient will be used as a singleton. Once a global object is created, it is persisted throughout the game lifetime and is globally accessible.&lt;&#x2F;p&gt;
 &lt;p&gt;In macroquad, we can use the node system for this. It will still be a singleton, but the access and relationship graph with our new Nakama node will be easily traceable and visible.&lt;&#x2F;p&gt;
@@ -379,7 +375,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;} 
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;authentication-and-registration&quot;&gt;Authentication and registration&lt;&#x2F;h2&gt;
 &lt;p&gt;Macroquad uses the immediate mode gui concept for UI. Here we will skip GUI style setup (it may be found &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;gui.rs#L36&quot;&gt;here&lt;&#x2F;a&gt;), and we will proceed to the UI logic instead.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;Z2RBVbM.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;login.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Most UI windows interacting with Nakama are built in the same way:&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;get Nakama node&lt;&#x2F;li&gt;
@@ -435,7 +431,7 @@ Any data sent through a match is immediately routed to all other participants. T
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;}
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Now let&#x27;s focus on how Nakama&#x27;s real-time matches work.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;wQLOBEx.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;matchmaker.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;To create a match:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#323232;&quot;&gt;nakama.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;socket_create_match&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;();
@@ -449,9 +445,9 @@ Any data sent through a match is immediately routed to all other participants. T
 &lt;ul&gt;
 &lt;li&gt;Match discoverability.
 Sharing a match id with a friend works for private games, but we need a better solution for public games.
-This will be addressed in the &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;blog&#x2F;hello-world&#x2F;#Matchmaker&quot;&gt;Matchmaker&lt;&#x2F;a&gt; section.&lt;&#x2F;li&gt;
+This will be addressed in the &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;fish-tutorial&#x2F;#Matchmaker&quot;&gt;Matchmaker&lt;&#x2F;a&gt; section.&lt;&#x2F;li&gt;
 &lt;li&gt;Nakama considers a match started right after the &lt;code&gt;create_match&lt;&#x2F;code&gt; call, and anyone can join at any moment. While the rules of Fish Game won&#x27;t let players join in the middle, and the game starts only when all of the players have pressed the “ready” button.
-This will be addressed in the &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;blog&#x2F;hello-world&#x2F;#Ready-window&quot;&gt;Ready window&lt;&#x2F;a&gt; section.&lt;&#x2F;li&gt;
+This will be addressed in the &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;fish-tutorial&#x2F;#Ready-window&quot;&gt;Ready window&lt;&#x2F;a&gt; section.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;h2 id=&quot;matchmaker&quot;&gt;Matchmaker&lt;&#x2F;h2&gt;
 &lt;p&gt;You can use the Matchmaker to find other players. It is possible to match them using properties and a query that specifies the values the other players&#x27; properties should hold. In &lt;code&gt;nakama-rs&lt;&#x2F;code&gt; the Matchmaker is a &lt;code&gt;struct&lt;&#x2F;code&gt; and can be created using &lt;code&gt;Matchmaker::new()&lt;&#x2F;code&gt;. There are two types of properties, string properties and numeric properties that can be added with &lt;code&gt;matchmaker.add_string_property(&amp;quot;name&amp;quot;, &amp;quot;value&amp;quot;)&lt;&#x2F;code&gt; and &lt;code&gt;matchmaker.add_numeric_property(&amp;quot;rank&amp;quot;, 1000.0)&lt;&#x2F;code&gt; respectively. Names of properties should be unique across both types.&lt;&#x2F;p&gt;
@@ -481,7 +477,7 @@ This will be addressed in the &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x
     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;();
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;In addition, it is possible to specify the minimum and the maximum number of players using &lt;code&gt;matchmaker.min(2)&lt;&#x2F;code&gt; and &lt;code&gt;matchmaker.max(100)&lt;&#x2F;code&gt;. The default values are 2 and 100, respectively.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;0rZ5reB.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;matchmaker2.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Fish Game only specifies one property called &lt;code&gt;&amp;quot;engine&amp;quot;&lt;&#x2F;code&gt; with the value &lt;code&gt;macroquad_engine&lt;&#x2F;code&gt;. The query only specifies that we also match players holding the same value for that property, allowing us to avoid matchmaking players running a different game on the same Nakama server.&lt;&#x2F;p&gt;
 &lt;p&gt;The full matchmaker setup can be seen below:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
@@ -562,7 +558,7 @@ widgets::InputText::new(hash!())
     &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;..
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;}
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;Event may be either a message from other client or a system even like joined&#x2F;leaved player. This will be explained in details in &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;blog&#x2F;hello-world&#x2F;#Player-state-synchronization&quot;&gt;Player state syncronization&lt;&#x2F;a&gt; section.&lt;&#x2F;p&gt;
+&lt;p&gt;Event may be either a message from other client or a system even like joined&#x2F;leaved player. This will be explained in details in &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;fish-tutorial&#x2F;#Player-state-synchronization&quot;&gt;Player state syncronization&lt;&#x2F;a&gt; section.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;player-state-synchronization&quot;&gt;Player state synchronization&lt;&#x2F;h2&gt;
 &lt;p&gt;Fish Game uses a relayed network synchronization model. Each player simulates its physics and sends its state to other players.&lt;&#x2F;p&gt;
 &lt;p&gt;One of the players is called &amp;quot;host&amp;quot; and is responsible for global events and conflict resolution.&lt;&#x2F;p&gt;
@@ -592,8 +588,7 @@ widgets::InputText::new(hash!())
     }
 }
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;TODO: fix the url!&lt;&#x2F;p&gt;
-&lt;p&gt;In the final game code, the &lt;code&gt;State&lt;&#x2F;code&gt; structure is slightly more &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;net_syncronizer.rs#L32&quot;&gt;optimized&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;In the final game code, the &lt;code&gt;State&lt;&#x2F;code&gt; structure is slightly more &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs#L67&quot;&gt;optimized&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Also, in the real game, network fps are different from the rendering fps - with networking lag sending state 60 times per second is too much, and ~15-20 should be enough. Fish Game works on 15.
 But the idea is the same - The &lt;code&gt;Nakama&lt;&#x2F;code&gt; node packs all the important parts of the player state and sends it over the network to all the other players in the room. &lt;&#x2F;p&gt;
 &lt;p&gt;Next step - receive other players&#x27; data and draw other players.&lt;&#x2F;p&gt;
@@ -672,8 +667,9 @@ We need to have a list of &lt;code&gt;remote_players&lt;&#x2F;code&gt; to track 
         }
     }
 } 
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;a-note-about-network-performance&quot;&gt;A note about network performance&lt;&#x2F;h2&gt;
-&lt;p&gt;TODO: too much copy paste from fishgame-godot!&lt;&#x2F;p&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&quot;&gt;&lt;em&gt;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;a-note-about-network-performance&quot;&gt;A note about network performance&lt;&#x2F;h2&gt;
 &lt;p&gt;While Fish Game has good enough network performance to be fully functional, it is kept intentionally simplistic for demonstration purposes.&lt;&#x2F;p&gt;
 &lt;p&gt;Nakama’s real-time Multiplayer API sends data over WebSockets, which means TCP. TCP is reliable (you know if the message you sent arrived or not), but it’s slower. For an in-depth explanation about the trade-offs between TCP and UDP, see &lt;a href=&quot;https:&#x2F;&#x2F;heroiclabs.com&#x2F;docs&#x2F;expert-tcp-udp&#x2F;&quot;&gt;Choosing TCP or UDP: a guide for game developers&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Fast-paced games commonly use UDP to send synchronization information: it’s unreliable (your message can get lost) but faster. Using unreliable UDP would allow for some network optimizations that we can’t do here. For example, with some kinds of game states, only the most recent message is valid (all older messages are immediately invalid once a newer one arrives), so we could use the faster UDP packets.
@@ -715,9 +711,9 @@ It’s OK if some get lost, we&#x27;d just take the newest one that arrives.&lt;
     }
 }
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&quot;&gt;&lt;em&gt;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;global_events.rs&quot;&gt;&lt;em&gt;src&#x2F;nodes&#x2F;global_events.rs&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;ready-window&quot;&gt;Ready window&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;iXwhkjH.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;ready.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;One of our unsolved problems: in Fish Game the game starts only when all the players joined the match, can see each other and has opted in as ready. &lt;&#x2F;p&gt;
 &lt;p&gt;After this point, it is impossible to join a match and only one last standing fish will win.&lt;&#x2F;p&gt;
 &lt;p&gt;All this logic may be implemented on top of Nakama&#x27;s messages.&lt;&#x2F;p&gt;
@@ -737,7 +733,10 @@ It’s OK if some get lost, we&#x27;d just take the newest one that arrives.&lt;
         &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;pub const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;OPCODE&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;i32 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;;
     }
 }
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;leaderboards&quot;&gt;Leaderboards&lt;&#x2F;h2&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now it is the game&#x27;s responsibility to figure when to start a match. In Fish Game rules are quite simple - before everyone pushed &amp;quot;Ready&amp;quot; and the host confirmed by pushing &amp;quot;Start game&amp;quot; - no loot is spawning and noone is allowed to move. Implementation is in &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&quot;&gt;nakama node&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;But this logic may be totally different depending on game design, and the goal of this little chapter - demonstrate where nakama&#x27;s area of responsibility in the matchmaker&#x2F;match logic ends and game should roll its own logic. &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;leaderboards&quot;&gt;Leaderboards&lt;&#x2F;h2&gt;
 &lt;p&gt;There’s one last Nakama feature we’re going to look at before ending this tutorial: Leaderboards.&lt;&#x2F;p&gt;
 &lt;p&gt;Leaderboards need to be created on the server before your game can write data to them. This is done in Fish Game by adding a small server-side Lua module in &lt;code&gt;nakama&#x2F;data&#x2F;modules&#x2F;fish_game.lua&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
@@ -751,14 +750,14 @@ nk.run_once(&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5
 &lt;p&gt;It’s a non-authoritative leaderboard (the &lt;code&gt;false&lt;&#x2F;code&gt; in the 2nd argument), which means that the game clients can modify the leaderboard themselves, rather than requiring server-side logic to do it. It’s sorted in descending order (the &amp;quot;desc&amp;quot; in the 3rd argument) and is updated by incrementing the score (the &amp;quot;incr&amp;quot; in the 4th argument).&lt;&#x2F;p&gt;
 &lt;p&gt;Note: Nakama modules can be written in Lua, Go or (in Nakama 3) JavaScript.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;posting-results-to-the-leaderboard&quot;&gt;Posting results to the leaderboard&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;LBPLqCw.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;back_to_lobby.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;When only one fish is alive and the game has ended, the winner may update the leaderboard record.&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#323232;&quot;&gt;nakama.api_client.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;write_leaderboard_record&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;fish_game_wins&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;)
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;We may want to wait for the result status to display some error and retry if we got a network error.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;accessing-the-leaderboard&quot;&gt;Accessing the leaderboard&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;i.imgur.com&#x2F;l59sSEg.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;leaderboard.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;The leaderboard window is not much different from the authentication&#x2F;matchmaking window.&lt;&#x2F;p&gt;
 &lt;p&gt;First, make the Nakama request: &lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
@@ -766,8 +765,11 @@ nk.run_once(&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;And then on success we will have something in &lt;code&gt;api_client.leaderboard_records&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
-&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;Some&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(leaderboard) &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; nakama.api_client.leaderboard_records {
-    &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; record &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; leaderboard.records {
+&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;Some&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(leaderboard) &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; nakama
+    .api_client
+    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;leaderboard_records&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;fish_game_wins&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;)
+{
+    &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; record &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;in &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;leaderboard.records {
         ui.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;label&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;None&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;format!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;, record.username, record.score));
     }
 }

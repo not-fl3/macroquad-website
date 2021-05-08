@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://macroquad.rs/sitemap.xml
+Sitemap: https://macroquad.rs//sitemap.xml

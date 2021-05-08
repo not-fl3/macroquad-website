@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block header %}
+{{ macros_header::header(current_section="/tutorials") }}
+{% endblock header %}
+
+{% block content %}
+
+{% for page in paginator.pages %}
+
+<div class = "ui container segment">
+  <a class="stretched-link text-body" href="{{ page.permalink }}">
+    <h3 class = "ui header" > {{ page.title }}</h3>
+  </a>
+  <div class="ui divider"></div>
+  <p>{{ page.description }}</p>
+</div>
+
+{% endfor %}
+
+{% endblock content %}
