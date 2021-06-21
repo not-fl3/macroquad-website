@@ -134,13 +134,13 @@ $(document).ready(function(){
       </h2>
       <div class="ui hidden divider"></div>
       <h1 id="1-introduction">1. Introduction</h1>
-<p>This tutorial is based on the experience of publishing <a href="https://github.com/ozkriff/zemeroth">Zemeroth</a> game on the play store. The game is now available on the store, <a href="htts://not.yet">check it out!</a></p>
+<p>This tutorial is based on the experience of publishing <a href="https://github.com/ozkriff/zemeroth">Zemeroth</a> game on the Google Play Store. The game is now available on the store, <a href="htts://not.yet">check it out!</a></p>
 <p>CLICKABLE SCREENSHOT</p>
 <p>Topics covered:</p>
 <ul>
 <li>Building a macroquad game for android </li>
 <li>Common pitfalls and debugging tips</li>
-<li>Setting up and uploading an APK to a Play Store</li>
+<li>Setting up and uploading an APK to a Google Play</li>
 </ul>
 <h1 id="2-setting-up-your-environment">2. Setting up your Environment</h1>
 <h2 id="a-docker-way">A docker way</h2>
@@ -154,9 +154,9 @@ $(document).ready(function(){
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">docker run 
   --rm 
-  -v /home/pingu/macroquad:/root/src 
+  -v $(pwd):/root/src 
   -w /root/src 
-  notfl3/cargo-apk build --release
+  notfl3/cargo-apk cargo quad-apk build --release
 </span></code></pre>
 <p>This will produce an apk in <code>target/android-artifacts/release/apk</code>. </p>
 <p>However this may take quite a while - each docker invocation will do a clean build for all 3 android targets.</p>
@@ -165,16 +165,16 @@ $(document).ready(function(){
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">docker run 
   --rm 
-  -v /home/pingu/macroquad:/root/src 
+  -v $(pwd):/root/src 
   -w /root/src 
   -it notfl3/cargo-apk /bin/bash
 </span></code></pre>
-<p>and later, in the docker's bash: <code>cargo apk build --release</code>. And use the same command for each iteration.</p>
+<p>and later, in the docker's bash: <code>cargo quad-apk build --release</code>. And use the same command for each iteration.</p>
 <h2 id="a-manual-way">A manual way</h2>
 <p>Docker simplify the process of installing android-sdk and android-ndk. But, sometimes, it may be more convinient to use all native build pipeline. 
 While this is not really recommended, this path is included to a tutorial for better illustrating what exactly is going on in the container.</p>
 <h2 id="installing-pre-requisites">Installing pre-requisites:</h2>
-<p>Exact commands and pathes may depend on the host OS. Here we use commands for linux, but on all the other OSes the idea should be very similar.</p>
+<p>Exact commands and pathes may depend on the host OS. Here linux commands are used, but on all the other OSes the idea should be very similar.</p>
 <ul>
 <li>
 <p>JRE or JDK</p>
@@ -209,7 +209,7 @@ While this is not really recommended, this path is included to a tutorial for be
 <li>
 <p>Android NDK</p>
 <pre style="background-color:#ffffff;">
-<code><span style="color:#323232;"># go to the same dir we created for android-sdk
+<code><span style="color:#323232;"># go to the same dir created for android-sdk
 </span><span style="color:#323232;">cd /path/from/previous/step/android
 
 </span><span style="color:#323232;">wget -q http://dl.google.com/android/repository/android-ndk-r20-linux-x86_64.zip
@@ -247,8 +247,8 @@ cargo quad-apk build --release
 </span></code></pre>
 <p>To include assets folder to an APK, add this to your Cargo.toml:</p>
 <pre style="background-color:#ffffff;">
-<code><span style="color:#323232;">[package.metadata.android]
-assets = &quot;assets/&quot;
+<code class="language-ini" data-lang="ini"><span style="font-weight:bold;color:#a71d5d;">[package.metadata.android]
+</span><span style="color:#323232;">assets </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#183691;">&quot;assets/&quot;
 </span></code></pre>
 <p>Later on texture may be loaded with <code>load_texture(&quot;nice_texture.png&quot;)</code>.</p>
 <p>However, on PC, usually, the load_texture call will look like <code>load_texture(&quot;assets/nice_texture.png&quot;)</code> - the assets folder itself is a part of the path.</p>
@@ -332,12 +332,26 @@ To include &quot;res&quot; folder to an APK:</p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">adb logcat --pid=$(adb shell pidof -s rust.CRATENAME)
 </span></code></pre><h1 id="4-signing-the-apk">4. Signing the APK</h1>
-<p>Uploading to Google Play Store requires requires an APK signed with non-debug keystore file. To generate one <code>keytool</code> is required. <code>keytool</code> is a part of a <code>java</code> ditribution and is being shipped with <code>openjdk</code>.</p>
+<p>By default, <code>cargo quad-apk</code> generates debug kestore file and is signing up an APK with a debug key. This allows the APK to be installed locally, but is not enough for the Google Play.</p>
+<p>For the Play Store non-debug keystore file is required, and this file should be uploaded to the Play Console to verify developer identity. </p>
+<p>To generate the key <code>keytool</code> is required. <code>keytool</code> is a part of a <code>java</code> ditribution and is being shipped with <code>openjdk</code>.
+To sign the the APK <code>apksigner</code> is requires. <code>apksigner</code> is a part of Android SDK. </p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">keytool -v -genkey -keystore mygame.keystore -alias mygame -keyalg RSA -validity 10000
 </span></code></pre>
-<p>This keystore and key are used to verify your developer identity, remember the password and keep it in a safe place! Use <a href="https://developer.android.com/studio/publish/app-signing">Google's Android Developer guides</a> to learn more about APK signing.</p>
-<h1 id="5-uploading-an-apk-to-a-play-store">5. Uploading an APK to a Play Store</h1>
+<p>Than upload <code>mygame.keystore</code> to the Play Console. Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.</p>
+<p>First, tell <code>cargo-apk</code> to stop signing the build with debug keystore:
+`cargo quad-apk build --release --nosign```</p>
+<p>Than sign the APK with a non-debug keystore file:</p>
+<pre style="background-color:#ffffff;">
+<code><span style="color:#323232;">apksigner sign --ks mygame.keystore my-app.apk --ks-key-alias alias_name
+</span></code></pre>
+<p>It may be verified with</p>
+<pre style="background-color:#ffffff;">
+<code><span style="color:#323232;">apksigner verify my-app.apk
+
+</span></code></pre>
+<p><a href="https://developer.android.com/studio/publish/app-signing.html#signing-manually">The official documentation can be found here.</a>.</p>
 
     </div>
   </div>
