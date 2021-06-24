@@ -352,7 +352,18 @@ To sign the the APK <code>apksigner</code> is requires. <code>apksigner</code> i
 
 </span></code></pre>
 <p><a href="https://developer.android.com/studio/publish/app-signing.html#signing-manually">The official documentation can be found here.</a>.</p>
-
+<h2 id="note-how-to-get-keytool-apksigner-with-docker">NOTE: how to get <code>keytool</code>/<code>apksigner</code> with docker</h2>
+<p>Assuming android keystore lives in ~/.android and .apk to sign lives in current working directory: </p>
+<pre style="background-color:#ffffff;">
+<code><span style="color:#323232;">docker run --rm 
+    -v (pwd):/root/src  
+    -v(/home/USER/.android):/root/.android_secrets 
+    -w /root/src -it notfl3/cargo-apk /bin/bash
+</span></code></pre>
+<p>This command will gives a bash session with current directory mounted to <code>/root/src</code> and .android mounted to <code>/root/.android_secrets</code>
+And inside the container APK may be signed with</p>
+<pre style="background-color:#ffffff;">
+<code></code></pre>
     </div>
   </div>
 </div>
