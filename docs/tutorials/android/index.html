@@ -341,7 +341,7 @@ To sign the the APK <code>apksigner</code> is requires. <code>apksigner</code> i
 </span></code></pre>
 <p>Than upload <code>mygame.keystore</code> to the Play Console. Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.</p>
 <p>First, tell <code>cargo-apk</code> to stop signing the build with debug keystore:
-`cargo quad-apk build --release --nosign```</p>
+<code>cargo quad-apk build --release --nosign</code></p>
 <p>Than sign the APK with a non-debug keystore file:</p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">apksigner sign --ks mygame.keystore my-app.apk --ks-key-alias alias_name
