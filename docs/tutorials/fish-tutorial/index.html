@@ -16,6 +16,14 @@
     .ui, h1, h2, h3, h4, h5 {
         font-family: "Jost",-apple-system,blinkmacsystemfont,"Segoe UI",roboto,"Helvetica Neue",arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
     }
+    .zola-anchor {
+        font-size: 1.25rem;
+        margin-left: -2rem;
+        margin-right: 0.75rem;
+        text-decoration: none;
+        border-bottom-color: transparent;
+        cursor: pointer;
+      }
   </style>
   <script
     src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -91,7 +99,8 @@ $(document).ready(function(){
 
   
 
-    
+  
+  
 <style type="text/css">
   .eleven.wide.column {
       font-size: 18px;
@@ -146,9 +155,9 @@ $(document).ready(function(){
 <li>Leaderboards</li>
 </ul>
 <p>This tutorial will briefly cover how to create a game with Macroquad. Afterward, it will focus on Nakama integration.</p>
-<h1 id="making-a-platformer-game">Making a platformer game</h1>
+<h1 id="making-a-platformer-game"><a class="zola-anchor" href="#making-a-platformer-game" aria-label="Anchor link for: making-a-platformer-game">🔗</a>Making a platformer game</h1>
 <p>This part of the tutorial will explain how to create a single-player platformer game in Rust, starting with setting up macroquad. By the end of this section, we will have created a simple but fully functional platformer.</p>
-<h2 id="setting-up-macroquad">Setting up macroquad</h2>
+<h2 id="setting-up-macroquad"><a class="zola-anchor" href="#setting-up-macroquad" aria-label="Anchor link for: setting-up-macroquad">🔗</a>Setting up macroquad</h2>
 <p>Start an empty Rust project:</p>
 <pre style="background-color:#ffffff;">
 <code class="language-bash" data-lang="bash"><span style="font-weight:bold;color:#a71d5d;">&gt;</span><span style="color:#323232;"> cargo init --bin fishgame
@@ -197,7 +206,7 @@ async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style
 <code class="language-bash" data-lang="bash"><span style="color:#323232;">apt install libx11-dev libxi-dev libgl1-mesa-dev
 </span></code></pre>
 <p>For more details, check the <a href="https://github.com/not-fl3/macroquad/#building-instructions">build instructions</a>.</p>
-<h2 id="making-game-levels">Making game levels</h2>
+<h2 id="making-game-levels"><a class="zola-anchor" href="#making-game-levels" aria-label="Anchor link for: making-game-levels">🔗</a>Making game levels</h2>
 <p>The easiest way to do some 2D-level design with macroquad is with the free tiles editor <a href="https://www.mapeditor.org">Tiled</a>.</p>
 <img src="/fishgame_tutorial/tiled.png"  width="100%"/>
 <p><em>Tiled with <a href="https://github.com/heroiclabs/fishgame-macroquad/blob/master/assets/map.json">Fish Game's level</a></em></p>
@@ -244,7 +253,7 @@ async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style
 </span></code></pre><img src="/fishgame_tutorial/background.png"  width="100%"/>
 <p>Now we have a level background. For a more polished game, it would be reasonable to invest some time into a more complicated camera, window handling, etc.
 All of those are implemented in the final Fish Game but will be skipped in the tutorial to get started with Nakama faster.</p>
-<h2 id="character-physics">Character physics</h2>
+<h2 id="character-physics"><a class="zola-anchor" href="#character-physics" aria-label="Anchor link for: character-physics">🔗</a>Character physics</h2>
 <p>Add a character into the level from the previous chapter:</p>
 <pre style="background-color:#ffffff;">
 <code class="language-rust" data-lang="rust"><span style="font-weight:bold;color:#a71d5d;">...
@@ -338,7 +347,7 @@ world.</span><span style="color:#62a35c;">add_static_tiled_layer</span><span sty
 <p><a href="https://gist.github.com/not-fl3/a51dbff5f09c04d5a371e55db4c48e13">Full source code</a></p>
 <p>Now the fish can jump!</p>
 <img src="/fishgame_tutorial/fish_jump.gif"  width="100%"/>
-<h2 id="nodes">Nodes</h2>
+<h2 id="nodes"><a class="zola-anchor" href="#nodes" aria-label="Anchor link for: nodes">🔗</a>Nodes</h2>
 <p>Now we have enough of a game to start adding Nakama networking. Just one final piece missing.</p>
 <p>So far, the game code looks like this:</p>
 <pre style="background-color:#ffffff;">
@@ -442,7 +451,7 @@ async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style
 </span></code></pre>
 <p><a href="https://gist.github.com/not-fl3/a98d9f9e37a01be8bc2f0d246164b8bb">Full source code</a>.</p>
 <p>It may not look like a big improvement over the previous approach, but scenes allow building complicated node relationships and applying iteration strategies over scene nodes. We are going to use it a lot more in the upcoming sections.</p>
-<h1 id="networking-with-nakama">Networking with Nakama</h1>
+<h1 id="networking-with-nakama"><a class="zola-anchor" href="#networking-with-nakama" aria-label="Anchor link for: networking-with-nakama">🔗</a>Networking with Nakama</h1>
 <p>The <a href="https://github.com/heroiclabs/nakama-rs/">&quot;nakama-rs&quot;</a> crate is a pure Rust implementation of the Nakama protocol.</p>
 <p>It allows working with Nakama in three different styles. </p>
 <ul>
@@ -452,7 +461,7 @@ async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style
 </ul>
 <p>For Fish Game, we are going to use that high-level client.  That client works as a giant state machine - the user makes non-blocking calls, and the client may change some internal state based on those calls.
 Than in the main loop game pull changes from the ApiClient and may react accordingly.</p>
-<h2 id="connecting-to-nakama">Connecting to Nakama</h2>
+<h2 id="connecting-to-nakama"><a class="zola-anchor" href="#connecting-to-nakama" aria-label="Anchor link for: connecting-to-nakama">🔗</a>Connecting to Nakama</h2>
 <p>nakama-rs' ApiClient will be used as a singleton. Once a global object is created, it is persisted throughout the game lifetime and is globally accessible.</p>
 <p>In macroquad, we can use the node system for this. It will still be a singleton, but the access and relationship graph with our new Nakama node will be easily traceable and visible.</p>
 <p>So we will create a scene node with ApiClient and  pass a reference to this node to all nodes communicating with Nakama.</p>
@@ -493,7 +502,7 @@ async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style
     ));
     </span><span style="font-weight:bold;color:#a71d5d;">...
 </span><span style="color:#323232;">} 
-</span></code></pre><h2 id="authentication-and-registration">Authentication and registration</h2>
+</span></code></pre><h2 id="authentication-and-registration"><a class="zola-anchor" href="#authentication-and-registration" aria-label="Anchor link for: authentication-and-registration">🔗</a>Authentication and registration</h2>
 <p>Macroquad uses the immediate mode gui concept for UI. Here we will skip GUI style setup (it may be found <a href="https://github.com/heroiclabs/fishgame-macroquad/blob/master/src/gui.rs#L36">here</a>), and we will proceed to the UI logic instead.</p>
 <img src="/fishgame_tutorial/login.png"  width="100%"/>
 <p>Most UI windows interacting with Nakama are built in the same way:</p>
@@ -536,7 +545,7 @@ async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style
 
     </span><span style="color:#62a35c;">next_frame</span><span style="color:#323232;">().await;
 }
-</span></code></pre><h2 id="real-time-multiplayer">Real-time multiplayer</h2>
+</span></code></pre><h2 id="real-time-multiplayer"><a class="zola-anchor" href="#real-time-multiplayer" aria-label="Anchor link for: real-time-multiplayer">🔗</a>Real-time multiplayer</h2>
 <p><em>The real-time multiplayer engine makes it easy for users to set up and join matches where they can rapidly exchange data with opponents.
 Any user can participate in matches with other users. Users can create, join, and leave matches with messages sent from clients. A match exists on the server until its last participant has left.
 Any data sent through a match is immediately routed to all other participants. The matches are kept in memory and can be persisted as needed.</em>
@@ -569,7 +578,7 @@ This will be addressed in the <a href="https://macroquad.rs/tutorials/fish-tutor
 <li>Nakama considers a match started right after the <code>create_match</code> call, and anyone can join at any moment. While the rules of Fish Game won't let players join in the middle, and the game starts only when all of the players have pressed the “ready” button.
 This will be addressed in the <a href="https://macroquad.rs/tutorials/fish-tutorial/#Ready-window">Ready window</a> section.</li>
 </ul>
-<h2 id="matchmaker">Matchmaker</h2>
+<h2 id="matchmaker"><a class="zola-anchor" href="#matchmaker" aria-label="Anchor link for: matchmaker">🔗</a>Matchmaker</h2>
 <p>You can use the Matchmaker to find other players. It is possible to match them using properties and a query that specifies the values the other players' properties should hold. In <code>nakama-rs</code> the Matchmaker is a <code>struct</code> and can be created using <code>Matchmaker::new()</code>. There are two types of properties, string properties and numeric properties that can be added with <code>matchmaker.add_string_property(&quot;name&quot;, &quot;value&quot;)</code> and <code>matchmaker.add_numeric_property(&quot;rank&quot;, 1000.0)</code> respectively. Names of properties should be unique across both types.</p>
 <p>The query is a space-separated string using the <a href="http://blevesearch.com/docs/Query-String-Query/">Bleve Query-String-Query Syntax</a>. It is possible to add queries manually using <code>matchmaker.add_query_item(&quot;properties.region:Europe&quot;)</code> but <code>nakama-rs</code> provides a helper to construct the query string using the builder pattern. For now, terms, numeric ranges, required, optional and exclusion are supported. See <a href="https://github.com/heroiclabs/nakama-rs/blob/master/examples/matchmaker.rs">examples/matchmaker.rs</a> for more examples.</p>
 <pre style="background-color:#ffffff;">
@@ -635,7 +644,7 @@ widgets::InputText::new(hash!())
 <p>You can add the Matchmaker by calling <code>nakama.socket_add_matchmaker(&amp;matchmaker)</code>, adding the user to the server's matchmaking pool. The user will stay in the pool until matched as long as they are online or until you remove them manually. It is possible to add multiple matchmakers with different queries simultaneously to look for different types of matches.</p>
 <p>When the server matches the user, the ApiClient will handle the event and set <code>nakama.matchmaker_token</code> to <code>Some(token)</code>. The token is a short-lived entry ticket that you can use to join a match with the other matched players by calling <code>nakama.socket_join_match_by_token(token)</code>. The server creates the match as soon as the first player tries to join it and sends an event once the player joined successfully. In the client, <code>nakama.match_id()</code> will then contain a value. It is now possible to send match data between players.</p>
 <p>For additional details, check out the <a href="https://heroiclabs.com/docs/gameplay-matchmaker">Matchmaker documentation</a>.</p>
-<h2 id="exchanging-messages">Exchanging messages</h2>
+<h2 id="exchanging-messages"><a class="zola-anchor" href="#exchanging-messages" aria-label="Anchor link for: exchanging-messages">🔗</a>Exchanging messages</h2>
 <p>nakama-rs'<code>ApiClient</code> provides two API calls to communicate between each other: </p>
 <ul>
 <li><code>fn socket_send&lt;T: SerBin&gt;(&amp;self, opcode: u32, data: T)</code>
@@ -679,7 +688,7 @@ widgets::InputText::new(hash!())
 </span><span style="color:#323232;">}
 </span></code></pre>
 <p>Event may be either a message from other client or a system even like joined/leaved player. This will be explained in details in <a href="https://macroquad.rs/tutorials/fish-tutorial/#Player-state-synchronization">Player state syncronization</a> section.</p>
-<h2 id="player-state-synchronization">Player state synchronization</h2>
+<h2 id="player-state-synchronization"><a class="zola-anchor" href="#player-state-synchronization" aria-label="Anchor link for: player-state-synchronization">🔗</a>Player state synchronization</h2>
 <p>Fish Game uses a relayed network synchronization model. Each player simulates its physics and sends its state to other players.</p>
 <p>One of the players is called &quot;host&quot; and is responsible for global events and conflict resolution.</p>
 <p>Nakama node from previous chapters:</p>
@@ -789,14 +798,14 @@ We need to have a list of <code>remote_players</code> to track the scene nodes o
 } 
 </span></code></pre>
 <p><a href="https://github.com/heroiclabs/fishgame-macroquad/blob/master/src/nodes/nakama/nakama_realtime_game.rs"><em>src/nodes/nakama/nakama_realtime_game.rs</em></a></p>
-<h2 id="a-note-about-network-performance">A note about network performance</h2>
+<h2 id="a-note-about-network-performance"><a class="zola-anchor" href="#a-note-about-network-performance" aria-label="Anchor link for: a-note-about-network-performance">🔗</a>A note about network performance</h2>
 <p>While Fish Game has good enough network performance to be fully functional, it is kept intentionally simplistic for demonstration purposes.</p>
 <p>Nakama’s real-time Multiplayer API sends data over WebSockets, which means TCP. TCP is reliable (you know if the message you sent arrived or not), but it’s slower. For an in-depth explanation about the trade-offs between TCP and UDP, see <a href="https://heroiclabs.com/docs/expert-tcp-udp/">Choosing TCP or UDP: a guide for game developers</a>.</p>
 <p>Fast-paced games commonly use UDP to send synchronization information: it’s unreliable (your message can get lost) but faster. Using unreliable UDP would allow for some network optimizations that we can’t do here. For example, with some kinds of game states, only the most recent message is valid (all older messages are immediately invalid once a newer one arrives), so we could use the faster UDP packets.
 It’s OK if some get lost, we'd just take the newest one that arrives.</p>
 <p>This game is fast-paced enough that it ideally should be using “input prediction and rollback” rather than “input prediction and correction”. When using rollback, rather than applying the corrections you received to the current state of the game, you roll back the local game state to the time when the remote state was generated, apply it, and then roll the game state forward to the current time. This can help eliminate lag and avoid situations where one player sees themselves hitting another player, but it doesn’t  register as a hit. However, rollback is a lot more complicated to implement than correction. Fish Game has enough in common with arcade-style Fighting Games that the most optimal networking technique for it might be the <a href="https://github.com/pond3r/ggpo">GGPO</a> technique.</p>
 <p>This would merit further investigation if this was a commercial game.</p>
-<h2 id="global-events-and-conflicts-resolution">Global events and conflicts resolution</h2>
+<h2 id="global-events-and-conflicts-resolution"><a class="zola-anchor" href="#global-events-and-conflicts-resolution" aria-label="Anchor link for: global-events-and-conflicts-resolution">🔗</a>Global events and conflicts resolution</h2>
 <p>In Fish Game, we have some global events. Good example: Spawn process of pickable weapon.</p>
 <p>There are two ways to simulate such a process:</p>
 <ul>
@@ -832,7 +841,7 @@ It’s OK if some get lost, we'd just take the newest one that arrives.</p>
 }
 </span></code></pre>
 <p><a href="https://github.com/heroiclabs/fishgame-macroquad/blob/master/src/nodes/global_events.rs"><em>src/nodes/global_events.rs</em></a></p>
-<h2 id="ready-window">Ready window</h2>
+<h2 id="ready-window"><a class="zola-anchor" href="#ready-window" aria-label="Anchor link for: ready-window">🔗</a>Ready window</h2>
 <img src="/fishgame_tutorial/ready.png"  width="100%"/>
 <p>One of our unsolved problems: in Fish Game the game starts only when all the players joined the match, can see each other and has opted in as ready. </p>
 <p>After this point, it is impossible to join a match and only one last standing fish will win.</p>
@@ -856,7 +865,7 @@ It’s OK if some get lost, we'd just take the newest one that arrives.</p>
 </span></code></pre>
 <p>Now it is the game's responsibility to figure when to start a match. In Fish Game rules are quite simple - before everyone pushed &quot;Ready&quot; and the host confirmed by pushing &quot;Start game&quot; - no loot is spawning and noone is allowed to move. Implementation is in <a href="https://github.com/heroiclabs/fishgame-macroquad/blob/master/src/nodes/nakama/nakama_realtime_game.rs">nakama node</a></p>
 <p>But this logic may be totally different depending on game design, and the goal of this little chapter - demonstrate where nakama's area of responsibility in the matchmaker/match logic ends and game should roll its own logic. </p>
-<h2 id="leaderboards">Leaderboards</h2>
+<h2 id="leaderboards"><a class="zola-anchor" href="#leaderboards" aria-label="Anchor link for: leaderboards">🔗</a>Leaderboards</h2>
 <p>There’s one last Nakama feature we’re going to look at before ending this tutorial: Leaderboards.</p>
 <p>Leaderboards need to be created on the server before your game can write data to them. This is done in Fish Game by adding a small server-side Lua module in <code>nakama/data/modules/fish_game.lua</code>:</p>
 <pre style="background-color:#ffffff;">
@@ -869,14 +878,14 @@ nk.run_once(</span><span style="font-weight:bold;color:#a71d5d;">function</span>
 <p>This runs on the Nakama server at startup and creates a leaderboard called “fishgamewins”, which we’re going to use to track the total number of wins that each player has gotten.</p>
 <p>It’s a non-authoritative leaderboard (the <code>false</code> in the 2nd argument), which means that the game clients can modify the leaderboard themselves, rather than requiring server-side logic to do it. It’s sorted in descending order (the &quot;desc&quot; in the 3rd argument) and is updated by incrementing the score (the &quot;incr&quot; in the 4th argument).</p>
 <p>Note: Nakama modules can be written in Lua, Go or (in Nakama 3) JavaScript.</p>
-<h2 id="posting-results-to-the-leaderboard">Posting results to the leaderboard</h2>
+<h2 id="posting-results-to-the-leaderboard"><a class="zola-anchor" href="#posting-results-to-the-leaderboard" aria-label="Anchor link for: posting-results-to-the-leaderboard">🔗</a>Posting results to the leaderboard</h2>
 <img src="/fishgame_tutorial/back_to_lobby.png"  width="100%"/>
 <p>When only one fish is alive and the game has ended, the winner may update the leaderboard record.</p>
 <pre style="background-color:#ffffff;">
 <code class="language-rust" data-lang="rust"><span style="color:#323232;">nakama.api_client.</span><span style="color:#62a35c;">write_leaderboard_record</span><span style="color:#323232;">(</span><span style="color:#183691;">&quot;fish_game_wins&quot;</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1</span><span style="color:#323232;">)
 </span></code></pre>
 <p>We may want to wait for the result status to display some error and retry if we got a network error.</p>
-<h2 id="accessing-the-leaderboard">Accessing the leaderboard</h2>
+<h2 id="accessing-the-leaderboard"><a class="zola-anchor" href="#accessing-the-leaderboard" aria-label="Anchor link for: accessing-the-leaderboard">🔗</a>Accessing the leaderboard</h2>
 <img src="/fishgame_tutorial/leaderboard.png"  width="100%"/>
 <p>The leaderboard window is not much different from the authentication/matchmaking window.</p>
 <p>First, make the Nakama request: </p>
@@ -899,6 +908,7 @@ nk.run_once(</span><span style="font-weight:bold;color:#a71d5d;">function</span>
 </div>
 
 
+  
 
   
     

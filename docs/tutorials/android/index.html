@@ -16,6 +16,14 @@
     .ui, h1, h2, h3, h4, h5 {
         font-family: "Jost",-apple-system,blinkmacsystemfont,"Segoe UI",roboto,"Helvetica Neue",arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
     }
+    .zola-anchor {
+        font-size: 1.25rem;
+        margin-left: -2rem;
+        margin-right: 0.75rem;
+        text-decoration: none;
+        border-bottom-color: transparent;
+        cursor: pointer;
+      }
   </style>
   <script
     src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -91,7 +99,8 @@ $(document).ready(function(){
 
   
 
-    
+  
+  
 <style type="text/css">
   .eleven.wide.column {
       font-size: 18px;
@@ -133,7 +142,7 @@ $(document).ready(function(){
         <div class="content">Publish game on Android with Macroquad</div>
       </h2>
       <div class="ui hidden divider"></div>
-      <h1 id="1-introduction">1. Introduction</h1>
+      <h1 id="1-introduction"><a class="zola-anchor" href="#1-introduction" aria-label="Anchor link for: 1-introduction">🔗</a>1. Introduction</h1>
 <p>This tutorial is based on the experience of publishing <a href="https://github.com/ozkriff/zemeroth">Zemeroth</a> game on the Google Play Store. The game is now available on the store, <a href="htts://not.yet">check it out!</a></p>
 <p>CLICKABLE SCREENSHOT</p>
 <p>Topics covered:</p>
@@ -142,14 +151,14 @@ $(document).ready(function(){
 <li>Common pitfalls and debugging tips</li>
 <li>Setting up and uploading an APK to a Google Play</li>
 </ul>
-<h1 id="2-setting-up-your-environment">2. Setting up your Environment</h1>
-<h2 id="a-docker-way">A docker way</h2>
+<h1 id="2-setting-up-your-environment"><a class="zola-anchor" href="#2-setting-up-your-environment" aria-label="Anchor link for: 2-setting-up-your-environment">🔗</a>2. Setting up your Environment</h1>
+<h2 id="a-docker-way"><a class="zola-anchor" href="#a-docker-way" aria-label="Anchor link for: a-docker-way">🔗</a>A docker way</h2>
 <p>On the machine with docker pulling all the NDK dependencies is as simple as</p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">docker pull not-fl3/cargo-apk
 </span></code></pre>
 <p>Docker is a recommended way to build macroquad's game for Android. </p>
-<h3 id="building-an-apk-a-docker-way">Building an APK, a docker way</h3>
+<h3 id="building-an-apk-a-docker-way"><a class="zola-anchor" href="#building-an-apk-a-docker-way" aria-label="Anchor link for: building-an-apk-a-docker-way">🔗</a>Building an APK, a docker way</h3>
 <p>APK may be made with just one command:</p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">docker run 
@@ -170,10 +179,10 @@ $(document).ready(function(){
   -it notfl3/cargo-apk /bin/bash
 </span></code></pre>
 <p>and later, in the docker's bash: <code>cargo quad-apk build --release</code>. And use the same command for each iteration.</p>
-<h2 id="a-manual-way">A manual way</h2>
+<h2 id="a-manual-way"><a class="zola-anchor" href="#a-manual-way" aria-label="Anchor link for: a-manual-way">🔗</a>A manual way</h2>
 <p>Docker simplify the process of installing android-sdk and android-ndk. But, sometimes, it may be more convinient to use all native build pipeline. 
 While this is not really recommended, this path is included to a tutorial for better illustrating what exactly is going on in the container.</p>
-<h2 id="installing-pre-requisites">Installing pre-requisites:</h2>
+<h3 id="installing-pre-requisites"><a class="zola-anchor" href="#installing-pre-requisites" aria-label="Anchor link for: installing-pre-requisites">🔗</a>Installing pre-requisites:</h3>
 <p>Exact commands and pathes may depend on the host OS. Here linux commands are used, but on all the other OSes the idea should be very similar.</p>
 <ul>
 <li>
@@ -223,7 +232,7 @@ While this is not really recommended, this path is included to a tutorial for be
 <code><span style="color:#323232;">cargo install cargo-quad-apk
 </span></code></pre></li>
 </ul>
-<h3 id="building-an-apk-a-manual-way">Building an APK, a manual way</h3>
+<h3 id="building-an-apk-a-manual-way"><a class="zola-anchor" href="#building-an-apk-a-manual-way" aria-label="Anchor link for: building-an-apk-a-manual-way">🔗</a>Building an APK, a manual way</h3>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">export ANDROID_HOME=/path/from/previous/step/android
 export NDK_HOME=/path/from/previous/step/android/android-ndk-r20
@@ -234,8 +243,8 @@ cargo quad-apk build
 cargo quad-apk build --release
 </span></code></pre>
 <p>An apk will be in <code>target/android-artifacts/debug/apk</code> or <code>target/android-artifacts/release/apk</code>.</p>
-<h1 id="3-fine-tuning-the-game-for-android">3. Fine tuning the game for android</h1>
-<h2 id="assets-folder">Assets folder</h2>
+<h1 id="3-fine-tuning-the-game-for-android"><a class="zola-anchor" href="#3-fine-tuning-the-game-for-android" aria-label="Anchor link for: 3-fine-tuning-the-game-for-android">🔗</a>3. Fine tuning the game for android</h1>
+<h2 id="assets-folder"><a class="zola-anchor" href="#assets-folder" aria-label="Anchor link for: assets-folder">🔗</a>Assets folder</h2>
 <p>Assuming following project structure: </p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">.
@@ -257,7 +266,7 @@ cargo quad-apk build --release
 <code><span style="color:#323232;">macroquad::file::set_pc_assets_folder(&quot;assets&quot;);
 </span></code></pre>
 <p>Now its <code>load_texture(&quot;nice_texture.png&quot;)</code> on both platforms.</p>
-<h2 id="high-dpi">High-dpi</h2>
+<h2 id="high-dpi"><a class="zola-anchor" href="#high-dpi" aria-label="Anchor link for: high-dpi">🔗</a>High-dpi</h2>
 <img src="densities-phone_2x.png"  width="300px"/>
 <p><em><a href="https://developer.android.com/training/multiscreen/screendensities">Image source</a></em></p>
 <p>Android devices have significant pixel dencity difference. 
@@ -276,13 +285,13 @@ By default, android tries to emulate a low-density display on a high-density pix
 #[macroquad::main(window_conf)]
 async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
 }
-</span></code></pre><h2 id="screen-orientation">Screen orientation</h2>
+</span></code></pre><h2 id="screen-orientation"><a class="zola-anchor" href="#screen-orientation" aria-label="Anchor link for: screen-orientation">🔗</a>Screen orientation</h2>
 <p>By default Macroquad games are fullscreen and allows any screen locations.
 To limit possible screen orientations add this to your Cargo.toml: </p>
 <pre style="background-color:#ffffff;">
 <code class="language-ini" data-lang="ini"><span style="font-weight:bold;color:#a71d5d;">[package.metadata.android.activity_attributes]
 </span><span style="color:#183691;">&quot;android:screenOrientation&quot; </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#183691;">&quot;userLandscape&quot;
-</span></code></pre><h2 id="icon">Icon</h2>
+</span></code></pre><h2 id="icon"><a class="zola-anchor" href="#icon" aria-label="Anchor link for: icon">🔗</a>Icon</h2>
 <p><img src="https://macroquad.rs/tutorials/android/icon.jpg" alt="icon" /></p>
 <p>Application icon lives in an &quot;resources&quot; - special section in APK.
 To include &quot;res&quot; folder to an APK:</p>
@@ -307,9 +316,9 @@ To include &quot;res&quot; folder to an APK:</p>
 </span></code></pre>
 <p>Icons for each size certainly may be generated manually. For this tutorial 
 <a href="http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html">http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html</a> was used, worked pretty good.</p>
-<h2 id="debug-logs">Debug logs</h2>
+<h2 id="debug-logs"><a class="zola-anchor" href="#debug-logs" aria-label="Anchor link for: debug-logs">🔗</a>Debug logs</h2>
 <p>All the <code>warn!</code>/<code>info!</code>/<code>debug!</code> macroquad's messages goes into android system messages. To access android's system messages there is <code>adb logcat</code> command. There are various way to filter <code>adb logcat</code>.</p>
-<h3 id="filter-adb-logcat-by-tag">Filter <code>adb logcat</code> by tag</h3>
+<h3 id="filter-adb-logcat-by-tag"><a class="zola-anchor" href="#filter-adb-logcat-by-tag" aria-label="Anchor link for: filter-adb-logcat-by-tag">🔗</a>Filter <code>adb logcat</code> by tag</h3>
 <p>Filter by tag will show only messages posted by macroquad's <code>warn!</code>/<code>info!</code>/<code>debug!</code>.</p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">adb logcat -v brief SAPP:V &quot;*:S&quot;
@@ -318,7 +327,7 @@ To include &quot;res&quot; folder to an APK:</p>
 <p>Arguments after <code>adb logcat</code> are filter specification.</p>
 <p>SAPP:V - For messages with tag SAPP V(verbose) filter will be applied. All the SAPP messages will be in the output.
 *:S - For all the other tags S(silent) filter will be applied. All the other messages will be filtered out.</p>
-<h3 id="filter-by-pid">Filter by PID</h3>
+<h3 id="filter-by-pid"><a class="zola-anchor" href="#filter-by-pid" aria-label="Anchor link for: filter-by-pid">🔗</a>Filter by PID</h3>
 <p>Sometimes application produced some extra system messages. It may be some system warnings or some unhandled native libraries problems. But those messages may be filtered out when <code>adb logcat</code> is filtered by tag.</p>
 <p>PID is a process id, and filtering by PID will give all the application output, with any tag.</p>
 <pre style="background-color:#ffffff;">
@@ -331,7 +340,7 @@ To include &quot;res&quot; folder to an APK:</p>
 <p>Depending on the command processor those to commands may be usually reduced to something like</p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">adb logcat --pid=$(adb shell pidof -s rust.CRATENAME)
-</span></code></pre><h1 id="4-signing-the-apk">4. Signing the APK</h1>
+</span></code></pre><h1 id="4-signing-the-apk"><a class="zola-anchor" href="#4-signing-the-apk" aria-label="Anchor link for: 4-signing-the-apk">🔗</a>4. Signing the APK</h1>
 <p>By default, <code>cargo quad-apk</code> generates debug kestore file and is signing up an APK with a debug key. This allows the APK to be installed locally, but is not enough for the Google Play.</p>
 <p>For the Play Store non-debug keystore file is required, and this file should be uploaded to the Play Console to verify developer identity. </p>
 <p>To generate the key <code>keytool</code> is required. <code>keytool</code> is a part of a <code>java</code> ditribution and is being shipped with <code>openjdk</code>.
@@ -351,8 +360,8 @@ To sign the the APK <code>apksigner</code> is requires. <code>apksigner</code> i
 <code><span style="color:#323232;">apksigner verify my-app.apk
 
 </span></code></pre>
-<p><a href="https://developer.android.com/studio/publish/app-signing.html#signing-manually">The official documentation can be found here.</a>.</p>
-<h2 id="note-how-to-get-keytool-apksigner-with-docker">NOTE: how to get <code>keytool</code>/<code>apksigner</code> with docker</h2>
+<p><a href="https://developer.android.com/studio/publish/app-signing.html#signing-manually">The official documentation on signing can be found here.</a>.</p>
+<h2 id="note-how-to-get-keytool-apksigner-with-docker"><a class="zola-anchor" href="#note-how-to-get-keytool-apksigner-with-docker" aria-label="Anchor link for: note-how-to-get-keytool-apksigner-with-docker">🔗</a>NOTE: how to get <code>keytool</code>/<code>apksigner</code> with docker</h2>
 <p>Assuming android keystore lives in ~/.android and .apk to sign lives in current working directory: </p>
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">docker run --rm 
@@ -363,12 +372,39 @@ To sign the the APK <code>apksigner</code> is requires. <code>apksigner</code> i
 <p>This command will gives a bash session with current directory mounted to <code>/root/src</code> and .android mounted to <code>/root/.android_secrets</code>
 And inside the container APK may be signed with</p>
 <pre style="background-color:#ffffff;">
-<code></code></pre>
+<code><span style="color:#323232;">apksigner sign --ks my.keystore my-app.apk --ks-key-alias alias_name
+</span></code></pre><h2 id="android-targets"><a class="zola-anchor" href="#android-targets" aria-label="Anchor link for: android-targets">🔗</a>Android targets</h2>
+<p>By default <code>cargo quad-apk</code> is building an APK for 3 different platforms. 
+To comply Google Play requirements and get all the platforms:</p>
+<pre style="background-color:#ffffff;">
+<code class="language-ini" data-lang="ini"><span style="font-weight:bold;color:#a71d5d;">[package.metadata.android]
+..
+</span><span style="color:#323232;">build_targets </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> [ </span><span style="color:#183691;">&quot;armv7-linux-androideabi&quot;</span><span style="font-weight:bold;color:#a71d5d;">, </span><span style="color:#183691;">&quot;aarch64-linux-android&quot;</span><span style="font-weight:bold;color:#a71d5d;">, </span><span style="color:#183691;">&quot;i686-linux-android&quot;</span><span style="font-weight:bold;color:#a71d5d;">, </span><span style="color:#183691;">&quot;x86_64-linux-android&quot;</span><span style="color:#323232;"> ]
+</span></code></pre>
+<p>To reduce build time while debugging - pick one for a testing device in use:</p>
+<pre style="background-color:#ffffff;">
+<code class="language-ini" data-lang="ini"><span style="font-weight:bold;color:#a71d5d;">[package.metadata.android]
+..
+</span><span style="color:#323232;">build_targets </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> [ </span><span style="color:#183691;">&quot;armv7-linux-androideabi&quot;</span><span style="color:#323232;"> ]
+</span></code></pre><h2 id="google-play-versioning"><a class="zola-anchor" href="#google-play-versioning" aria-label="Anchor link for: google-play-versioning">🔗</a>Google Play versioning</h2>
+<p>Google play have its own versioning mechanism for uploaded APKs.
+Each APK for google play should have unique <code>version_code</code>.
+Otherwise google developer console will end up with <code>Version code 1 has already been used. Try another version code.&quot;</code>.</p>
+<p>To set <code>version_code</code> from an app Cargo.toml:</p>
+<pre style="background-color:#ffffff;">
+<code class="language-ini" data-lang="ini"><span style="font-weight:bold;color:#a71d5d;">[package.metadata.android]
+..
+</span><span style="color:#323232;">version_code </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">2
+</span><span style="color:#323232;">version_name </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#183691;">&quot;Version Name&quot;
+</span></code></pre>
+<p><a href="https://developer.android.com/studio/publish/versioning">The official documentation on versioning can be found here.</a>.</p>
+
     </div>
   </div>
 </div>
 
 
+  
 
   
     

@@ -5,8 +5,272 @@
 	<link href="https://macroquad.rs/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://macroquad.rs/"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2021-05-01T09:19:42+00:00</updated>
+	<updated>2021-06-15T10:19:42+00:00</updated>
 	<id>https://macroquad.rs/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Publish game on Android with Macroquad</title>
+		<published>2021-06-15T09:19:42+00:00</published>
+		<updated>2021-06-15T10:19:42+00:00</updated>
+		<link href="https://macroquad.rs/tutorials/android/" type="text/html"/>
+		<id>https://macroquad.rs/tutorials/android/</id>
+		<content type="html">&lt;h1 id=&quot;1-introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#1-introduction&quot; aria-label=&quot;Anchor link for: 1-introduction&quot;&gt;🔗&lt;&#x2F;a&gt;1. Introduction&lt;&#x2F;h1&gt;
+&lt;p&gt;This tutorial is based on the experience of publishing &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ozkriff&#x2F;zemeroth&quot;&gt;Zemeroth&lt;&#x2F;a&gt; game on the Google Play Store. The game is now available on the store, &lt;a href=&quot;htts:&#x2F;&#x2F;not.yet&quot;&gt;check it out!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;CLICKABLE SCREENSHOT&lt;&#x2F;p&gt;
+&lt;p&gt;Topics covered:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Building a macroquad game for android &lt;&#x2F;li&gt;
+&lt;li&gt;Common pitfalls and debugging tips&lt;&#x2F;li&gt;
+&lt;li&gt;Setting up and uploading an APK to a Google Play&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;2-setting-up-your-environment&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-setting-up-your-environment&quot; aria-label=&quot;Anchor link for: 2-setting-up-your-environment&quot;&gt;🔗&lt;&#x2F;a&gt;2. Setting up your Environment&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;a-docker-way&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#a-docker-way&quot; aria-label=&quot;Anchor link for: a-docker-way&quot;&gt;🔗&lt;&#x2F;a&gt;A docker way&lt;&#x2F;h2&gt;
+&lt;p&gt;On the machine with docker pulling all the NDK dependencies is as simple as&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;docker pull not-fl3&#x2F;cargo-apk
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Docker is a recommended way to build macroquad&#x27;s game for Android. &lt;&#x2F;p&gt;
+&lt;h3 id=&quot;building-an-apk-a-docker-way&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#building-an-apk-a-docker-way&quot; aria-label=&quot;Anchor link for: building-an-apk-a-docker-way&quot;&gt;🔗&lt;&#x2F;a&gt;Building an APK, a docker way&lt;&#x2F;h3&gt;
+&lt;p&gt;APK may be made with just one command:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;docker run 
+  --rm 
+  -v $(pwd):&#x2F;root&#x2F;src 
+  -w &#x2F;root&#x2F;src 
+  notfl3&#x2F;cargo-apk cargo quad-apk build --release
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This will produce an apk in &lt;code&gt;target&#x2F;android-artifacts&#x2F;release&#x2F;apk&lt;&#x2F;code&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;However this may take quite a while - each docker invocation will do a clean build for all 3 android targets.&lt;&#x2F;p&gt;
+&lt;p&gt;One way to make it a little bit faster: add &lt;code&gt; -v &#x2F;tmp&#x2F;registry\&amp;quot;:&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;registry\&amp;quot;&lt;&#x2F;code&gt; to a docker command. This will tell docker to use &lt;code&gt;&#x2F;tmp&#x2F;registry&lt;&#x2F;code&gt; on the host machine for cargo&#x27;s registry, therefore docker will not download all the dependencies on each build.&lt;&#x2F;p&gt;
+&lt;p&gt;Another possibility: run docker interactively and invoke build command in the same container for each build.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;docker run 
+  --rm 
+  -v $(pwd):&#x2F;root&#x2F;src 
+  -w &#x2F;root&#x2F;src 
+  -it notfl3&#x2F;cargo-apk &#x2F;bin&#x2F;bash
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and later, in the docker&#x27;s bash: &lt;code&gt;cargo quad-apk build --release&lt;&#x2F;code&gt;. And use the same command for each iteration.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;a-manual-way&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#a-manual-way&quot; aria-label=&quot;Anchor link for: a-manual-way&quot;&gt;🔗&lt;&#x2F;a&gt;A manual way&lt;&#x2F;h2&gt;
+&lt;p&gt;Docker simplify the process of installing android-sdk and android-ndk. But, sometimes, it may be more convinient to use all native build pipeline. 
+While this is not really recommended, this path is included to a tutorial for better illustrating what exactly is going on in the container.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;installing-pre-requisites&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#installing-pre-requisites&quot; aria-label=&quot;Anchor link for: installing-pre-requisites&quot;&gt;🔗&lt;&#x2F;a&gt;Installing pre-requisites:&lt;&#x2F;h3&gt;
+&lt;p&gt;Exact commands and pathes may depend on the host OS. Here linux commands are used, but on all the other OSes the idea should be very similar.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;JRE or JDK&lt;&#x2F;p&gt;
+&lt;p&gt;This step highly depends on the OS, for ubuntu: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;sudo apt-get install openjdk-8-jdk
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Rust android&lt;&#x2F;p&gt;
+&lt;p&gt;Assuming rustup&#x27;s rust installation:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;rustup target add armv7-linux-androideabi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;rustup target add aarch64-linux-android
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;rustup target add i686-linux-android
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;rustup target add x86_64-linux-android
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Android SDK&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;# create a folder for all the android pre-requisites stuff
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;mkdir &#x2F;this&#x2F;may&#x2F;be&#x2F;any&#x2F;path&#x2F;android
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;cd android
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;wget -q https:&#x2F;&#x2F;dl.google.com&#x2F;android&#x2F;repository&#x2F;sdk-tools-linux-4333796.zip
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;unzip -q sdk-tools-linux-4333796.zip
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;rm sdk-tools-linux-4333796.zip
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;tools&#x2F;bind&#x2F;sdkmanager &amp;quot;platform-tools&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;tools&#x2F;bin&#x2F;sdkmanager &amp;quot;platforms;android-29&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;tools&#x2F;bin&#x2F;sdkmanager &amp;quot;build-tools;29.0.0&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;tools&#x2F;bin&#x2F;sdkmanager --update
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Android NDK&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;# go to the same dir created for android-sdk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;cd &#x2F;path&#x2F;from&#x2F;previous&#x2F;step&#x2F;android
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;wget -q http:&#x2F;&#x2F;dl.google.com&#x2F;android&#x2F;repository&#x2F;android-ndk-r20-linux-x86_64.zip
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;unzip -q android-ndk-r20-linux-x86_64.zip
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;rm android-ndk-r20-linux-x86_64.zip
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Cargo APK&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;cargo-quad-apk&lt;&#x2F;code&gt; is a cargo extension, allowing&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;cargo install cargo-quad-apk
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;building-an-apk-a-manual-way&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#building-an-apk-a-manual-way&quot; aria-label=&quot;Anchor link for: building-an-apk-a-manual-way&quot;&gt;🔗&lt;&#x2F;a&gt;Building an APK, a manual way&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;export ANDROID_HOME=&#x2F;path&#x2F;from&#x2F;previous&#x2F;step&#x2F;android
+export NDK_HOME=&#x2F;path&#x2F;from&#x2F;previous&#x2F;step&#x2F;android&#x2F;android-ndk-r20
+
+# for a debug build
+cargo quad-apk build
+# for a release build
+cargo quad-apk build --release
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;An apk will be in &lt;code&gt;target&#x2F;android-artifacts&#x2F;debug&#x2F;apk&lt;&#x2F;code&gt; or &lt;code&gt;target&#x2F;android-artifacts&#x2F;release&#x2F;apk&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;3-fine-tuning-the-game-for-android&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#3-fine-tuning-the-game-for-android&quot; aria-label=&quot;Anchor link for: 3-fine-tuning-the-game-for-android&quot;&gt;🔗&lt;&#x2F;a&gt;3. Fine tuning the game for android&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;assets-folder&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#assets-folder&quot; aria-label=&quot;Anchor link for: assets-folder&quot;&gt;🔗&lt;&#x2F;a&gt;Assets folder&lt;&#x2F;h2&gt;
+&lt;p&gt;Assuming following project structure: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;.
+├── assets
+├── └── nice_texture.png
+├── src
+├── └── main.rs
+└── Cargo.toml
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To include assets folder to an APK, add this to your Cargo.toml:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;[package.metadata.android]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;assets &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;assets&#x2F;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Later on texture may be loaded with &lt;code&gt;load_texture(&amp;quot;nice_texture.png&amp;quot;)&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;However, on PC, usually, the load_texture call will look like &lt;code&gt;load_texture(&amp;quot;assets&#x2F;nice_texture.png&amp;quot;)&lt;&#x2F;code&gt; - the assets folder itself is a part of the path.&lt;&#x2F;p&gt;
+&lt;p&gt;To fix it and use uniforms path between android and PC &lt;a href=&quot;https:&#x2F;&#x2F;docs.rs&#x2F;macroquad&#x2F;0.3.6&#x2F;macroquad&#x2F;file&#x2F;fn.set_pc_assets_folder.html&quot;&gt;set_pc_assets_folder&lt;&#x2F;a&gt; may help.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;macroquad::file::set_pc_assets_folder(&amp;quot;assets&amp;quot;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now its &lt;code&gt;load_texture(&amp;quot;nice_texture.png&amp;quot;)&lt;&#x2F;code&gt; on both platforms.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;high-dpi&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#high-dpi&quot; aria-label=&quot;Anchor link for: high-dpi&quot;&gt;🔗&lt;&#x2F;a&gt;High-dpi&lt;&#x2F;h2&gt;
+&lt;img src=&quot;densities-phone_2x.png&quot;  width=&quot;300px&quot;&#x2F;&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;https:&#x2F;&#x2F;developer.android.com&#x2F;training&#x2F;multiscreen&#x2F;screendensities&quot;&gt;Image source&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Android devices have significant pixel dencity difference. 
+By default, android tries to emulate a low-density display on a high-density pixel display.&lt;&#x2F;p&gt;
+&lt;p&gt;This means that &lt;code&gt;screen_width()&#x2F;screen_height()&lt;&#x2F;code&gt; may give a value way lower than the actual screen pixel resolution, but later on android will automatically upscale the viewport.&lt;&#x2F;p&gt;
+&lt;p&gt;This may be OK - smaller viewport means better FPS, but if android&#x27;s upscale is not required - the game should tell android to support &amp;quot;high-dpi&amp;quot; screens.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#795da3;&quot;&gt;window_conf&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;() -&amp;gt; window::Conf {
+    window::Conf {
+        window_title: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;Zemeroth&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;to_owned&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(),
+        high_dpi: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;,
+        &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;Default&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;::default()
+    }
+}
+
+#[macroquad::main(window_conf)]
+async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#795da3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;() {
+}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;screen-orientation&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#screen-orientation&quot; aria-label=&quot;Anchor link for: screen-orientation&quot;&gt;🔗&lt;&#x2F;a&gt;Screen orientation&lt;&#x2F;h2&gt;
+&lt;p&gt;By default Macroquad games are fullscreen and allows any screen locations.
+To limit possible screen orientations add this to your Cargo.toml: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;[package.metadata.android.activity_attributes]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;android:screenOrientation&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;userLandscape&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;icon&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#icon&quot; aria-label=&quot;Anchor link for: icon&quot;&gt;🔗&lt;&#x2F;a&gt;Icon&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;android&#x2F;icon.jpg&quot; alt=&quot;icon&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Application icon lives in an &amp;quot;resources&amp;quot; - special section in APK.
+To include &amp;quot;res&amp;quot; folder to an APK:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;[package.metadata.android]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;res &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;android_res&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;icon &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;@mipmap&#x2F;ic_launcher&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And the icon itself for different DPI may look something like this:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;android_res&#x2F;
+├── mipmap-hdpi
+│   └── ic_launcher.png
+├── mipmap-mdpi
+│   └── ic_launcher.png
+├── mipmap-xhdpi
+│   └── ic_launcher.png
+├── mipmap-xxhdpi
+│   └── ic_launcher.png
+└── mipmap-xxxhdpi
+    └── ic_launcher.png
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Icons for each size certainly may be generated manually. For this tutorial 
+&lt;a href=&quot;http:&#x2F;&#x2F;romannurik.github.io&#x2F;AndroidAssetStudio&#x2F;icons-launcher.html&quot;&gt;http:&#x2F;&#x2F;romannurik.github.io&#x2F;AndroidAssetStudio&#x2F;icons-launcher.html&lt;&#x2F;a&gt; was used, worked pretty good.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;debug-logs&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#debug-logs&quot; aria-label=&quot;Anchor link for: debug-logs&quot;&gt;🔗&lt;&#x2F;a&gt;Debug logs&lt;&#x2F;h2&gt;
+&lt;p&gt;All the &lt;code&gt;warn!&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;info!&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;debug!&lt;&#x2F;code&gt; macroquad&#x27;s messages goes into android system messages. To access android&#x27;s system messages there is &lt;code&gt;adb logcat&lt;&#x2F;code&gt; command. There are various way to filter &lt;code&gt;adb logcat&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;filter-adb-logcat-by-tag&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#filter-adb-logcat-by-tag&quot; aria-label=&quot;Anchor link for: filter-adb-logcat-by-tag&quot;&gt;🔗&lt;&#x2F;a&gt;Filter &lt;code&gt;adb logcat&lt;&#x2F;code&gt; by tag&lt;&#x2F;h3&gt;
+&lt;p&gt;Filter by tag will show only messages posted by macroquad&#x27;s &lt;code&gt;warn!&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;info!&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;debug!&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;adb logcat -v brief SAPP:V &amp;quot;*:S&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;-v brief&lt;&#x2F;code&gt; will save a little bit of screen space, hiding some log metadata.&lt;&#x2F;p&gt;
+&lt;p&gt;Arguments after &lt;code&gt;adb logcat&lt;&#x2F;code&gt; are filter specification.&lt;&#x2F;p&gt;
+&lt;p&gt;SAPP:V - For messages with tag SAPP V(verbose) filter will be applied. All the SAPP messages will be in the output.
+*:S - For all the other tags S(silent) filter will be applied. All the other messages will be filtered out.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;filter-by-pid&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#filter-by-pid&quot; aria-label=&quot;Anchor link for: filter-by-pid&quot;&gt;🔗&lt;&#x2F;a&gt;Filter by PID&lt;&#x2F;h3&gt;
+&lt;p&gt;Sometimes application produced some extra system messages. It may be some system warnings or some unhandled native libraries problems. But those messages may be filtered out when &lt;code&gt;adb logcat&lt;&#x2F;code&gt; is filtered by tag.&lt;&#x2F;p&gt;
+&lt;p&gt;PID is a process id, and filtering by PID will give all the application output, with any tag.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;# Find out PID
+&amp;gt; adb shell pidof -s rust.CRATENAME
+30243
+# Get all the messages from a given PID
+&amp;gt;adb shell pidof -s 30243
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Depending on the command processor those to commands may be usually reduced to something like&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;adb logcat --pid=$(adb shell pidof -s rust.CRATENAME)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h1 id=&quot;4-signing-the-apk&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#4-signing-the-apk&quot; aria-label=&quot;Anchor link for: 4-signing-the-apk&quot;&gt;🔗&lt;&#x2F;a&gt;4. Signing the APK&lt;&#x2F;h1&gt;
+&lt;p&gt;By default, &lt;code&gt;cargo quad-apk&lt;&#x2F;code&gt; generates debug kestore file and is signing up an APK with a debug key. This allows the APK to be installed locally, but is not enough for the Google Play.&lt;&#x2F;p&gt;
+&lt;p&gt;For the Play Store non-debug keystore file is required, and this file should be uploaded to the Play Console to verify developer identity. &lt;&#x2F;p&gt;
+&lt;p&gt;To generate the key &lt;code&gt;keytool&lt;&#x2F;code&gt; is required. &lt;code&gt;keytool&lt;&#x2F;code&gt; is a part of a &lt;code&gt;java&lt;&#x2F;code&gt; ditribution and is being shipped with &lt;code&gt;openjdk&lt;&#x2F;code&gt;.
+To sign the the APK &lt;code&gt;apksigner&lt;&#x2F;code&gt; is requires. &lt;code&gt;apksigner&lt;&#x2F;code&gt; is a part of Android SDK. &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;keytool -v -genkey -keystore mygame.keystore -alias mygame -keyalg RSA -validity 10000
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Than upload &lt;code&gt;mygame.keystore&lt;&#x2F;code&gt; to the Play Console. Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.&lt;&#x2F;p&gt;
+&lt;p&gt;First, tell &lt;code&gt;cargo-apk&lt;&#x2F;code&gt; to stop signing the build with debug keystore:
+&lt;code&gt;cargo quad-apk build --release --nosign&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Than sign the APK with a non-debug keystore file:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;apksigner sign --ks mygame.keystore my-app.apk --ks-key-alias alias_name
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It may be verified with&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;apksigner verify my-app.apk
+
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;developer.android.com&#x2F;studio&#x2F;publish&#x2F;app-signing.html#signing-manually&quot;&gt;The official documentation on signing can be found here.&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;note-how-to-get-keytool-apksigner-with-docker&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#note-how-to-get-keytool-apksigner-with-docker&quot; aria-label=&quot;Anchor link for: note-how-to-get-keytool-apksigner-with-docker&quot;&gt;🔗&lt;&#x2F;a&gt;NOTE: how to get &lt;code&gt;keytool&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;apksigner&lt;&#x2F;code&gt; with docker&lt;&#x2F;h2&gt;
+&lt;p&gt;Assuming android keystore lives in ~&#x2F;.android and .apk to sign lives in current working directory: &lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;docker run --rm 
+    -v (pwd):&#x2F;root&#x2F;src  
+    -v(&#x2F;home&#x2F;USER&#x2F;.android):&#x2F;root&#x2F;.android_secrets 
+    -w &#x2F;root&#x2F;src -it notfl3&#x2F;cargo-apk &#x2F;bin&#x2F;bash
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This command will gives a bash session with current directory mounted to &lt;code&gt;&#x2F;root&#x2F;src&lt;&#x2F;code&gt; and .android mounted to &lt;code&gt;&#x2F;root&#x2F;.android_secrets&lt;&#x2F;code&gt;
+And inside the container APK may be signed with&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;apksigner sign --ks my.keystore my-app.apk --ks-key-alias alias_name
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;android-targets&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#android-targets&quot; aria-label=&quot;Anchor link for: android-targets&quot;&gt;🔗&lt;&#x2F;a&gt;Android targets&lt;&#x2F;h2&gt;
+&lt;p&gt;By default &lt;code&gt;cargo quad-apk&lt;&#x2F;code&gt; is building an APK for 3 different platforms. 
+To comply Google Play requirements and get all the platforms:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;[package.metadata.android]
+..
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;build_targets &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; [ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;armv7-linux-androideabi&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;aarch64-linux-android&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;i686-linux-android&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;x86_64-linux-android&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; ]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To reduce build time while debugging - pick one for a testing device in use:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;[package.metadata.android]
+..
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;build_targets &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; [ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;armv7-linux-androideabi&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; ]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;google-play-versioning&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#google-play-versioning&quot; aria-label=&quot;Anchor link for: google-play-versioning&quot;&gt;🔗&lt;&#x2F;a&gt;Google Play versioning&lt;&#x2F;h2&gt;
+&lt;p&gt;Google play have its own versioning mechanism for uploaded APKs.
+Each APK for google play should have unique &lt;code&gt;version_code&lt;&#x2F;code&gt;.
+Otherwise google developer console will end up with &lt;code&gt;Version code 1 has already been used. Try another version code.&amp;quot;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;To set &lt;code&gt;version_code&lt;&#x2F;code&gt; from an app Cargo.toml:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
+&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;[package.metadata.android]
+..
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;version_code &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;2
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;version_name &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;Version Name&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;developer.android.com&#x2F;studio&#x2F;publish&#x2F;versioning&quot;&gt;The official documentation on versioning can be found here.&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Making an online multiplayer game in Rust with Nakama</title>
 		<published>2021-05-01T09:19:42+00:00</published>
@@ -26,9 +290,9 @@
 &lt;li&gt;Leaderboards&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;p&gt;This tutorial will briefly cover how to create a game with Macroquad. Afterward, it will focus on Nakama integration.&lt;&#x2F;p&gt;
-&lt;h1 id=&quot;making-a-platformer-game&quot;&gt;Making a platformer game&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;making-a-platformer-game&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#making-a-platformer-game&quot; aria-label=&quot;Anchor link for: making-a-platformer-game&quot;&gt;🔗&lt;&#x2F;a&gt;Making a platformer game&lt;&#x2F;h1&gt;
 &lt;p&gt;This part of the tutorial will explain how to create a single-player platformer game in Rust, starting with setting up macroquad. By the end of this section, we will have created a simple but fully functional platformer.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;setting-up-macroquad&quot;&gt;Setting up macroquad&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;setting-up-macroquad&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#setting-up-macroquad&quot; aria-label=&quot;Anchor link for: setting-up-macroquad&quot;&gt;🔗&lt;&#x2F;a&gt;Setting up macroquad&lt;&#x2F;h2&gt;
 &lt;p&gt;Start an empty Rust project:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt; cargo init --bin fishgame
@@ -77,7 +341,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 &lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#323232;&quot;&gt;apt install libx11-dev libxi-dev libgl1-mesa-dev
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;For more details, check the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;not-fl3&#x2F;macroquad&#x2F;#building-instructions&quot;&gt;build instructions&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;making-game-levels&quot;&gt;Making game levels&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;making-game-levels&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#making-game-levels&quot; aria-label=&quot;Anchor link for: making-game-levels&quot;&gt;🔗&lt;&#x2F;a&gt;Making game levels&lt;&#x2F;h2&gt;
 &lt;p&gt;The easiest way to do some 2D-level design with macroquad is with the free tiles editor &lt;a href=&quot;https:&#x2F;&#x2F;www.mapeditor.org&quot;&gt;Tiled&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;tiled.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;&lt;em&gt;Tiled with &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;assets&#x2F;map.json&quot;&gt;Fish Game&#x27;s level&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
@@ -124,7 +388,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;background.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Now we have a level background. For a more polished game, it would be reasonable to invest some time into a more complicated camera, window handling, etc.
 All of those are implemented in the final Fish Game but will be skipped in the tutorial to get started with Nakama faster.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;character-physics&quot;&gt;Character physics&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;character-physics&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#character-physics&quot; aria-label=&quot;Anchor link for: character-physics&quot;&gt;🔗&lt;&#x2F;a&gt;Character physics&lt;&#x2F;h2&gt;
 &lt;p&gt;Add a character into the level from the previous chapter:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;...
@@ -218,7 +482,7 @@ world.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;add_static_
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gist.github.com&#x2F;not-fl3&#x2F;a51dbff5f09c04d5a371e55db4c48e13&quot;&gt;Full source code&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Now the fish can jump!&lt;&#x2F;p&gt;
 &lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;fish_jump.gif&quot;  width=&quot;100%&quot;&#x2F;&gt;
-&lt;h2 id=&quot;nodes&quot;&gt;Nodes&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;nodes&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#nodes&quot; aria-label=&quot;Anchor link for: nodes&quot;&gt;🔗&lt;&#x2F;a&gt;Nodes&lt;&#x2F;h2&gt;
 &lt;p&gt;Now we have enough of a game to start adding Nakama networking. Just one final piece missing.&lt;&#x2F;p&gt;
 &lt;p&gt;So far, the game code looks like this:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
@@ -322,7 +586,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gist.github.com&#x2F;not-fl3&#x2F;a98d9f9e37a01be8bc2f0d246164b8bb&quot;&gt;Full source code&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;It may not look like a big improvement over the previous approach, but scenes allow building complicated node relationships and applying iteration strategies over scene nodes. We are going to use it a lot more in the upcoming sections.&lt;&#x2F;p&gt;
-&lt;h1 id=&quot;networking-with-nakama&quot;&gt;Networking with Nakama&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;networking-with-nakama&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#networking-with-nakama&quot; aria-label=&quot;Anchor link for: networking-with-nakama&quot;&gt;🔗&lt;&#x2F;a&gt;Networking with Nakama&lt;&#x2F;h1&gt;
 &lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;nakama-rs&#x2F;&quot;&gt;&amp;quot;nakama-rs&amp;quot;&lt;&#x2F;a&gt; crate is a pure Rust implementation of the Nakama protocol.&lt;&#x2F;p&gt;
 &lt;p&gt;It allows working with Nakama in three different styles. &lt;&#x2F;p&gt;
 &lt;ul&gt;
@@ -332,7 +596,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 &lt;&#x2F;ul&gt;
 &lt;p&gt;For Fish Game, we are going to use that high-level client.  That client works as a giant state machine - the user makes non-blocking calls, and the client may change some internal state based on those calls.
 Than in the main loop game pull changes from the ApiClient and may react accordingly.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;connecting-to-nakama&quot;&gt;Connecting to Nakama&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;connecting-to-nakama&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#connecting-to-nakama&quot; aria-label=&quot;Anchor link for: connecting-to-nakama&quot;&gt;🔗&lt;&#x2F;a&gt;Connecting to Nakama&lt;&#x2F;h2&gt;
 &lt;p&gt;nakama-rs&#x27; ApiClient will be used as a singleton. Once a global object is created, it is persisted throughout the game lifetime and is globally accessible.&lt;&#x2F;p&gt;
 &lt;p&gt;In macroquad, we can use the node system for this. It will still be a singleton, but the access and relationship graph with our new Nakama node will be easily traceable and visible.&lt;&#x2F;p&gt;
 &lt;p&gt;So we will create a scene node with ApiClient and  pass a reference to this node to all nodes communicating with Nakama.&lt;&#x2F;p&gt;
@@ -373,7 +637,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
     ));
     &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;...
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;} 
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;authentication-and-registration&quot;&gt;Authentication and registration&lt;&#x2F;h2&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;authentication-and-registration&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#authentication-and-registration&quot; aria-label=&quot;Anchor link for: authentication-and-registration&quot;&gt;🔗&lt;&#x2F;a&gt;Authentication and registration&lt;&#x2F;h2&gt;
 &lt;p&gt;Macroquad uses the immediate mode gui concept for UI. Here we will skip GUI style setup (it may be found &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;gui.rs#L36&quot;&gt;here&lt;&#x2F;a&gt;), and we will proceed to the UI logic instead.&lt;&#x2F;p&gt;
 &lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;login.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Most UI windows interacting with Nakama are built in the same way:&lt;&#x2F;p&gt;
@@ -416,7 +680,7 @@ async &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quo
 
     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;next_frame&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;().await;
 }
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;real-time-multiplayer&quot;&gt;Real-time multiplayer&lt;&#x2F;h2&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;real-time-multiplayer&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#real-time-multiplayer&quot; aria-label=&quot;Anchor link for: real-time-multiplayer&quot;&gt;🔗&lt;&#x2F;a&gt;Real-time multiplayer&lt;&#x2F;h2&gt;
 &lt;p&gt;&lt;em&gt;The real-time multiplayer engine makes it easy for users to set up and join matches where they can rapidly exchange data with opponents.
 Any user can participate in matches with other users. Users can create, join, and leave matches with messages sent from clients. A match exists on the server until its last participant has left.
 Any data sent through a match is immediately routed to all other participants. The matches are kept in memory and can be persisted as needed.&lt;&#x2F;em&gt;
@@ -449,7 +713,7 @@ This will be addressed in the &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x
 &lt;li&gt;Nakama considers a match started right after the &lt;code&gt;create_match&lt;&#x2F;code&gt; call, and anyone can join at any moment. While the rules of Fish Game won&#x27;t let players join in the middle, and the game starts only when all of the players have pressed the “ready” button.
 This will be addressed in the &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;fish-tutorial&#x2F;#Ready-window&quot;&gt;Ready window&lt;&#x2F;a&gt; section.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;h2 id=&quot;matchmaker&quot;&gt;Matchmaker&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;matchmaker&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#matchmaker&quot; aria-label=&quot;Anchor link for: matchmaker&quot;&gt;🔗&lt;&#x2F;a&gt;Matchmaker&lt;&#x2F;h2&gt;
 &lt;p&gt;You can use the Matchmaker to find other players. It is possible to match them using properties and a query that specifies the values the other players&#x27; properties should hold. In &lt;code&gt;nakama-rs&lt;&#x2F;code&gt; the Matchmaker is a &lt;code&gt;struct&lt;&#x2F;code&gt; and can be created using &lt;code&gt;Matchmaker::new()&lt;&#x2F;code&gt;. There are two types of properties, string properties and numeric properties that can be added with &lt;code&gt;matchmaker.add_string_property(&amp;quot;name&amp;quot;, &amp;quot;value&amp;quot;)&lt;&#x2F;code&gt; and &lt;code&gt;matchmaker.add_numeric_property(&amp;quot;rank&amp;quot;, 1000.0)&lt;&#x2F;code&gt; respectively. Names of properties should be unique across both types.&lt;&#x2F;p&gt;
 &lt;p&gt;The query is a space-separated string using the &lt;a href=&quot;http:&#x2F;&#x2F;blevesearch.com&#x2F;docs&#x2F;Query-String-Query&#x2F;&quot;&gt;Bleve Query-String-Query Syntax&lt;&#x2F;a&gt;. It is possible to add queries manually using &lt;code&gt;matchmaker.add_query_item(&amp;quot;properties.region:Europe&amp;quot;)&lt;&#x2F;code&gt; but &lt;code&gt;nakama-rs&lt;&#x2F;code&gt; provides a helper to construct the query string using the builder pattern. For now, terms, numeric ranges, required, optional and exclusion are supported. See &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;nakama-rs&#x2F;blob&#x2F;master&#x2F;examples&#x2F;matchmaker.rs&quot;&gt;examples&#x2F;matchmaker.rs&lt;&#x2F;a&gt; for more examples.&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
@@ -515,7 +779,7 @@ widgets::InputText::new(hash!())
 &lt;p&gt;You can add the Matchmaker by calling &lt;code&gt;nakama.socket_add_matchmaker(&amp;amp;matchmaker)&lt;&#x2F;code&gt;, adding the user to the server&#x27;s matchmaking pool. The user will stay in the pool until matched as long as they are online or until you remove them manually. It is possible to add multiple matchmakers with different queries simultaneously to look for different types of matches.&lt;&#x2F;p&gt;
 &lt;p&gt;When the server matches the user, the ApiClient will handle the event and set &lt;code&gt;nakama.matchmaker_token&lt;&#x2F;code&gt; to &lt;code&gt;Some(token)&lt;&#x2F;code&gt;. The token is a short-lived entry ticket that you can use to join a match with the other matched players by calling &lt;code&gt;nakama.socket_join_match_by_token(token)&lt;&#x2F;code&gt;. The server creates the match as soon as the first player tries to join it and sends an event once the player joined successfully. In the client, &lt;code&gt;nakama.match_id()&lt;&#x2F;code&gt; will then contain a value. It is now possible to send match data between players.&lt;&#x2F;p&gt;
 &lt;p&gt;For additional details, check out the &lt;a href=&quot;https:&#x2F;&#x2F;heroiclabs.com&#x2F;docs&#x2F;gameplay-matchmaker&quot;&gt;Matchmaker documentation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;exchanging-messages&quot;&gt;Exchanging messages&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;exchanging-messages&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#exchanging-messages&quot; aria-label=&quot;Anchor link for: exchanging-messages&quot;&gt;🔗&lt;&#x2F;a&gt;Exchanging messages&lt;&#x2F;h2&gt;
 &lt;p&gt;nakama-rs&#x27;&lt;code&gt;ApiClient&lt;&#x2F;code&gt; provides two API calls to communicate between each other: &lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;fn socket_send&amp;lt;T: SerBin&amp;gt;(&amp;amp;self, opcode: u32, data: T)&lt;&#x2F;code&gt;
@@ -559,7 +823,7 @@ widgets::InputText::new(hash!())
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;}
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Event may be either a message from other client or a system even like joined&#x2F;leaved player. This will be explained in details in &lt;a href=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;fish-tutorial&#x2F;#Player-state-synchronization&quot;&gt;Player state syncronization&lt;&#x2F;a&gt; section.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;player-state-synchronization&quot;&gt;Player state synchronization&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;player-state-synchronization&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#player-state-synchronization&quot; aria-label=&quot;Anchor link for: player-state-synchronization&quot;&gt;🔗&lt;&#x2F;a&gt;Player state synchronization&lt;&#x2F;h2&gt;
 &lt;p&gt;Fish Game uses a relayed network synchronization model. Each player simulates its physics and sends its state to other players.&lt;&#x2F;p&gt;
 &lt;p&gt;One of the players is called &amp;quot;host&amp;quot; and is responsible for global events and conflict resolution.&lt;&#x2F;p&gt;
 &lt;p&gt;Nakama node from previous chapters:&lt;&#x2F;p&gt;
@@ -669,14 +933,14 @@ We need to have a list of &lt;code&gt;remote_players&lt;&#x2F;code&gt; to track 
 } 
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&quot;&gt;&lt;em&gt;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;a-note-about-network-performance&quot;&gt;A note about network performance&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;a-note-about-network-performance&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#a-note-about-network-performance&quot; aria-label=&quot;Anchor link for: a-note-about-network-performance&quot;&gt;🔗&lt;&#x2F;a&gt;A note about network performance&lt;&#x2F;h2&gt;
 &lt;p&gt;While Fish Game has good enough network performance to be fully functional, it is kept intentionally simplistic for demonstration purposes.&lt;&#x2F;p&gt;
 &lt;p&gt;Nakama’s real-time Multiplayer API sends data over WebSockets, which means TCP. TCP is reliable (you know if the message you sent arrived or not), but it’s slower. For an in-depth explanation about the trade-offs between TCP and UDP, see &lt;a href=&quot;https:&#x2F;&#x2F;heroiclabs.com&#x2F;docs&#x2F;expert-tcp-udp&#x2F;&quot;&gt;Choosing TCP or UDP: a guide for game developers&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Fast-paced games commonly use UDP to send synchronization information: it’s unreliable (your message can get lost) but faster. Using unreliable UDP would allow for some network optimizations that we can’t do here. For example, with some kinds of game states, only the most recent message is valid (all older messages are immediately invalid once a newer one arrives), so we could use the faster UDP packets.
 It’s OK if some get lost, we&#x27;d just take the newest one that arrives.&lt;&#x2F;p&gt;
 &lt;p&gt;This game is fast-paced enough that it ideally should be using “input prediction and rollback” rather than “input prediction and correction”. When using rollback, rather than applying the corrections you received to the current state of the game, you roll back the local game state to the time when the remote state was generated, apply it, and then roll the game state forward to the current time. This can help eliminate lag and avoid situations where one player sees themselves hitting another player, but it doesn’t  register as a hit. However, rollback is a lot more complicated to implement than correction. Fish Game has enough in common with arcade-style Fighting Games that the most optimal networking technique for it might be the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;pond3r&#x2F;ggpo&quot;&gt;GGPO&lt;&#x2F;a&gt; technique.&lt;&#x2F;p&gt;
 &lt;p&gt;This would merit further investigation if this was a commercial game.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;global-events-and-conflicts-resolution&quot;&gt;Global events and conflicts resolution&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;global-events-and-conflicts-resolution&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#global-events-and-conflicts-resolution&quot; aria-label=&quot;Anchor link for: global-events-and-conflicts-resolution&quot;&gt;🔗&lt;&#x2F;a&gt;Global events and conflicts resolution&lt;&#x2F;h2&gt;
 &lt;p&gt;In Fish Game, we have some global events. Good example: Spawn process of pickable weapon.&lt;&#x2F;p&gt;
 &lt;p&gt;There are two ways to simulate such a process:&lt;&#x2F;p&gt;
 &lt;ul&gt;
@@ -712,7 +976,7 @@ It’s OK if some get lost, we&#x27;d just take the newest one that arrives.&lt;
 }
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;global_events.rs&quot;&gt;&lt;em&gt;src&#x2F;nodes&#x2F;global_events.rs&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;ready-window&quot;&gt;Ready window&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;ready-window&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#ready-window&quot; aria-label=&quot;Anchor link for: ready-window&quot;&gt;🔗&lt;&#x2F;a&gt;Ready window&lt;&#x2F;h2&gt;
 &lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;ready.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;One of our unsolved problems: in Fish Game the game starts only when all the players joined the match, can see each other and has opted in as ready. &lt;&#x2F;p&gt;
 &lt;p&gt;After this point, it is impossible to join a match and only one last standing fish will win.&lt;&#x2F;p&gt;
@@ -736,7 +1000,7 @@ It’s OK if some get lost, we&#x27;d just take the newest one that arrives.&lt;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Now it is the game&#x27;s responsibility to figure when to start a match. In Fish Game rules are quite simple - before everyone pushed &amp;quot;Ready&amp;quot; and the host confirmed by pushing &amp;quot;Start game&amp;quot; - no loot is spawning and noone is allowed to move. Implementation is in &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;heroiclabs&#x2F;fishgame-macroquad&#x2F;blob&#x2F;master&#x2F;src&#x2F;nodes&#x2F;nakama&#x2F;nakama_realtime_game.rs&quot;&gt;nakama node&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;But this logic may be totally different depending on game design, and the goal of this little chapter - demonstrate where nakama&#x27;s area of responsibility in the matchmaker&#x2F;match logic ends and game should roll its own logic. &lt;&#x2F;p&gt;
-&lt;h2 id=&quot;leaderboards&quot;&gt;Leaderboards&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;leaderboards&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#leaderboards&quot; aria-label=&quot;Anchor link for: leaderboards&quot;&gt;🔗&lt;&#x2F;a&gt;Leaderboards&lt;&#x2F;h2&gt;
 &lt;p&gt;There’s one last Nakama feature we’re going to look at before ending this tutorial: Leaderboards.&lt;&#x2F;p&gt;
 &lt;p&gt;Leaderboards need to be created on the server before your game can write data to them. This is done in Fish Game by adding a small server-side Lua module in &lt;code&gt;nakama&#x2F;data&#x2F;modules&#x2F;fish_game.lua&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
@@ -749,14 +1013,14 @@ nk.run_once(&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5
 &lt;p&gt;This runs on the Nakama server at startup and creates a leaderboard called “fishgamewins”, which we’re going to use to track the total number of wins that each player has gotten.&lt;&#x2F;p&gt;
 &lt;p&gt;It’s a non-authoritative leaderboard (the &lt;code&gt;false&lt;&#x2F;code&gt; in the 2nd argument), which means that the game clients can modify the leaderboard themselves, rather than requiring server-side logic to do it. It’s sorted in descending order (the &amp;quot;desc&amp;quot; in the 3rd argument) and is updated by incrementing the score (the &amp;quot;incr&amp;quot; in the 4th argument).&lt;&#x2F;p&gt;
 &lt;p&gt;Note: Nakama modules can be written in Lua, Go or (in Nakama 3) JavaScript.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;posting-results-to-the-leaderboard&quot;&gt;Posting results to the leaderboard&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;posting-results-to-the-leaderboard&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#posting-results-to-the-leaderboard&quot; aria-label=&quot;Anchor link for: posting-results-to-the-leaderboard&quot;&gt;🔗&lt;&#x2F;a&gt;Posting results to the leaderboard&lt;&#x2F;h2&gt;
 &lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;back_to_lobby.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;When only one fish is alive and the game has ended, the winner may update the leaderboard record.&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#323232;&quot;&gt;nakama.api_client.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#62a35c;&quot;&gt;write_leaderboard_record&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;fish_game_wins&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#0086b3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;)
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;We may want to wait for the result status to display some error and retry if we got a network error.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;accessing-the-leaderboard&quot;&gt;Accessing the leaderboard&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;accessing-the-leaderboard&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#accessing-the-leaderboard&quot; aria-label=&quot;Anchor link for: accessing-the-leaderboard&quot;&gt;🔗&lt;&#x2F;a&gt;Accessing the leaderboard&lt;&#x2F;h2&gt;
 &lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;leaderboard.png&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;The leaderboard window is not much different from the authentication&#x2F;matchmaking window.&lt;&#x2F;p&gt;
 &lt;p&gt;First, make the Nakama request: &lt;&#x2F;p&gt;
