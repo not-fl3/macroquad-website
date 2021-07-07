@@ -1,6 +1,7 @@
 {% import 'macros/head.html' as macros_head %}
 {% import 'macros/header.html' as macros_header %}
 {% import 'macros/footer.html' as macros_footer %}
+
 <!DOCTYPE html>
 <html lang="{{ config.extra.language_code | default(value="en-US") }}">
 <head>
@@ -26,7 +27,8 @@
     {{ macros_header::header(current_section="/") }}
   {% endblock header %}
 
-    {% block content %}{% endblock content %}
+  {% block content %}
+  {% endblock content %}
 
   {% block footer %}
     {{ macros_footer::footer() }}

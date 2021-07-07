@@ -5,17 +5,16 @@ date = 2021-06-15T09:19:42+00:00
 updated = 2021-06-15T10:19:42+00:00
 draft = false
 template = "blog/page.html"
-insert_anchor_links = "left"
 
 [taxonomies]
 authors = ["Fedor"]
 +++
 
+[![zemeroth](zemeroth.png)](https://play.google.com/store/apps/details?id=rust.zemeroth)
+
 # 1. Introduction
 
-This tutorial is based on the experience of publishing [Zemeroth](https://github.com/ozkriff/zemeroth) game on the Google Play Store. The game is now available on the store, [check it out!](htts://not.yet)
-
-CLICKABLE SCREENSHOT
+This tutorial is based on the experience of publishing [Zemeroth](https://github.com/ozkriff/zemeroth) game on the Google Play Store. The game is now available on the store, [check it out!](https://play.google.com/store/apps/details?id=rust.zemeroth)
 
 Topics covered:
 - Building a macroquad game for android 
@@ -67,7 +66,7 @@ and later, in the docker's bash: `cargo quad-apk build --release`. And use the s
 Docker simplify the process of installing android-sdk and android-ndk. But, sometimes, it may be more convinient to use all native build pipeline. 
 While this is not really recommended, this path is included to a tutorial for better illustrating what exactly is going on in the container.
 
-## Installing pre-requisites:
+### Installing pre-requisites:
 
 Exact commands and pathes may depend on the host OS. Here linux commands are used, but on all the other OSes the idea should be very similar.
 
@@ -307,7 +306,6 @@ It may be verified with
 apksigner verify my-app.apk
 
 ```
-
 [The official documentation on signing can be found here.](https://developer.android.com/studio/publish/app-signing.html#signing-manually).
 
 ## NOTE: how to get `keytool`/`apksigner` with docker
@@ -323,21 +321,23 @@ docker run --rm
 
 This command will gives a bash session with current directory mounted to `/root/src` and .android mounted to `/root/.android_secrets`
 And inside the container APK may be signed with
+
 ```
+apksigner sign --ks my.keystore my-app.apk --ks-key-alias alias_name
 ```
 
 ## Android targets
 
 By default `cargo quad-apk` is building an APK for 3 different platforms. 
 To comply Google Play requirements and get all the platforms:
-```
+```ini
 [package.metadata.android]
 ..
 build_targets = [ "armv7-linux-androideabi", "aarch64-linux-android", "i686-linux-android", "x86_64-linux-android" ]
 ```
 
 To reduce build time while debugging - pick one for a testing device in use:
-```
+```ini
 [package.metadata.android]
 ..
 build_targets = [ "armv7-linux-androideabi" ]
@@ -346,13 +346,16 @@ build_targets = [ "armv7-linux-androideabi" ]
 ## Google Play versioning
 
 Google play have its own versioning mechanism for uploaded APKs.
-Each APK for google play should have this: 
-```
+Each APK for google play should have unique `version_code`.
+Otherwise google developer console will end up with `Version code 1 has already been used. Try another version code."`.
+
+To set `version_code` from an app Cargo.toml:
+
+```ini
 [package.metadata.android]
 ..
 version_code = 2
 version_name = "Version Name"
 ```
-in its Cargo.toml
 
 [The official documentation on versioning can be found here.](https://developer.android.com/studio/publish/versioning).

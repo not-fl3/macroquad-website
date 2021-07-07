@@ -13,9 +13,9 @@
 		<updated>2021-06-15T10:19:42+00:00</updated>
 		<link href="https://macroquad.rs/tutorials/android/" type="text/html"/>
 		<id>https://macroquad.rs/tutorials/android/</id>
-		<content type="html">&lt;h1 id=&quot;1-introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#1-introduction&quot; aria-label=&quot;Anchor link for: 1-introduction&quot;&gt;🔗&lt;&#x2F;a&gt;1. Introduction&lt;&#x2F;h1&gt;
-&lt;p&gt;This tutorial is based on the experience of publishing &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ozkriff&#x2F;zemeroth&quot;&gt;Zemeroth&lt;&#x2F;a&gt; game on the Google Play Store. The game is now available on the store, &lt;a href=&quot;htts:&#x2F;&#x2F;not.yet&quot;&gt;check it out!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;CLICKABLE SCREENSHOT&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;&lt;img src=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;android&#x2F;zemeroth.png&quot; alt=&quot;zemeroth&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;1-introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#1-introduction&quot; aria-label=&quot;Anchor link for: 1-introduction&quot;&gt;🔗&lt;&#x2F;a&gt;1. Introduction&lt;&#x2F;h1&gt;
+&lt;p&gt;This tutorial is based on the experience of publishing &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ozkriff&#x2F;zemeroth&quot;&gt;Zemeroth&lt;&#x2F;a&gt; game on the Google Play Store. The game is now available on the store, &lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;check it out!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Topics covered:&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;Building a macroquad game for android &lt;&#x2F;li&gt;
