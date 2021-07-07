@@ -368,3 +368,22 @@ To submit your game for a google review and do an open test/release - the Play S
 - two 16:9 screenshots
 
 [Useful article on preview assets.](https://developer.android.com/studio/publish/versioning).
+
+## Internal test, open test and release
+
+*Difference between an internal, closed, and open test?*
+*You can create releases on three testing tracks before you release your app to production.*
+
+*Internal testing: Create an internal testing release to quickly distribute your app to up to 100 testers for initial quality assurance checks.*
+
+Do not require setted up store page and do not require a review. Helps with ensuring that signing process actually worked, build is really uploaded. Also allows to add testers by email.
+
+*Closed testing: Create a closed testing release to test pre-release versions of your app with a wider set of testers to gather more targeted feedback.*
+
+Almost an open test, but requires adding tester's email.
+
+*Open testing: Create an open testing release to run a test with a large group and surface your app's test version on Google Play. If you run an open test, anyone can join your testing program and submit private feedback to you.*
+
+Almost a release, page is publicly available, no additional actions from testers required to install the game.
+
+[More info on testing tracks can be found here.](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)
