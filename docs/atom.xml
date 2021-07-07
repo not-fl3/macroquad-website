@@ -15,7 +15,7 @@
 		<id>https://macroquad.rs/tutorials/android/</id>
 		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;&lt;img src=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;tutorials&#x2F;android&#x2F;zemeroth.png&quot; alt=&quot;zemeroth&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;1-introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#1-introduction&quot; aria-label=&quot;Anchor link for: 1-introduction&quot;&gt;🔗&lt;&#x2F;a&gt;1. Introduction&lt;&#x2F;h1&gt;
-&lt;p&gt;This tutorial is based on the experience of publishing &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ozkriff&#x2F;zemeroth&quot;&gt;Zemeroth&lt;&#x2F;a&gt; game on the Google Play Store. The game is now available on the store, &lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;check it out!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;This tutorial is based on the experience of publishing &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ozkriff&#x2F;zemeroth&quot;&gt;Zemeroth&lt;&#x2F;a&gt; game on the Google Play Store. The game is now available as open test, &lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;check it out!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Topics covered:&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;Building a macroquad game for android &lt;&#x2F;li&gt;
@@ -272,11 +272,21 @@ Otherwise google developer console will end up with &lt;code&gt;Version code 1 h
 &lt;h2 id=&quot;preview-assets-for-a-store-page&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#preview-assets-for-a-store-page&quot; aria-label=&quot;Anchor link for: preview-assets-for-a-store-page&quot;&gt;🔗&lt;&#x2F;a&gt;Preview assets for a store page&lt;&#x2F;h2&gt;
 &lt;p&gt;To submit your game for a google review and do an open test&#x2F;release - the Play Store page should be filled setted up - screenshots&#x2F;descriptions should be uploaded. Lots of data will be marked as (*)required, however, the real minimal subset of game graphics to upload is:&lt;&#x2F;p&gt;
 &lt;ul&gt;
-&lt;li&gt;512x512 icon &lt;&#x2F;li&gt;
+&lt;li&gt;512x512 icon&lt;&#x2F;li&gt;
 &lt;li&gt;1024x500 banner&lt;&#x2F;li&gt;
 &lt;li&gt;two 16:9 screenshots&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;developer.android.com&#x2F;studio&#x2F;publish&#x2F;versioning&quot;&gt;Useful article on preview assets.&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;internal-test-open-test-and-release&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#internal-test-open-test-and-release&quot; aria-label=&quot;Anchor link for: internal-test-open-test-and-release&quot;&gt;🔗&lt;&#x2F;a&gt;Internal test, open test and release&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;em&gt;Difference between an internal, closed, and open test?&lt;&#x2F;em&gt;
+&lt;em&gt;You can create releases on three testing tracks before you release your app to production.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Internal testing: Create an internal testing release to quickly distribute your app to up to 100 testers for initial quality assurance checks.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Do not require setted up store page and do not require a review. Helps with ensuring that signing process actually worked, build is really uploaded. Also allows to add testers by email.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Closed testing: Create a closed testing release to test pre-release versions of your app with a wider set of testers to gather more targeted feedback.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Almost an open test, but requires adding tester&#x27;s email.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Open testing: Create an open testing release to run a test with a large group and surface your app&#x27;s test version on Google Play. If you run an open test, anyone can join your testing program and submit private feedback to you.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Almost a release, page is publicly available, no additional actions from testers required to install the game.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;support.google.com&#x2F;googleplay&#x2F;android-developer&#x2F;answer&#x2F;9845334?hl=en&quot;&gt;More info on testing tracks can be found here.&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">

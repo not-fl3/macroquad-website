@@ -26,11 +26,10 @@
       }
   </style>
   <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    src="https:&#x2F;&#x2F;macroquad.rs&#x2F;jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.7/semantic.min.js"></script>
+  <script src="https:&#x2F;&#x2F;macroquad.rs&#x2F;semantic.min.js"></script>
 
 
 
@@ -143,7 +142,7 @@ $(document).ready(function(){
       <div class="ui hidden divider"></div>
       <p><a href="https://play.google.com/store/apps/details?id=rust.zemeroth"><img src="https://macroquad.rs/tutorials/android/zemeroth.png" alt="zemeroth" /></a></p>
 <h1 id="1-introduction"><a class="zola-anchor" href="#1-introduction" aria-label="Anchor link for: 1-introduction">🔗</a>1. Introduction</h1>
-<p>This tutorial is based on the experience of publishing <a href="https://github.com/ozkriff/zemeroth">Zemeroth</a> game on the Google Play Store. The game is now available on the store, <a href="https://play.google.com/store/apps/details?id=rust.zemeroth">check it out!</a></p>
+<p>This tutorial is based on the experience of publishing <a href="https://github.com/ozkriff/zemeroth">Zemeroth</a> game on the Google Play Store. The game is now available as open test, <a href="https://play.google.com/store/apps/details?id=rust.zemeroth">check it out!</a></p>
 <p>Topics covered:</p>
 <ul>
 <li>Building a macroquad game for android </li>
@@ -400,11 +399,21 @@ Otherwise google developer console will end up with <code>Version code 1 has alr
 <h2 id="preview-assets-for-a-store-page"><a class="zola-anchor" href="#preview-assets-for-a-store-page" aria-label="Anchor link for: preview-assets-for-a-store-page">🔗</a>Preview assets for a store page</h2>
 <p>To submit your game for a google review and do an open test/release - the Play Store page should be filled setted up - screenshots/descriptions should be uploaded. Lots of data will be marked as (*)required, however, the real minimal subset of game graphics to upload is:</p>
 <ul>
-<li>512x512 icon </li>
+<li>512x512 icon</li>
 <li>1024x500 banner</li>
 <li>two 16:9 screenshots</li>
 </ul>
 <p><a href="https://developer.android.com/studio/publish/versioning">Useful article on preview assets.</a>.</p>
+<h2 id="internal-test-open-test-and-release"><a class="zola-anchor" href="#internal-test-open-test-and-release" aria-label="Anchor link for: internal-test-open-test-and-release">🔗</a>Internal test, open test and release</h2>
+<p><em>Difference between an internal, closed, and open test?</em>
+<em>You can create releases on three testing tracks before you release your app to production.</em></p>
+<p><em>Internal testing: Create an internal testing release to quickly distribute your app to up to 100 testers for initial quality assurance checks.</em></p>
+<p>Do not require setted up store page and do not require a review. Helps with ensuring that signing process actually worked, build is really uploaded. Also allows to add testers by email.</p>
+<p><em>Closed testing: Create a closed testing release to test pre-release versions of your app with a wider set of testers to gather more targeted feedback.</em></p>
+<p>Almost an open test, but requires adding tester's email.</p>
+<p><em>Open testing: Create an open testing release to run a test with a large group and surface your app's test version on Google Play. If you run an open test, anyone can join your testing program and submit private feedback to you.</em></p>
+<p>Almost a release, page is publicly available, no additional actions from testers required to install the game.</p>
+<p><a href="https://support.google.com/googleplay/android-developer/answer/9845334?hl=en">More info on testing tracks can be found here.</a></p>
 
     </div>
   </div>
