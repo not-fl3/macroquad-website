@@ -14,7 +14,7 @@ authors = ["Fedor"]
 
 # 1. Introduction
 
-This tutorial is based on the experience of publishing [Zemeroth](https://github.com/ozkriff/zemeroth) game on the Google Play Store. The game is now available on the store, [check it out!](https://play.google.com/store/apps/details?id=rust.zemeroth)
+This tutorial is based on the experience of publishing [Zemeroth](https://github.com/ozkriff/zemeroth) game on the Google Play Store. The game is now available as open test, [check it out!](https://play.google.com/store/apps/details?id=rust.zemeroth)
 
 Topics covered:
 - Building a macroquad game for android 
