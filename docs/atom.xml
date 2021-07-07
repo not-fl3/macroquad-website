@@ -219,7 +219,7 @@ To sign the the APK &lt;code&gt;apksigner&lt;&#x2F;code&gt; is requires. &lt;cod
 &lt;pre style=&quot;background-color:#ffffff;&quot;&gt;
 &lt;code&gt;&lt;span style=&quot;color:#323232;&quot;&gt;keytool -v -genkey -keystore mygame.keystore -alias mygame -keyalg RSA -validity 10000
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;Than upload &lt;code&gt;mygame.keystore&lt;&#x2F;code&gt; to the Play Console. Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.&lt;&#x2F;p&gt;
+&lt;p&gt;Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.&lt;&#x2F;p&gt;
 &lt;p&gt;First, tell &lt;code&gt;cargo-apk&lt;&#x2F;code&gt; to stop signing the build with debug keystore:
 &lt;code&gt;cargo quad-apk build --release --nosign&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Than sign the APK with a non-debug keystore file:&lt;&#x2F;p&gt;
@@ -269,6 +269,14 @@ Otherwise google developer console will end up with &lt;code&gt;Version code 1 h
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#323232;&quot;&gt;version_name &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;Version Name&amp;quot;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;developer.android.com&#x2F;studio&#x2F;publish&#x2F;versioning&quot;&gt;The official documentation on versioning can be found here.&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;preview-assets-for-a-store-page&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#preview-assets-for-a-store-page&quot; aria-label=&quot;Anchor link for: preview-assets-for-a-store-page&quot;&gt;🔗&lt;&#x2F;a&gt;Preview assets for a store page&lt;&#x2F;h2&gt;
+&lt;p&gt;To submit your game for a google review and do an open test&#x2F;release - the Play Store page should be filled setted up - screenshots&#x2F;descriptions should be uploaded. Lots of data will be marked as (*)required, however, the real minimal subset of game graphics to upload is:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;512x512 icon &lt;&#x2F;li&gt;
+&lt;li&gt;1024x500 banner&lt;&#x2F;li&gt;
+&lt;li&gt;two 16:9 screenshots&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;developer.android.com&#x2F;studio&#x2F;publish&#x2F;versioning&quot;&gt;Useful article on preview assets.&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">

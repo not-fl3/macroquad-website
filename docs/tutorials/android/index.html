@@ -347,7 +347,7 @@ To sign the the APK <code>apksigner</code> is requires. <code>apksigner</code> i
 <pre style="background-color:#ffffff;">
 <code><span style="color:#323232;">keytool -v -genkey -keystore mygame.keystore -alias mygame -keyalg RSA -validity 10000
 </span></code></pre>
-<p>Than upload <code>mygame.keystore</code> to the Play Console. Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.</p>
+<p>Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.</p>
 <p>First, tell <code>cargo-apk</code> to stop signing the build with debug keystore:
 <code>cargo quad-apk build --release --nosign</code></p>
 <p>Than sign the APK with a non-debug keystore file:</p>
@@ -397,6 +397,14 @@ Otherwise google developer console will end up with <code>Version code 1 has alr
 </span><span style="color:#323232;">version_name </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#183691;">&quot;Version Name&quot;
 </span></code></pre>
 <p><a href="https://developer.android.com/studio/publish/versioning">The official documentation on versioning can be found here.</a>.</p>
+<h2 id="preview-assets-for-a-store-page"><a class="zola-anchor" href="#preview-assets-for-a-store-page" aria-label="Anchor link for: preview-assets-for-a-store-page">🔗</a>Preview assets for a store page</h2>
+<p>To submit your game for a google review and do an open test/release - the Play Store page should be filled setted up - screenshots/descriptions should be uploaded. Lots of data will be marked as (*)required, however, the real minimal subset of game graphics to upload is:</p>
+<ul>
+<li>512x512 icon </li>
+<li>1024x500 banner</li>
+<li>two 16:9 screenshots</li>
+</ul>
+<p><a href="https://developer.android.com/studio/publish/versioning">Useful article on preview assets.</a>.</p>
 
     </div>
   </div>

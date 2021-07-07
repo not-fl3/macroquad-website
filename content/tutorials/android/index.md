@@ -290,7 +290,7 @@ To sign the the APK `apksigner` is requires. `apksigner` is a part of Android SD
 keytool -v -genkey -keystore mygame.keystore -alias mygame -keyalg RSA -validity 10000
 ```
 
-Than upload `mygame.keystore` to the Play Console. Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.
+Now all the pre-requisites are fullfilled and the key is ready to be used for a release build.
 
 First, tell `cargo-apk` to stop signing the build with debug keystore:
 `cargo quad-apk build --release --nosign`
@@ -359,3 +359,12 @@ version_name = "Version Name"
 ```
 
 [The official documentation on versioning can be found here.](https://developer.android.com/studio/publish/versioning).
+
+## Preview assets for a store page
+
+To submit your game for a google review and do an open test/release - the Play Store page should be filled setted up - screenshots/descriptions should be uploaded. Lots of data will be marked as (*)required, however, the real minimal subset of game graphics to upload is:
+- 512x512 icon
+- 1024x500 banner
+- two 16:9 screenshots
+
+[Useful article on preview assets.](https://developer.android.com/studio/publish/versioning).
