@@ -92,7 +92,7 @@ If we got a window with some shapes: All good, the project is set up correctly. 
 
 If instead of a window, we have some errors: Maybe some native dependency is missing. Most likely, it is one of these: 
 ```bash
-apt install libx11-dev libxi-dev libgl1-mesa-dev
+apt install pkg-config libx11-dev libxi-dev libgl1-mesa-dev libasound2-dev
 ```
 For more details, check the [build instructions](https://github.com/not-fl3/macroquad/#building-instructions).
 
