@@ -177,6 +177,13 @@ $(document).ready(function(){
   -it notfl3/cargo-apk /bin/bash
 </span></code></pre>
 <p>and later, in the docker's bash: <code>cargo quad-apk build --release</code>. And use the same command for each iteration.</p>
+<h3 id="docker-troubleshooting"><a class="zola-anchor" href="#docker-troubleshooting" aria-label="Anchor link for: docker-troubleshooting">🔗</a>Troubleshooting</h3>
+<p>Enter the docker interactive shell with <code><span style="color:#323232;">docker run 
+  --rm 
+  -v $(pwd):/root/src 
+  -w /root/src 
+  -it notfl3/cargo-apk /bin/bash
+</span></code> and use <code>cargo update</code> and then <code>cargo quad-apk build --release</code> if you get the error <code>no matching package named {cratename} found</code> </p>
 <h2 id="a-manual-way"><a class="zola-anchor" href="#a-manual-way" aria-label="Anchor link for: a-manual-way">🔗</a>A manual way</h2>
 <p>Docker simplify the process of installing android-sdk and android-ndk. But, sometimes, it may be more convinient to use all native build pipeline. 
 While this is not really recommended, this path is included to a tutorial for better illustrating what exactly is going on in the container.</p>
