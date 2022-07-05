@@ -10,7 +10,9 @@ template = "blog/page.html"
 authors = ["Fedor"]
 +++
 
-Miniquad allows seamless integration of Java code, intagrating java compilation into a rust build pipeline. This article use a native file dialog as an example.
+Miniquad allows seamless integration of Java code, intagrating Java compilation into a rust build pipeline. This allows *quad project to get access to any Android APIs and an option to integrate any third-party Java libraries.
+
+The article use a native file dialog as an example.
 
 Code is available here: 
 
@@ -90,7 +92,7 @@ To simplify getting data from a callback (hmm), the docs [suggests](https://deve
 The goal here - make a crate that provides a `find_file` function. This function opens a dialog and returns a bytes of a file content.
 
 To tell cargo where are the java files: 
-(quad.toml)[https://github.com/not-fl3/example-android-fileopen/blob/main/quad.toml]:
+[quad.toml](https://github.com/not-fl3/example-android-fileopen/blob/main/quad.toml):
 
 ```toml
 main_activity_inject = "java/MainActivity.java"
