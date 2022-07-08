@@ -137,10 +137,11 @@ $(document).ready(function(){
   <div class="row" id="article">
     <div class="eleven wide centered column">
       <h2 class="ui large header">
-        <div class="content">Java interop with Miniquad</div>
+        <div class="content">Java interop with Miniquad on Android</div>
       </h2>
       <div class="ui hidden divider"></div>
-      <p>Miniquad allows seamless integration of Java code, intagrating java compilation into a rust build pipeline. This article use a native file dialog as an example.</p>
+      <p>Miniquad allows seamless integration of Java code, intagrating Java compilation into a rust build pipeline. This allows *quad project to get access to any Android APIs and an option to integrate any third-party Java libraries.</p>
+<p>The article use a native file dialog as an example.</p>
 <p>Code is available here: </p>
 <p><a href="https://github.com/not-fl3/example-android-fileopen/">https://github.com/not-fl3/example-android-fileopen/</a></p>
 <p>More comprehensive example: </p>
@@ -203,7 +204,7 @@ The problem here - some of the android API's are really, really hard to use thro
 <h2 id="wrapping-this-into-a-crate"><a class="zola-anchor" href="#wrapping-this-into-a-crate" aria-label="Anchor link for: wrapping-this-into-a-crate">🔗</a>Wrapping this into a crate</h2>
 <p>The goal here - make a crate that provides a <code>find_file</code> function. This function opens a dialog and returns a bytes of a file content.</p>
 <p>To tell cargo where are the java files: 
-(quad.toml)[https://github.com/not-fl3/example-android-fileopen/blob/main/quad.toml]:</p>
+<a href="https://github.com/not-fl3/example-android-fileopen/blob/main/quad.toml">quad.toml</a>:</p>
 <pre data-lang="toml" style="background-color:#ffffff;color:#323232;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#63a35c;">main_activity_inject </span><span>= </span><span style="color:#183691;">&quot;java/MainActivity.java&quot;
 </span><span style="color:#63a35c;">java_files </span><span>= [
 </span><span>    </span><span style="color:#183691;">&quot;java/fileopen/FileOpen.java&quot;</span><span>,
@@ -253,7 +254,7 @@ Just include the crate in Cargo.toml: </p>
             <div class="eight wide column">
                 <h4 class="ui inverted header">Page source</h4>
                 <div class="ui inverted link list">
-                    <a class="item" href="https://github.com/optozorax/macroquad-examples/">macroquad-website</a>
+                    <a class="item" href="https://github.com/not-fl3/macroquad-examples/">macroquad-website</a>
                 </div>
             </div>
 		</div>

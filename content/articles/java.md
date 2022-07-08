@@ -1,5 +1,5 @@
 +++
-title = "Java interop with Miniquad"
+title = "Java interop with Miniquad on Android"
 description = "How to Android runs binaries and how to work with Java libraries from *quads"
 date = 2022-07-04T20:10:42+00:00
 updated = 2022-07-04T20:10:42+00:00

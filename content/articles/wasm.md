@@ -1,8 +1,8 @@
 +++
 title = "JavaScript interop with miniquad"
 description = "A short intro into what WASM is and how to build a bridge between rust and wasm."
-date = 2022-07-04T20:10:42+00:00
-updated = 2022-07-04T20:10:42+00:00
+date = 2021-04-01T20:10:42+00:00
+updated = 2021-04-01T20:10:42+00:00
 draft = false
 template = "blog/page.html"
 
