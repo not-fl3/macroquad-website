@@ -51,15 +51,14 @@ However this may take quite a while - each docker invocation will do a clean bui
 
 One way to make it a little bit faster: add ` -v /tmp/registry\":/usr/local/cargo/registry\"` to a docker command. This will tell docker to use `/tmp/registry` on the host machine for cargo's registry, therefore docker will not download all the dependencies on each build.
 
-Another possibility: run docker interactively and invoke build command in the same container for each build.
+If you get an error similar to: `failed to select a version for the requirement hashbrown = "=0.12.3"`
 ```
 docker run 
   --rm 
   -v $(pwd):/root/src 
   -w /root/src 
-  -it notfl3/cargo-apk /bin/bash
+  -it notfl3/cargo-apk bash -c "cargo update && cargo quad-apk build -
 ```
-and later, in the docker's bash: `cargo quad-apk build --release`. And use the same command for each iteration.
 
 ## A manual way
 
@@ -98,7 +97,7 @@ Exact commands and pathes may depend on the host OS. Here linux commands are use
   wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
   unzip -q sdk-tools-linux-4333796.zip
   rm sdk-tools-linux-4333796.zip
-  tools/bind/sdkmanager "platform-tools"
+  tools/bin/sdkmanager "platform-tools"
   tools/bin/sdkmanager "platforms;android-29"
   tools/bin/sdkmanager "build-tools;29.0.0"
   tools/bin/sdkmanager --update
