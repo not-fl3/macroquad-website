@@ -6,8 +6,6 @@ updated = 2020-04-01T09:19:42+00:00
 draft = false
 template = "blog/page.html"
 
-[taxonomies]
-authors = ["Fedor"]
 +++
 
 # Cross-platform logs with miniquad

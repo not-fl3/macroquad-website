@@ -5,9 +5,6 @@ date = 2022-07-04T20:10:42+00:00
 updated = 2022-07-04T20:10:42+00:00
 draft = false
 template = "blog/page.html"
-
-[taxonomies]
-authors = ["Fedor"]
 +++
 
 Miniquad allows seamless integration of Java code, intagrating Java compilation into a rust build pipeline. This allows *quad project to get access to any Android APIs and an option to integrate any third-party Java libraries.

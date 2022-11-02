@@ -5,9 +5,6 @@ date = 2021-06-15T09:19:42+00:00
 updated = 2021-06-15T10:19:42+00:00
 draft = false
 template = "blog/page.html"
-
-[taxonomies]
-authors = ["Fedor"]
 +++
 
 [![zemeroth](zemeroth.png)](https://play.google.com/store/apps/details?id=rust.zemeroth)

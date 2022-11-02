@@ -5,9 +5,6 @@ date = 2021-04-01T20:10:42+00:00
 updated = 2021-04-01T20:10:42+00:00
 draft = false
 template = "blog/page.html"
-
-[taxonomies]
-authors = ["Fedor"]
 +++
 
 # Intro
