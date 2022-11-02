@@ -5,13 +5,192 @@
 	<link href="https://macroquad.rs/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://macroquad.rs/"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-07-04T20:10:42+00:00</updated>
+	<updated>2022-10-31T10:19:42+00:00</updated>
 	<id>https://macroquad.rs/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Macroquad on IOS</title>
+		<published>2022-10-31T09:19:42+00:00</published>
+		<updated>2022-10-31T10:19:42+00:00</updated>
+		<link rel="alternate" href="https://macroquad.rs/articles/ios/" type="text/html"/>
+		<id>https://macroquad.rs/articles/ios/</id>
+		<content type="html">&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;articles&#x2F;ios&#x2F;ios_zemeroth.png&quot; alt=&quot;zemeroth&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;setting-up-a-macroquad-project&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#setting-up-a-macroquad-project&quot; aria-label=&quot;Anchor link for: setting-up-a-macroquad-project&quot;&gt;🔗&lt;&#x2F;a&gt;Setting up a macroquad project&lt;&#x2F;h1&gt;
+&lt;p&gt;This article assume that all the commands are invoked in the root folder of any mini&#x2F;macroquad based project. For simplicity, lets assumet that this project was created like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; cargo init mygame
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; cd mygame
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; cargo add macroquad
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; cat &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; src&#x2F;main.rs &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;lt;&amp;lt; EOF
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;use macroquad::prelude::*;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;#[macroquad::main(&amp;quot;MyGame&amp;quot;)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;async fn main() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;    loop {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;        clear_background(RED);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;        draw_circle(200.0, 200.0, 60.0, YELLOW);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;        next_frame().await
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;EOF
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;building-for-the-simulator&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#building-for-the-simulator&quot; aria-label=&quot;Anchor link for: building-for-the-simulator&quot;&gt;🔗&lt;&#x2F;a&gt;Building for the simulator&lt;&#x2F;h1&gt;
+&lt;p&gt;IOS application is just a normal folder, named like &amp;quot;MyGame.app&amp;quot;. This folder contains the binary, a file with a metadata and all the resources.&lt;br &#x2F;&gt;
+The binary is a normal, cargo-produced, binary and resources are normal files, just like on any other platform. There is no third-party post-processors, resource compilators or anything like this.&lt;br &#x2F;&gt;
+Create a folder, copy your binary and resources and it is a valid IOS application!&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;mkdir MyGame.app
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;cargo build --target x86_64-apple-ios --release
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;cp target&#x2F;release&#x2F;mygame MyGame.app
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;cat &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; MyGame.app&#x2F;Info.plist &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;lt;&amp;lt; EOF
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;!DOCTYPE plist PUBLIC &amp;quot;-&#x2F;&#x2F;Apple&#x2F;&#x2F;DTD PLIST 1.0&#x2F;&#x2F;EN&amp;quot; &amp;quot;http:&#x2F;&#x2F;www.apple.com&#x2F;DTDs&#x2F;PropertyList-1.0.dtd&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;plist version=&amp;quot;1.0&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;dict&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;key&amp;gt;CFBundleExecutable&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;string&amp;gt;mygame&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;key&amp;gt;CFBundleIdentifier&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;string&amp;gt;com.mygame&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;key&amp;gt;CFBundleName&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;string&amp;gt;mygame&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;key&amp;gt;CFBundleVersion&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;string&amp;gt;1&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;key&amp;gt;CFBundleShortVersionString&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;string&amp;gt;1.0&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;&#x2F;dict&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;&#x2F;plist&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;EOF
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl install booted MyGame.app&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl launch booted com.mygame
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;note&lt;&#x2F;strong&gt; on resources. All the files inside &amp;quot;MyGame.app&#x2F;assets&amp;quot; are accesible to &lt;code&gt;miniquad::fs&lt;&#x2F;code&gt; just like on any other platform.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;├── MyGame.app
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── mygame
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── Info.plist
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── assets
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── texture.png
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── someronfile.ron
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;load_texture(&amp;quot;texture.png&amp;quot;)&lt;&#x2F;code&gt; or &lt;code&gt;load_file(&amp;quot;someronfile.ron&amp;quot;)&lt;&#x2F;code&gt; will work just fine.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;deploying-on-the-real-device-with&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#deploying-on-the-real-device-with&quot; aria-label=&quot;Anchor link for: deploying-on-the-real-device-with&quot;&gt;🔗&lt;&#x2F;a&gt;Deploying on the real device with&lt;&#x2F;h1&gt;
+&lt;p&gt;The real device use exactly the same &amp;quot;application bundle&amp;quot; format - its a &amp;quot;Name.app&amp;quot; folder with a binary, Info.plist and resources.&lt;&#x2F;p&gt;
+&lt;p&gt;But real device use aarch64-apple-ios instead of x86_64-apple-ios and it requires the bundle to be signed.&lt;&#x2F;p&gt;
+&lt;p&gt;Which means - to install and run the app, following conditions should be met:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;the bundle(Name.app folder) should contain a &amp;quot;embedded.mobileprovision&amp;quot; file&lt;&#x2F;li&gt;
+&lt;li&gt;in iphone&#x27;s settings, in General -&amp;gt; &amp;quot;VPN &amp;amp; Device Management&amp;quot; should be a record with your team name&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;getting-provisioning-profile-files&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#getting-provisioning-profile-files&quot; aria-label=&quot;Anchor link for: getting-provisioning-profile-files&quot;&gt;🔗&lt;&#x2F;a&gt;Getting provisioning profile files&lt;&#x2F;h2&gt;
+&lt;p&gt;This is ridicoulosly painful proces. Brace yourself!
+Good news - its only a one time thing. With all the certificates being available installing the app to an iphone works just as smooth as to the simulator!&lt;&#x2F;p&gt;
+&lt;p&gt;A lot of credits goes to this article: This article helped A TON: https:&#x2F;&#x2F;medium.com&#x2F;@vojtastavik&#x2F;building-an-ios-app-without-xcodes-build-system-d3e5ca86d30d
+It is a bit outdated, some CLI arguments are a bit different now, but, in general, it was incredibly instrumental to get all this done!&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;prerequisites&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#prerequisites&quot; aria-label=&quot;Anchor link for: prerequisites&quot;&gt;🔗&lt;&#x2F;a&gt;Prerequisites&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;free appstore account&lt;&#x2F;li&gt;
+&lt;li&gt;macos 10.15+ (probably 10.14 works as well)&lt;&#x2F;li&gt;
+&lt;li&gt;xcode 11+&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ios-control&#x2F;ios-deploy&quot;&gt;ios-deploy&lt;&#x2F;a&gt; tool. (&lt;code&gt;brew install ios-deploy&lt;&#x2F;code&gt;)&lt;&#x2F;li&gt;
+&lt;li&gt;any ios device&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;connecting-phone-with-xcode&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#connecting-phone-with-xcode&quot; aria-label=&quot;Anchor link for: connecting-phone-with-xcode&quot;&gt;🔗&lt;&#x2F;a&gt;Connecting phone with xcode&lt;&#x2F;h3&gt;
+&lt;p&gt;On the first connection, both xcode and macos might complain about versions incompatibility.
+MacOs complains may be just ignored, but to make XCode recognise the device:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;double check that there is a folder with Iphone&#x27;s ios version here: &lt;code&gt;&#x2F;Applications&#x2F;Xcode.app&#x2F;Contents&#x2F;Developer&#x2F;Platforms&#x2F;iPhoneOS.platform&#x2F;DeviceSupport&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;if no - download the required file somewhere from the internet(there are a lot of repos on github with such a data).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The goal of this step - to see a new device available in &lt;code&gt;Xcode -&amp;gt; Window -&amp;gt; Devices and Simulators&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;mobileprovision-file&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#mobileprovision-file&quot; aria-label=&quot;Anchor link for: mobileprovision-file&quot;&gt;🔗&lt;&#x2F;a&gt;.mobileprovision file&lt;&#x2F;h3&gt;
+&lt;p&gt;Purpose of this step - create an empty xcode project runnable on the iphone. This project will be never used for building anything, just to make xcode to download provision files from apple developer portal. &lt;&#x2F;p&gt;
+&lt;p&gt;First, login to the app store account. (it might be a free account, no need for the developer one). &lt;code&gt;xcode-&amp;gt;preferences-&amp;gt;account login create team&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Than create a new dummy project with the desired bundle indentifier (&lt;code&gt;com.mygame&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;Run it on the device.&lt;&#x2F;p&gt;
+&lt;p&gt;If xcode complains with &amp;quot;-402620375&amp;quot; (and no other explanations) - add &lt;code&gt;--generate-entitlement-der&lt;&#x2F;code&gt; to &lt;code&gt;Project -&amp;gt; Build Settings -&amp;gt; Other Code Signing Flags&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This will create a runnable app on the phone and make two provision files in &lt;code&gt;~&#x2F;Library&#x2F;MobileDevice&#x2F;Provisioning\ Profiles&#x2F;&lt;&#x2F;code&gt;.
+One for &amp;quot;com.mygame&amp;quot; and one for &amp;quot;com.mygameUITests&amp;quot;. To find which one is which &lt;code&gt;cat ~&#x2F;Library&#x2F;MobileDevice&#x2F;Provisioning\ Profiles&#x2F;lotsofhex.mobileprovision | grep -a UITests&lt;&#x2F;code&gt;. The one that doesnt have UITests in it is the one!&lt;&#x2F;p&gt;
+&lt;p&gt;Copy it to MyApp.app&#x2F;embedded.mobileprovision&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;&#x2F;strong&gt; for the paid apple developer account - with the developer account this step may be skipped alltogether, provision profiles could be downloaded from the iOS developer portal.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;scent-file&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#scent-file&quot; aria-label=&quot;Anchor link for: scent-file&quot;&gt;🔗&lt;&#x2F;a&gt;.scent file&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;.scent&lt;&#x2F;code&gt; file contains all the metadata for signing the bundle.&lt;&#x2F;p&gt;
+&lt;p&gt;First, get a team id (the team is a thing created in xcode in the previous step).&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; cat mygame_provisionsfetch.xcodeproj&#x2F;project.pbxproj &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;| &lt;&#x2F;span&gt;&lt;span&gt;grep DEVELOPMENT_TEAM
+&lt;&#x2F;span&gt;&lt;span&gt;DEVELOPMENT_TEAM = YOURID&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;em&gt;mygame_provisionsfetch.xcodeproj&lt;&#x2F;em&gt; is our dummy provisions-fetching project.&lt;&#x2F;p&gt;
+&lt;p&gt;Than create a &lt;code&gt;.scent&lt;&#x2F;code&gt; file next to the &lt;code&gt;MyGame.app&lt;&#x2F;code&gt; folder:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;cat &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; MyGame.scent &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;lt;&amp;lt; EOF
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;!DOCTYPE plist PUBLIC &amp;quot;-&#x2F;&#x2F;Apple&#x2F;&#x2F;DTD PLIST 1.0&#x2F;&#x2F;EN&amp;quot; &amp;quot;http:&#x2F;&#x2F;www.apple.com&#x2F;DTDs&#x2F;PropertyList-1.0.dtd&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;plist version=&amp;quot;1.0&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;dict&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;key&amp;gt;application-identifier&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;string&amp;gt;G92KM8UVQS.com.iwantprovisions&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;key&amp;gt;com.apple.developer.team-identifier&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;string&amp;gt;MYTEAMID&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;key&amp;gt;get-task-allow&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;true&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;key&amp;gt;keychain-access-groups&amp;lt;&#x2F;key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;array&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;		&amp;lt;string&amp;gt;MYTEAMID.com.mygame&amp;lt;&#x2F;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;	&amp;lt;&#x2F;array&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;&#x2F;dict&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;&#x2F;plist&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;EOF
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre style=&quot;background-color:#ffffff;color:#323232;&quot;&gt;&lt;code&gt;&lt;span&gt;├── MyGame.app
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── mygame
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── Info.plist
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── assets
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── texture.png
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── someronfile.ron
+&lt;&#x2F;span&gt;&lt;span&gt;├── MyGame.scent
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;sign-it&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#sign-it&quot; aria-label=&quot;Anchor link for: sign-it&quot;&gt;🔗&lt;&#x2F;a&gt;sign it&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# this should show the certificate previously created in xcode
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# copy the very long hex id from the certificate
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; security find-identity -v -p codesigning
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# and use it here to sign the binary
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; codesign --force --timestamp&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt;none --sign LONGHEXID mygame
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# and sign the bundle itself
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; codesign --force --timestamp&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt;none --sign LONGHEXID --scent MyGame.scent --generate-entitlement-der MyGame.app
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;deploy-it&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#deploy-it&quot; aria-label=&quot;Anchor link for: deploy-it&quot;&gt;🔗&lt;&#x2F;a&gt;deploy it&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; ios-deploy -c
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; ios-deploy -i HEXDEVICEID -b MyGame.app
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;build-scripts&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#build-scripts&quot; aria-label=&quot;Anchor link for: build-scripts&quot;&gt;🔗&lt;&#x2F;a&gt;Build scripts&lt;&#x2F;h1&gt;
+&lt;p&gt;When all the groundwork is done those scripts will deploy run the game on the simulator&#x2F;real device.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;emulator&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#emulator&quot; aria-label=&quot;Anchor link for: emulator&quot;&gt;🔗&lt;&#x2F;a&gt;Emulator&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;cargo build --target x86_64-apple-ios
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# if assets are updated all the time - copy them on each build
+&lt;&#x2F;span&gt;&lt;span&gt;cp -r assets MyGame.app&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# note debug&#x2F;release
+&lt;&#x2F;span&gt;&lt;span&gt;cp target&#x2F;x86_64-apple-ios&#x2F;debug&#x2F;mygame MyGame.app&#x2F;mygame
+&lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl install booted MyGame.app&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl launch booted com.mygame
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;real-device&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#real-device&quot; aria-label=&quot;Anchor link for: real-device&quot;&gt;🔗&lt;&#x2F;a&gt;Real device&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;cargo build --target aarch64-apple-ios --release
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# if assets are updated all the time - copy them on each build
+&lt;&#x2F;span&gt;&lt;span&gt;cp -r assets MyGame.app&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# note debug&#x2F;release
+&lt;&#x2F;span&gt;&lt;span&gt;cp target&#x2F;aarch64-apple-ios&#x2F;release&#x2F;mygame MyGame.app&#x2F;mygame
+&lt;&#x2F;span&gt;&lt;span&gt;codesign --force --timestamp&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt;none --sign VERYLONGHEXID MyGame.app&#x2F;mygame
+&lt;&#x2F;span&gt;&lt;span&gt;codesign --force --timestamp&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt;none --sign VERYLONGHEXID --scent MyGame.scent --generate-entitlement-der MyGame.app
+&lt;&#x2F;span&gt;&lt;span&gt;ios-deploy -i HEXDEVICEID -b MyGame.app
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Java interop with Miniquad on Android</title>
 		<published>2022-07-04T20:10:42+00:00</published>
 		<updated>2022-07-04T20:10:42+00:00</updated>
-		<link href="https://macroquad.rs/articles/java/" type="text/html"/>
+		<link rel="alternate" href="https://macroquad.rs/articles/java/" type="text/html"/>
 		<id>https://macroquad.rs/articles/java/</id>
 		<content type="html">&lt;p&gt;Miniquad allows seamless integration of Java code, intagrating Java compilation into a rust build pipeline. This allows *quad project to get access to any Android APIs and an option to integrate any third-party Java libraries.&lt;&#x2F;p&gt;
 &lt;p&gt;The article use a native file dialog as an example.&lt;&#x2F;p&gt;
@@ -111,9 +290,9 @@ Just include the crate in Cargo.toml: &lt;&#x2F;p&gt;
 		<title>Publish game on Android with Macroquad</title>
 		<published>2021-06-15T09:19:42+00:00</published>
 		<updated>2021-06-15T10:19:42+00:00</updated>
-		<link href="https://macroquad.rs/articles/android/" type="text/html"/>
+		<link rel="alternate" href="https://macroquad.rs/articles/android/" type="text/html"/>
 		<id>https://macroquad.rs/articles/android/</id>
-		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;&lt;img src=&quot;zemeroth.png&quot; alt=&quot;zemeroth&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;&lt;img src=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;articles&#x2F;android&#x2F;zemeroth.png&quot; alt=&quot;zemeroth&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;1-introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#1-introduction&quot; aria-label=&quot;Anchor link for: 1-introduction&quot;&gt;🔗&lt;&#x2F;a&gt;1. Introduction&lt;&#x2F;h1&gt;
 &lt;p&gt;This tutorial is based on the experience of publishing &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ozkriff&#x2F;zemeroth&quot;&gt;Zemeroth&lt;&#x2F;a&gt; game on the Google Play Store. The game is now available as open test, &lt;a href=&quot;https:&#x2F;&#x2F;play.google.com&#x2F;store&#x2F;apps&#x2F;details?id=rust.zemeroth&quot;&gt;check it out!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Topics covered:&lt;&#x2F;p&gt;
@@ -256,7 +435,7 @@ To limit possible screen orientations add this to your Cargo.toml: &lt;&#x2F;p&g
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;android:screenOrientation&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;quot;userLandscape&amp;quot;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;h2 id=&quot;icon&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#icon&quot; aria-label=&quot;Anchor link for: icon&quot;&gt;🔗&lt;&#x2F;a&gt;Icon&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;icon.jpg&quot; alt=&quot;icon&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;macroquad.rs&#x2F;articles&#x2F;android&#x2F;icon.jpg&quot; alt=&quot;icon&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Application icon lives in an &amp;quot;resources&amp;quot; - special section in APK.
 To include &amp;quot;res&amp;quot; folder to an APK:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;ini&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-ini &quot;&gt;&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;[package.metadata.android]
@@ -376,7 +555,7 @@ Otherwise google developer console will end up with &lt;code&gt;Version code 1 h
 		<title>Making an online multiplayer game in Rust with Nakama</title>
 		<published>2021-05-01T09:19:42+00:00</published>
 		<updated>2021-05-01T09:19:42+00:00</updated>
-		<link href="https://macroquad.rs/articles/fish-tutorial/" type="text/html"/>
+		<link rel="alternate" href="https://macroquad.rs/articles/fish-tutorial/" type="text/html"/>
 		<id>https://macroquad.rs/articles/fish-tutorial/</id>
 		<content type="html">&lt;img src=&quot;&#x2F;fishgame_tutorial&#x2F;title.gif&quot;  width=&quot;100%&quot;&#x2F;&gt;
 &lt;p&gt;Fish Game is a 2-4 player online game built in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;not-fl3&#x2F;macroquad&#x2F;&quot;&gt;Macroquad&lt;&#x2F;a&gt; game engine and the &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;&quot;&gt;Rust&lt;&#x2F;a&gt; programming language. The game was created as a demonstration of &lt;a href=&quot;https:&#x2F;&#x2F;heroiclabs.com&#x2F;&quot;&gt;Nakama&lt;&#x2F;a&gt;, an open-source scalable game server.&lt;&#x2F;p&gt;
@@ -1116,7 +1295,7 @@ It’s OK if some get lost, we&#x27;d just take the newest one that arrives.&lt;
 		<title>JavaScript interop with miniquad</title>
 		<published>2021-04-01T20:10:42+00:00</published>
 		<updated>2021-04-01T20:10:42+00:00</updated>
-		<link href="https://macroquad.rs/articles/wasm/" type="text/html"/>
+		<link rel="alternate" href="https://macroquad.rs/articles/wasm/" type="text/html"/>
 		<id>https://macroquad.rs/articles/wasm/</id>
 		<content type="html">&lt;h1 id=&quot;intro&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#intro&quot; aria-label=&quot;Anchor link for: intro&quot;&gt;🔗&lt;&#x2F;a&gt;Intro&lt;&#x2F;h1&gt;
 &lt;p&gt;A short intro into the current state of wasm:&lt;&#x2F;p&gt;
@@ -1246,7 +1425,7 @@ But there is &lt;code&gt;sapp-jsutils&lt;&#x2F;code&gt; plugin available that ca
 		<title>Cross-platform logs</title>
 		<published>2020-04-01T09:19:42+00:00</published>
 		<updated>2020-04-01T09:19:42+00:00</updated>
-		<link href="https://macroquad.rs/articles/logs/" type="text/html"/>
+		<link rel="alternate" href="https://macroquad.rs/articles/logs/" type="text/html"/>
 		<id>https://macroquad.rs/articles/logs/</id>
 		<content type="html">&lt;h1 id=&quot;cross-platform-logs-with-miniquad&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#cross-platform-logs-with-miniquad&quot; aria-label=&quot;Anchor link for: cross-platform-logs-with-miniquad&quot;&gt;🔗&lt;&#x2F;a&gt;Cross-platform logs with miniquad&lt;&#x2F;h1&gt;
 &lt;p&gt;Miniquad is cross-platform layer between rust code and target platforms rendering API. Console API necessary for logs are some kind of output API and its on miniquads responsibility to abstract it away. On the other hand, using log-rs with different frontends are the most common way to do logging in rust cosystem.&lt;&#x2F;p&gt;
