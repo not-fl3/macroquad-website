@@ -107,9 +107,9 @@ Exact commands and pathes may depend on the host OS. Here linux commands are use
   # go to the same dir created for android-sdk
   cd /path/from/previous/step/android
 
-  wget -q http://dl.google.com/android/repository/android-ndk-r20-linux-x86_64.zip
-  unzip -q android-ndk-r20-linux-x86_64.zip
-  rm android-ndk-r20-linux-x86_64.zip
+  wget -q https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
+  unzip -q android-ndk-r25b-linux.zip
+  rm android-ndk-r25-linux-x86_64.zip
   ```
 
 - Cargo APK
@@ -123,7 +123,7 @@ Exact commands and pathes may depend on the host OS. Here linux commands are use
 
 ```
 export ANDROID_HOME=/path/from/previous/step/android
-export NDK_HOME=/path/from/previous/step/android/android-ndk-r20
+export NDK_HOME=/path/from/previous/step/android/android-ndk-r25
 
 # for a debug build
 cargo quad-apk build
