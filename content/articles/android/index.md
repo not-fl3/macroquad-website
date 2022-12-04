@@ -135,6 +135,14 @@ An apk will be in `target/android-artifacts/debug/apk` or `target/android-artifa
 
 # 3. Fine tuning the game for android
 
+## Targeting API Level >= 31
+You have to add this to your Cargo.toml
+```
+[package.metadata.android.activity_attributes]
+"android:exported" =  "true"
+```
+
+
 ## Assets folder
 
 Assuming following project structure: 
