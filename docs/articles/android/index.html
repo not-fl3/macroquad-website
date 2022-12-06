@@ -215,9 +215,9 @@ While this is not really recommended, this path is included to a tutorial for be
 <pre style="background-color:#ffffff;color:#323232;"><code><span># go to the same dir created for android-sdk
 </span><span>cd /path/from/previous/step/android
 </span><span>
-</span><span>wget -q http://dl.google.com/android/repository/android-ndk-r20-linux-x86_64.zip
-</span><span>unzip -q android-ndk-r20-linux-x86_64.zip
-</span><span>rm android-ndk-r20-linux-x86_64.zip
+</span><span>wget -q https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
+</span><span>unzip -q android-ndk-r25b-linux.zip
+</span><span>rm android-ndk-r25-linux-x86_64.zip
 </span></code></pre>
 </li>
 <li>
@@ -229,7 +229,7 @@ While this is not really recommended, this path is included to a tutorial for be
 </ul>
 <h3 id="building-an-apk-a-manual-way"><a class="zola-anchor" href="#building-an-apk-a-manual-way" aria-label="Anchor link for: building-an-apk-a-manual-way">🔗</a>Building an APK, a manual way</h3>
 <pre style="background-color:#ffffff;color:#323232;"><code><span>export ANDROID_HOME=/path/from/previous/step/android
-</span><span>export NDK_HOME=/path/from/previous/step/android/android-ndk-r20
+</span><span>export NDK_HOME=/path/from/previous/step/android/android-ndk-r25
 </span><span>
 </span><span># for a debug build
 </span><span>cargo quad-apk build
@@ -238,6 +238,11 @@ While this is not really recommended, this path is included to a tutorial for be
 </span></code></pre>
 <p>An apk will be in <code>target/android-artifacts/debug/apk</code> or <code>target/android-artifacts/release/apk</code>.</p>
 <h1 id="3-fine-tuning-the-game-for-android"><a class="zola-anchor" href="#3-fine-tuning-the-game-for-android" aria-label="Anchor link for: 3-fine-tuning-the-game-for-android">🔗</a>3. Fine tuning the game for android</h1>
+<h2 id="targeting-api-level-31"><a class="zola-anchor" href="#targeting-api-level-31" aria-label="Anchor link for: targeting-api-level-31">🔗</a>Targeting API Level &gt;= 31</h2>
+<p>You have to add this to your Cargo.toml</p>
+<pre style="background-color:#ffffff;color:#323232;"><code><span>[package.metadata.android.activity_attributes]
+</span><span>&quot;android:exported&quot; =  &quot;true&quot;
+</span></code></pre>
 <h2 id="assets-folder"><a class="zola-anchor" href="#assets-folder" aria-label="Anchor link for: assets-folder">🔗</a>Assets folder</h2>
 <p>Assuming following project structure: </p>
 <pre style="background-color:#ffffff;color:#323232;"><code><span>.
