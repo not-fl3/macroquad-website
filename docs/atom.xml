@@ -367,9 +367,9 @@ While this is not really recommended, this path is included to a tutorial for be
 &lt;pre style=&quot;background-color:#ffffff;color:#323232;&quot;&gt;&lt;code&gt;&lt;span&gt;# go to the same dir created for android-sdk
 &lt;&#x2F;span&gt;&lt;span&gt;cd &#x2F;path&#x2F;from&#x2F;previous&#x2F;step&#x2F;android
 &lt;&#x2F;span&gt;&lt;span&gt;
-&lt;&#x2F;span&gt;&lt;span&gt;wget -q http:&#x2F;&#x2F;dl.google.com&#x2F;android&#x2F;repository&#x2F;android-ndk-r20-linux-x86_64.zip
-&lt;&#x2F;span&gt;&lt;span&gt;unzip -q android-ndk-r20-linux-x86_64.zip
-&lt;&#x2F;span&gt;&lt;span&gt;rm android-ndk-r20-linux-x86_64.zip
+&lt;&#x2F;span&gt;&lt;span&gt;wget -q https:&#x2F;&#x2F;dl.google.com&#x2F;android&#x2F;repository&#x2F;android-ndk-r25b-linux.zip
+&lt;&#x2F;span&gt;&lt;span&gt;unzip -q android-ndk-r25b-linux.zip
+&lt;&#x2F;span&gt;&lt;span&gt;rm android-ndk-r25-linux-x86_64.zip
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;&#x2F;li&gt;
 &lt;li&gt;
@@ -381,7 +381,7 @@ While this is not really recommended, this path is included to a tutorial for be
 &lt;&#x2F;ul&gt;
 &lt;h3 id=&quot;building-an-apk-a-manual-way&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#building-an-apk-a-manual-way&quot; aria-label=&quot;Anchor link for: building-an-apk-a-manual-way&quot;&gt;🔗&lt;&#x2F;a&gt;Building an APK, a manual way&lt;&#x2F;h3&gt;
 &lt;pre style=&quot;background-color:#ffffff;color:#323232;&quot;&gt;&lt;code&gt;&lt;span&gt;export ANDROID_HOME=&#x2F;path&#x2F;from&#x2F;previous&#x2F;step&#x2F;android
-&lt;&#x2F;span&gt;&lt;span&gt;export NDK_HOME=&#x2F;path&#x2F;from&#x2F;previous&#x2F;step&#x2F;android&#x2F;android-ndk-r20
+&lt;&#x2F;span&gt;&lt;span&gt;export NDK_HOME=&#x2F;path&#x2F;from&#x2F;previous&#x2F;step&#x2F;android&#x2F;android-ndk-r25
 &lt;&#x2F;span&gt;&lt;span&gt;
 &lt;&#x2F;span&gt;&lt;span&gt;# for a debug build
 &lt;&#x2F;span&gt;&lt;span&gt;cargo quad-apk build
@@ -390,6 +390,11 @@ While this is not really recommended, this path is included to a tutorial for be
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;An apk will be in &lt;code&gt;target&#x2F;android-artifacts&#x2F;debug&#x2F;apk&lt;&#x2F;code&gt; or &lt;code&gt;target&#x2F;android-artifacts&#x2F;release&#x2F;apk&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;3-fine-tuning-the-game-for-android&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#3-fine-tuning-the-game-for-android&quot; aria-label=&quot;Anchor link for: 3-fine-tuning-the-game-for-android&quot;&gt;🔗&lt;&#x2F;a&gt;3. Fine tuning the game for android&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;targeting-api-level-31&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#targeting-api-level-31&quot; aria-label=&quot;Anchor link for: targeting-api-level-31&quot;&gt;🔗&lt;&#x2F;a&gt;Targeting API Level &amp;gt;= 31&lt;&#x2F;h2&gt;
+&lt;p&gt;You have to add this to your Cargo.toml&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#ffffff;color:#323232;&quot;&gt;&lt;code&gt;&lt;span&gt;[package.metadata.android.activity_attributes]
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;android:exported&amp;quot; =  &amp;quot;true&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;h2 id=&quot;assets-folder&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#assets-folder&quot; aria-label=&quot;Anchor link for: assets-folder&quot;&gt;🔗&lt;&#x2F;a&gt;Assets folder&lt;&#x2F;h2&gt;
 &lt;p&gt;Assuming following project structure: &lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#ffffff;color:#323232;&quot;&gt;&lt;code&gt;&lt;span&gt;.
