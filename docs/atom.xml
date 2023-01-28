@@ -61,6 +61,11 @@ Create a folder, copy your binary and resources and it is a valid IOS applicatio
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;&#x2F;plist&amp;gt;
 &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;EOF
 &lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# only once, to get the emulator running
+&lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl list
+&lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl boot LONG_HEX_ID_OF_REQUIRED_IPHONE_FROM_SIMCTL_LIST
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#969896;&quot;&gt;# on each build, to run the game
 &lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl install booted MyGame.app&#x2F;
 &lt;&#x2F;span&gt;&lt;span&gt;xcrun simctl launch booted com.mygame
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;

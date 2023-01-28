@@ -52,7 +52,7 @@
 <body class="home">
   
     
-<div class="ui borderless huge menu">
+<div class="ui borderless stackable huge menu">
   <a class=
 
 "item active"
@@ -188,6 +188,11 @@ Create a folder, copy your binary and resources and it is a valid IOS applicatio
 </span><span style="color:#183691;">&lt;/plist&gt;
 </span><span style="font-weight:bold;color:#a71d5d;">EOF
 </span><span>
+</span><span style="font-style:italic;color:#969896;"># only once, to get the emulator running
+</span><span>xcrun simctl list
+</span><span>xcrun simctl boot LONG_HEX_ID_OF_REQUIRED_IPHONE_FROM_SIMCTL_LIST
+</span><span>
+</span><span style="font-style:italic;color:#969896;"># on each build, to run the game
 </span><span>xcrun simctl install booted MyGame.app/
 </span><span>xcrun simctl launch booted com.mygame
 </span></code></pre>
