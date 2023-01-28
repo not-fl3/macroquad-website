@@ -81,6 +81,9 @@ Create a folder, copy your binary and resources and it is a valid IOS applicatio
 &lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── someronfile.ron
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;&lt;code&gt;load_texture(&amp;quot;texture.png&amp;quot;)&lt;&#x2F;code&gt; or &lt;code&gt;load_file(&amp;quot;someronfile.ron&amp;quot;)&lt;&#x2F;code&gt; will work just fine.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;simulator-logs&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#simulator-logs&quot; aria-label=&quot;Anchor link for: simulator-logs&quot;&gt;🔗&lt;&#x2F;a&gt;Simulator logs&lt;&#x2F;h1&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#ffffff;color:#323232;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;xcrun simctl spawn booted log stream --predicate &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;#39;processImagePath endswith &amp;quot;mygame&amp;quot;&amp;#39;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;h1 id=&quot;deploying-on-the-real-device-with&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#deploying-on-the-real-device-with&quot; aria-label=&quot;Anchor link for: deploying-on-the-real-device-with&quot;&gt;🔗&lt;&#x2F;a&gt;Deploying on the real device with&lt;&#x2F;h1&gt;
 &lt;p&gt;The real device use exactly the same &amp;quot;application bundle&amp;quot; format - its a &amp;quot;Name.app&amp;quot; folder with a binary, Info.plist and resources.&lt;&#x2F;p&gt;
 &lt;p&gt;But real device use aarch64-apple-ios instead of x86_64-apple-ios and it requires the bundle to be signed.&lt;&#x2F;p&gt;

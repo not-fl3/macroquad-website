@@ -208,6 +208,9 @@ Create a folder, copy your binary and resources and it is a valid IOS applicatio
 </span><span>│   │   ├── someronfile.ron
 </span></code></pre>
 <p><code>load_texture(&quot;texture.png&quot;)</code> or <code>load_file(&quot;someronfile.ron&quot;)</code> will work just fine.</p>
+<h1 id="simulator-logs"><a class="zola-anchor" href="#simulator-logs" aria-label="Anchor link for: simulator-logs">🔗</a>Simulator logs</h1>
+<pre data-lang="sh" style="background-color:#ffffff;color:#323232;" class="language-sh "><code class="language-sh" data-lang="sh"><span>xcrun simctl spawn booted log stream --predicate </span><span style="color:#183691;">&#39;processImagePath endswith &quot;mygame&quot;&#39;
+</span></code></pre>
 <h1 id="deploying-on-the-real-device-with"><a class="zola-anchor" href="#deploying-on-the-real-device-with" aria-label="Anchor link for: deploying-on-the-real-device-with">🔗</a>Deploying on the real device with</h1>
 <p>The real device use exactly the same &quot;application bundle&quot; format - its a &quot;Name.app&quot; folder with a binary, Info.plist and resources.</p>
 <p>But real device use aarch64-apple-ios instead of x86_64-apple-ios and it requires the bundle to be signed.</p>

@@ -88,6 +88,12 @@ xcrun simctl launch booted com.mygame
 
 `load_texture("texture.png")` or `load_file("someronfile.ron")` will work just fine.
 
+# Simulator logs 
+
+```sh
+xcrun simctl spawn booted log stream --predicate 'processImagePath endswith "mygame"'
+```
+
 # Deploying on the real device with 
 
 The real device use exactly the same "application bundle" format - its a "Name.app" folder with a binary, Info.plist and resources.
