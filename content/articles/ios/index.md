@@ -63,6 +63,11 @@ cat > MyGame.app/Info.plist << EOF
 </plist>
 EOF
 
+# only once, to get the emulator running
+xcrun simctl list
+xcrun simctl boot LONG_HEX_ID_OF_REQUIRED_IPHONE_FROM_SIMCTL_LIST
+
+# on each build, to run the game
 xcrun simctl install booted MyGame.app/
 xcrun simctl launch booted com.mygame
 ```
