@@ -67,6 +67,9 @@ EOF
 xcrun simctl list
 xcrun simctl boot LONG_HEX_ID_OF_REQUIRED_IPHONE_FROM_SIMCTL_LIST
 
+# also just once, to show the simulator UI
+open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/
+
 # on each build, to run the game
 xcrun simctl install booted MyGame.app/
 xcrun simctl launch booted com.mygame

@@ -192,6 +192,9 @@ Create a folder, copy your binary and resources and it is a valid IOS applicatio
 </span><span>xcrun simctl list
 </span><span>xcrun simctl boot LONG_HEX_ID_OF_REQUIRED_IPHONE_FROM_SIMCTL_LIST
 </span><span>
+</span><span style="font-style:italic;color:#969896;"># also just once, to show the simulator UI
+</span><span>open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/
+</span><span>
 </span><span style="font-style:italic;color:#969896;"># on each build, to run the game
 </span><span>xcrun simctl install booted MyGame.app/
 </span><span>xcrun simctl launch booted com.mygame
