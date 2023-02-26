@@ -40,7 +40,7 @@ Create a folder, copy your binary and resources and it is a valid IOS applicatio
 &lt;&#x2F;span&gt;&lt;span&gt;
 &lt;&#x2F;span&gt;&lt;span&gt;cargo build --target x86_64-apple-ios --release
 &lt;&#x2F;span&gt;&lt;span&gt;
-&lt;&#x2F;span&gt;&lt;span&gt;cp target&#x2F;release&#x2F;mygame MyGame.app
+&lt;&#x2F;span&gt;&lt;span&gt;cp target&#x2F;x86_64-apple-ios&#x2F;release&#x2F;mygame MyGame.app
 &lt;&#x2F;span&gt;&lt;span&gt;
 &lt;&#x2F;span&gt;&lt;span&gt;cat &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; MyGame.app&#x2F;Info.plist &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#a71d5d;&quot;&gt;&amp;lt;&amp;lt; EOF
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#183691;&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;

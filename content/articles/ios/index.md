@@ -42,7 +42,7 @@ mkdir MyGame.app
 
 cargo build --target x86_64-apple-ios --release
 
-cp target/release/mygame MyGame.app
+cp target/x86_64-apple-ios/release/mygame MyGame.app
 
 cat > MyGame.app/Info.plist << EOF
 <?xml version="1.0" encoding="UTF-8"?>
