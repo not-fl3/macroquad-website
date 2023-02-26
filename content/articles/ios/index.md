@@ -129,6 +129,16 @@ MacOs complains may be just ignored, but to make XCode recognise the device:
 
 The goal of this step - to see a new device available in `Xcode -> Window -> Devices and Simulators`
 
+### On DeviceSupport files
+
+Any(11+ at least) xcode could install provision files on any IOS device!
+
+On pre 16 iOs, the only requirement is a little file in "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport"
+
+Post iOs 16, iPhone should be in a "Developer mode" to be able to receive the provisions. However, the "Developer mode" toggle is hidden in the settings until device seen a mac with xcode 14 installed at least once. Yes, you need to physically connect your iPhone to any Mac with XCode 14 to get a toggle in the menu!
+
+There are, however, scatchy third-party tools("iCareFone 2" did it for me) to get this very toggle. With this toggle on, XCode11 with "16.2" in "DeviceSupport" folder can successefully install the provisions on the iphone.
+
 ### .mobileprovision file
 
 Purpose of this step - create an empty xcode project runnable on the iphone. This project will be never used for building anything, just to make xcode to download provision files from apple developer portal. 

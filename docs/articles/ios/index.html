@@ -240,6 +240,11 @@ MacOs complains may be just ignored, but to make XCode recognise the device:</p>
 <li>if no - download the required file somewhere from the internet(there are a lot of repos on github with such a data).</li>
 </ul>
 <p>The goal of this step - to see a new device available in <code>Xcode -&gt; Window -&gt; Devices and Simulators</code></p>
+<h3 id="on-devicesupport-files"><a class="zola-anchor" href="#on-devicesupport-files" aria-label="Anchor link for: on-devicesupport-files">🔗</a>On DeviceSupport files</h3>
+<p>Any(11+ at least) xcode could install provision files on any IOS device!</p>
+<p>On pre 16 iOs, the only requirement is a little file in &quot;/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport&quot;</p>
+<p>Post iOs 16, iPhone should be in a &quot;Developer mode&quot; to be able to receive the provisions. However, the &quot;Developer mode&quot; toggle is hidden in the settings until device seen a mac with xcode 14 installed at least once. Yes, you need to physically connect your iPhone to any Mac with XCode 14 to get a toggle in the menu! </p>
+<p>There are, however, scatchy third-party tools(&quot;iCareFone 2&quot; did it for me) to get this very toggle. With this toggle on, XCode11 with &quot;16.2&quot; in &quot;DeviceSupport&quot; folder can successefully install the provisions on the iphone.</p>
 <h3 id="mobileprovision-file"><a class="zola-anchor" href="#mobileprovision-file" aria-label="Anchor link for: mobileprovision-file">🔗</a>.mobileprovision file</h3>
 <p>Purpose of this step - create an empty xcode project runnable on the iphone. This project will be never used for building anything, just to make xcode to download provision files from apple developer portal. </p>
 <p>First, login to the app store account. (it might be a free account, no need for the developer one). <code>xcode-&gt;preferences-&gt;account login create team</code></p>
