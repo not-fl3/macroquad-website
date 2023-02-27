@@ -10,16 +10,27 @@
 
   <style>
     .ui, h1, h2, h3, h4, h5 {
-        font-family: "Jost",-apple-system,blinkmacsystemfont,"Segoe UI",roboto,"Helvetica Neue",arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+      font-family: "Jost", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
     }
+
     .zola-anchor {
-        font-size: 1.25rem;
-        margin-left: -2rem;
-        margin-right: 0.75rem;
-        text-decoration: none;
-        border-bottom-color: transparent;
-        cursor: pointer;
-      }
+      font-size: 1.25rem;
+      margin-left: -2rem;
+      margin-right: 0.75rem;
+      text-decoration: none;
+      border-bottom-color: transparent;
+      cursor: pointer;
+    }
+
+    .home {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .footer_space {
+      flex: 1;
+    }
   </style>
   <script
     src="{{ get_url(path="jquery-3.1.1.min.js") }}"
