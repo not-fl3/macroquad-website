@@ -21,8 +21,7 @@
 
 {{ macros_head::favicons() }}
 </head>
-{% block body %}{% set page_class="home" %}{% endblock body %}
-<body class="{{ page_class }}">
+<body class="home">
   {% block header %}
     {{ macros_header::header(current_section="/") }}
   {% endblock header %}
