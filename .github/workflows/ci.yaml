@@ -1,0 +1,28 @@
+name: Zola
+
+on:
+  push:
+    branches: source
+  pull_request:
+
+jobs:
+  zola:
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: https://github.com/getzola/zola/releases/download
+      VERS: v0.17.2
+      ARCH: x86_64-unknown-linux-gnu
+      # https://github.com/crazy-max/ghaction-github-pages/issues/1#issuecomment-623202206
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Zola
+      run: curl -L ${BASE_URL}/${VERS}/zola-${VERS}-${ARCH}.tar.gz | tar -xz
+    - run: ./zola --version
+    - run: ./zola build
+    - name: Deploy
+      uses: crazy-max/ghaction-github-pages@v1
+      with:
+        build_dir: public
+        target_branch: master
+
