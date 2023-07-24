@@ -42,7 +42,7 @@ mkdir MyGame.app
 
 cargo build --target x86_64-apple-ios --release
 
-cp target/release/mygame MyGame.app
+cp target/x86_64-apple-ios/release/mygame MyGame.app
 
 cat > MyGame.app/Info.plist << EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -63,6 +63,14 @@ cat > MyGame.app/Info.plist << EOF
 </plist>
 EOF
 
+# only once, to get the emulator running
+xcrun simctl list
+xcrun simctl boot LONG_HEX_ID_OF_REQUIRED_IPHONE_FROM_SIMCTL_LIST
+
+# also just once, to show the simulator UI
+open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/
+
+# on each build, to run the game
 xcrun simctl install booted MyGame.app/
 xcrun simctl launch booted com.mygame
 ```
@@ -79,6 +87,12 @@ xcrun simctl launch booted com.mygame
 ```
 
 `load_texture("texture.png")` or `load_file("someronfile.ron")` will work just fine.
+
+# Simulator logs 
+
+```sh
+xcrun simctl spawn booted log stream --predicate 'processImagePath endswith "mygame"'
+```
 
 # Deploying on the real device with 
 
@@ -114,6 +128,16 @@ MacOs complains may be just ignored, but to make XCode recognise the device:
 - if no - download the required file somewhere from the internet(there are a lot of repos on github with such a data).
 
 The goal of this step - to see a new device available in `Xcode -> Window -> Devices and Simulators`
+
+### On DeviceSupport files
+
+Any(11+ at least) xcode could install provision files on any IOS device!
+
+On pre 16 iOs, the only requirement is a little file in "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport"
+
+Post iOs 16, iPhone should be in a "Developer mode" to be able to receive the provisions. However, the "Developer mode" toggle is hidden in the settings until device seen a mac with xcode 14 installed at least once. Yes, you need to physically connect your iPhone to any Mac with XCode 14 to get a toggle in the menu!
+
+There are, however, scatchy third-party tools("iCareFone 2" did it for me) to get this very toggle. With this toggle on, XCode11 with "16.2" in "DeviceSupport" folder can successefully install the provisions on the iphone.
 
 ### .mobileprovision file
 
