@@ -42,7 +42,7 @@ Miniquad is using the second option - it have MainActivity.java that is responsi
 Why miniquad is not built around NativeActivity, the first option? Well, it used to be built around NativeActivity until 0.3, actually.
 The problem here - some of the android API's are really, really hard to use through java native interface. So it really helps when there is an option to make a wrapper for something in Java and provide an easy to use function for a native code.
 
-*A little remark on apks* Now instead of raw .apk developers will be forced to use .aab - a new format for applications on android. Each .aab is a bunch of signed .apk's, so the idea is still the ssame.
+*A little remark on apks* Now instead of raw .apk developers will be forced to use .aab - a new format for applications on android. Each .aab is a bunch of signed .apk's, so the idea is still the same.
 
 ### Writing some java
 

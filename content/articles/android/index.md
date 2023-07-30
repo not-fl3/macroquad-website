@@ -392,3 +392,12 @@ Almost an open test, but requires adding tester's email.
 Almost a release, page is publicly available, no additional actions from testers required to install the game.
 
 [More info on testing tracks can be found here.](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)
+
+# APK to AAB
+
+Those days GooglePlay do not accept the goold old .apk. Now we are forced to upload .aab and all the official docs refer gradle/android studio to build an .aab.
+
+Turned out that .aab is exactly the same archive as the apk, but .xml's are converted to protobufs and a few files got renamed! I guess it is possible to make a little rust app converting the xml's, but right now I am using the aapt2/bundle-tool from google.
+
+This little script do the job: https://gist.github.com/not-fl3/ffff62804ca2c8acc6d8ef74aa610eob6
+(yes it is just "aapt2 convert && bundletool build-bundle", why it is never mentioned in the official android docs?)
