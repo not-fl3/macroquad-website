@@ -399,5 +399,5 @@ Those days GooglePlay do not accept the goold old .apk. Now we are forced to upl
 
 Turned out that .aab is exactly the same archive as the apk, but .xml's are converted to protobufs and a few files got renamed! I guess it is possible to make a little rust app converting the xml's, but right now I am using the aapt2/bundle-tool from google.
 
-This little script do the job: https://gist.github.com/not-fl3/ffff62804ca2c8acc6d8ef74aa610eob6
+This little script do the job: https://gist.github.com/not-fl3/ffff62804ca2c8acc6d8ef74aa610eb6
 (yes it is just "aapt2 convert && bundletool build-bundle", why it is never mentioned in the official android docs?)
