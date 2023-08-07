@@ -179,7 +179,7 @@ cat > MyGame.scent << EOF
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>G92KM8UVQS.com.iwantprovisions</string>
+	<string>MYTEAMID.com.mygame</string>
 	<key>com.apple.developer.team-identifier</key>
 	<string>MYTEAMID</string>
 	<key>get-task-allow</key>
