@@ -7,7 +7,7 @@ draft = false
 template = "blog/page.html"
 +++
 
-Miniquad allows seamless integration of Java code, intagrating Java compilation into a rust build pipeline. This allows *quad project to get access to any Android APIs and an option to integrate any third-party Java libraries.
+Miniquad allows seamless integration of Java code, integrating Java compilation into a rust build pipeline. This allows *quad project to get access to any Android APIs and an option to integrate any third-party Java libraries.
 
 The article use a native file dialog as an example.
 
@@ -20,11 +20,11 @@ More comprehensive example:
 [https://github.com/not-fl3/example-android-bluetooth/](https://github.com/not-fl3/example-android-bluetooth/)
 
 {{ video(src = "https://user-images.githubusercontent.com/910977/177233789-fefbf9c9-6c55-4151-804a-22b85dfa82de.mp4" )}}
-*Bluetooth example asking for permissions. Surpisingly, its A LOT of java!*
+*Bluetooth example asking for permissions. Surprisingly, its A LOT of java!*
 
 ## How android runs things
 
-First a brief introduction on how applications works on android. A bird's eye view on how apps works on android, to find out where it is possible to insert some calls to get the fial dialog (or any native api, actually) to appear. 
+First a brief introduction on how applications works on android. A bird's eye view on how apps works on android, to find out where it is possible to insert some calls to get the final dialog (or any native api, actually) to appear. 
 
 Each android package, .apk, is basically a zip archive with:
 - classes.dex file - all the compiled java files
@@ -57,7 +57,7 @@ We can ask the build system to insert some code right to the MainActivity.java. 
 
 Adding code inside MainActivity works in a quite literal way - there is a MainActivity.java template: [MainActivity.java](https://github.com/not-fl3/miniquad/blob/master/java/MainActivity.java). Each crate based on miniquad can ask the build system to add some lines into `//% MAIN_ACTIVITY_ON_RESUME` or `//% whatever`.
 
-Fortunately Java is not against recurring lines in imprts declaration,
+Fortunately Java is not against recurring lines in imports declaration,
 ```java
 import android.app.Activity;
 import android.app.Activity;

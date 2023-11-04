@@ -72,7 +72,7 @@ Cargo features are additive: let's say there is a crate A, depending on crate B 
 
 If crate B depends on "Dependency" with feature "Foo" and crate C depends on the same "Dependency" with feature "Bar", cargo will add just one crate into a build process, "Dependency", with both features "Foo" and "Bar" on.
 
-In macroquad 0.3 a library using macroquad like this: `macroquad = "0.3"` was silently introducing "audio" feature in the dependency tree. It was very contr-intuitive and required complicated workarounds.
+In macroquad 0.3 a library using macroquad like this: `macroquad = "0.3"` was silently introducing "audio" feature in the dependency tree. It was very counterintuitive and required complicated workarounds.
 
 After 0.4 macroquad introduce new, no-default, features policy. It will make life of libraries authors a lot easier: `macroquad = "0.4"` in a sub-dependencies Cargo.toml will never bring new, unwanted features.
 
@@ -129,7 +129,7 @@ As an example of a cheap `.clone`:
 
 # Error handling
 
-The last panicing functions were eleminated. Now everything returns `Result<_, macroquad::Error>`.
+The last panicking functions were eliminated. Now everything returns `Result<_, macroquad::Error>`.
 
 # Metal shaders
 

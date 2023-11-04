@@ -25,7 +25,7 @@ Topics covered:
 On the machine with docker pulling all the NDK dependencies is as simple as
 
 ```
-docker pull not-fl3/cargo-apk
+docker pull notfl3/cargo-apk
 ```
 
 Docker is a recommended way to build macroquad's game for Android. 

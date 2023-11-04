@@ -10,13 +10,13 @@ template = "blog/page.html"
 
 # Cross-platform logs with miniquad
 
-Miniquad is cross-platform layer between rust code and target platforms rendering API. Console API necessary for logs are some kind of output API and its on miniquads responsibility to abstract it away. On the other hand, using log-rs with different frontends are the most common way to do logging in rust cosystem.
+Miniquad is cross-platform layer between rust code and target platforms rendering API. Console API necessary for logs are some kind of output API and its on miniquads responsibility to abstract it away. On the other hand, using log-rs with different frontends are the most common way to do logging in rust ecosystem.
 
 So there are two different ways to send log messages into console with miniquad:
 
 ## With log-rs
 
-Use debug!, warn!, trace!, info! macroses from log-rs just like with any other library. The only issue - special logging frontend for wasm will be needed. Fortunately, there is one: sapp-console-log.
+Use debug!, warn!, trace!, info! macros from log-rs just like with any other library. The only issue - special logging frontend for wasm will be needed. Fortunately, there is one: sapp-console-log.
 
 dependencies to Cargo.toml:
 
@@ -44,7 +44,7 @@ fn main() {
 
 ## With embedded logging implementation
 
-If the main target platform is wasm - there are not much of a choice, just sapp_console_log. miniquad can provide its own logging macroses, very similar to log-rs ones. Each logging call will be redirected into appropriate console.*() call on wasm and just into eprintln!() on desktop.
+If the main target platform is wasm - there are not much of a choice, just sapp_console_log. miniquad can provide its own logging macros, very similar to log-rs ones. Each logging call will be redirected into appropriate console.*() call on wasm and just into eprintln!() on desktop.
 
 To use this, enable miniquad "log-impl" feature in Cargo.toml:
 
@@ -53,7 +53,7 @@ To use this, enable miniquad "log-impl" feature in Cargo.toml:
 miniquad = { version = "0.2", features = [ "log-impl" ]}
 ```
 
-And then all logging macroses will be available just from miniquad:
+And then all logging macros will be available just from miniquad:
 
 ```rust
 use miniquad::info;

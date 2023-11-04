@@ -27,7 +27,7 @@ That loader code is doing this:
 - load wasm binary data - download the file from the internet and get bytes
 - fill import functions table. all the JS functions that wasm use should be in that table
 - call browser api to instantiate wasm with the given import table
-- get references into nwo loaded wasm's functions and wasm's memory. Now JS can call our wasm! 
+- get references into now loaded wasm's functions and wasm's memory. Now JS can call our wasm! 
 
 In miniquad's case that JS loader code will also call "main" function from wasm export and will forward JS events as WASM functions calls.
 
@@ -159,4 +159,4 @@ pub extern "C" fn hi_rust(js_object: JsObject) {
 For more info check [demo project](https://github.com/not-fl3/miniquad-js-interop-demo.git). This example showcase usage of strings, arrays and structs bi-directional usage - complex types are used in both argument and return positions for both JS and Rust calls.
 
 
-Note that `sapp-utils` are completely optional and just one of the options to help with JS-Rust interops. I believe there are way better and efficient ways to do this, depending on the task and requirements. I hope case-specifc crates like `sapp-utils` will appear to make JS interop easier!
+Note that `sapp-utils` are completely optional and just one of the options to help with JS-Rust interops. I believe there are way better and efficient ways to do this, depending on the task and requirements. I hope case-specific crates like `sapp-utils` will appear to make JS interop easier!
