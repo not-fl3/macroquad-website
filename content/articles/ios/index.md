@@ -156,9 +156,13 @@ One for "com.mygame" and one for "com.mygameUITests". To find which one is which
 
 Copy it to MyApp.app/embedded.mobileprovision
 
+**Note** it seems XCode (at least version 15.1) is a bit arbitrary about which `.mobileprovisions` file it places in the **Provisioning Profiles** folder. If your developer account has several profiles, you may have to clean the folder, forcing XCode to redownload the provisioning file, until you get one that matches your bundle identifier. **Also note** at least with XCode 15.1 the wildcard provisioning profile has proven to work well. (The wildcard file does not mention your bundle identifier at all, and just uses `"*"` for that entry).
+
 **Note** for the paid apple developer account - with the developer account this step may be skipped alltogether, provision profiles could be downloaded from the iOS developer portal.
 
-### .scent file
+### .scent file (maybe)
+
+**Note** on MacOS 14 (Sonoma), `codesign` does not support `.scent` files and you should provide the `application-identifier` some other way. You can check if this option is available by running `codesign --sent`. If the error says "unrecognized option `--sent'" then see below for how to provide an **Entitlements** file instead.
 
 `.scent` file contains all the metadata for signing the bundle.
 
@@ -195,6 +199,7 @@ EOF
 
 ```
 ├── MyGame.app
+│   ├── embedded.mobileprovision
 │   ├── mygame
 │   ├── Info.plist
 │   ├── assets
@@ -203,7 +208,34 @@ EOF
 ├── MyGame.scent
 ```
 
+One way to find what to use for `MYTEAMID` is in the provisioning profile file. Look for `TeamIdentifier` in the output of this command:
+
+``` sh
+security cms -D -i MyGame.app/embedded.mobileprovision
+```
+
+(For cleaner output than a plain `cat` will give you.)
+
+### Entitlements file (unless `.scent` file worked)
+
+For `codesign` to be successful, it needs to know about the `application-identifier`. If you are using macOS 14+ (Sonoma) you probably should use an Entitlements file instead of a `.scent` one.
+
+The `application-identifier` is a concatenation of your team identifier (`MYTEAMID` above) and your bundle identifier. Create an XML file somewhere (e.g. in the crate root named `MyGame.entitlements.xml`) with this content:
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>application-identifier</key>
+  <string>MYTEAMID.com.mygame</string>
+</dict>
+</plist>
+```
+
 ### sign it
+
+**Before** macOS 14 (Sonoma):
 
 ```sh
 
@@ -216,6 +248,12 @@ EOF
 
 # and sign the bundle itself
 > codesign --force --timestamp=none --sign LONGHEXID --scent MyGame.scent --generate-entitlement-der MyGame.app
+```
+
+For Sonoma finding the identity (`LONGHEXID`) is the same as above. But you only need to sign the bundle, and you should use the entitlements file instead of the scent one:
+
+```sh
+codesign --force --timestamp=none --sign LONGHEXID --entitlements MyGame.entitlements.xml MyGame.app
 ```
 
 ### deploy it
@@ -252,4 +290,10 @@ cp target/aarch64-apple-ios/release/mygame MyGame.app/mygame
 codesign --force --timestamp=none --sign VERYLONGHEXID MyGame.app/mygame
 codesign --force --timestamp=none --sign VERYLONGHEXID --scent MyGame.scent --generate-entitlement-der MyGame.app
 ios-deploy -i HEXDEVICEID -b MyGame.app
+```
+
+**Note** on macOS 14 (Sonoma), replace both `codesign` invokations with:
+
+```sh
+codesign --force --timestamp=none --sign VERYLONGHEXID --entitlements MyGame.entitlements.xml MyGame.app
 ```
