@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block header %}
+{{ macros_header::header(current_section="/twiq") }}
+{% endblock header %}
+
+{% block content %}
+
+{% for page in paginator.pages %}
+
+<div class = "ui container segment">
+  <a class="stretched-link text-body" href="{{ page.permalink }}">
+    <h3 class = "ui header" > {{ page.title }}, {{ page.description }}</h3>
+  </a>
+</div>
+
+{% endfor %}
+
+<div class = "ui container">
+    <div class="row" id="article">
+      Got your own *quad-related update?
+    </div>
+    <div class="row" id="article">
+      <a href="https://github.com/not-fl3/macroquad-website/tree/source/content/twiq/"> Send a PR for the next week!</a>
+    </div>
+</div>
+{% endblock content %}
