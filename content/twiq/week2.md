@@ -1,6 +1,6 @@
 +++
 title = "This Week in Quads #2"
-description = "2024-05-12"
+description = "2024-05-20"
 date = 2024-05-20T20:10:42+00:00
 updated = 2024-05-20T20:10:42+00:00
 draft = false
