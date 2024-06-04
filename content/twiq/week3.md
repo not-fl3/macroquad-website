@@ -3,11 +3,10 @@ title = "This Week in Quads #3"
 description = "2024-05-27"
 date = 2024-05-27T20:10:42+00:00
 updated = 2024-05-27T20:10:42+00:00
-draft = true
 template = "blog/page.html"
 +++
 
-# blocking_event_loop on mac
+# blocking_event_loop on Mac OS
 
 A PR by [birhburh](https://github.com/birhburh).
 
