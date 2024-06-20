@@ -42,21 +42,9 @@ docker run
   notfl3/cargo-apk cargo quad-apk build --release
 ```
 
-This will produce an apk in `target/android-artifacts/release/apk`. 
+Will produce an apk in `target/android-artifacts/release/apk`. 
 
-However this may take quite a while - each docker invocation will do a clean build for all 3 android targets.
-
-One way to make it a little bit faster: add ` -v /tmp/registry\":/usr/local/cargo/registry\"` to a docker command. This will tell docker to use `/tmp/registry` on the host machine for cargo's registry, therefore docker will not download all the dependencies on each build.
-
-Another possibility: run docker interactively and invoke build command in the same container for each build.
-```
-docker run 
-  --rm 
-  -v $(pwd):/root/src 
-  -w /root/src 
-  -it notfl3/cargo-apk /bin/bash
-```
-and later, in the docker's bash: `cargo quad-apk build --release`. And use the same command for each iteration.
+This command takes a while - each docker invocation do a clean build for all 3 android targets. There are different strategies to make docker cache build temp files between builds, described in [a little docker cheatsheat](/articles/docker)
 
 ## A manual way
 
