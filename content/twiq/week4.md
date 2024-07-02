@@ -6,11 +6,11 @@ updated = 2024-06-03T20:10:42+00:00
 template = "blog/page.html"
 +++
 
-# blocking_event_loop on Android
+# blocking_event_loop on ios opengl/metal
 
-A PR by [birhburh](https://github.com/birhburh).
+[https://github.com/not-fl3/miniquad/pull/452](https://github.com/not-fl3/miniquad/pull/452).
 
-[https://github.com/not-fl3/miniquad/pull/449](https://github.com/not-fl3/miniquad/pull/449).
+Shout out to [birhburh](https://github.com/birhburh) for finishing a series of PRs porting `blocking_event_loop` on basically everything!
 
 # Article on getrandom for *quad
 
