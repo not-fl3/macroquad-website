@@ -68,32 +68,40 @@
 
 <section>
   <div class="ui container">
-    <h2>Get Started with Macroquad</h2>
+    <div class="row">
+      <div class="eleven wide centered column">
+        <h2>Get Started with Macroquad</h2>
 
-    <div>1. Install Rust and create a new project with Cargo: <code>cargo init my_game</code></div>
-    <div>2. Add Macroquad: <code>cargo add macroquad</code></div>
-    <div>3. Start coding by adding the following to <code>src/main.rs</code>:
-      <pre>
-      use macroquad::prelude::*;
+        <p>Macroquad has a refreshingly simple API and is quick to get started with.</p>
 
-      #[macroquad::main("MyGame")]
-      async fn main() {
-          loop {
-              clear_background(RED);
+        <div>1. Install Rust and create a new project with Cargo: <code>cargo init my_game</code></div>
+        <div>2. Add Macroquad: <code>cargo add macroquad</code></div>
+        <div>3. Start coding by adding the following to <code>src/main.rs</code>:
+          <pre data-lang="rust" class="language-rust">
+            <code data-lang="rust" class="language-rust">
+use macroquad::prelude::*;
 
-              draw_line(40.0, 40.0, 100.0, 200.0, 15.0, BLUE);
-              draw_rectangle(screen_width() / 2.0 - 60.0, 100.0, 120.0, 60.0, GREEN);
+#[macroquad::main("MyGame")]
+async fn main() {
+    loop {
+        clear_background(RED);
 
-              draw_text("Hello, Macroquad!", 20.0, 20.0, 30.0, DARKGRAY);
+        draw_line(40.0, 40.0, 100.0, 200.0, 15.0, BLUE);
+        draw_rectangle(screen_width() / 2.0 - 60.0, 100.0, 120.0, 60.0, GREEN);
 
-              next_frame().await
-          }
-      }
-      </pre>
+        draw_text("Hello, Macroquad!", 20.0, 20.0, 30.0, DARKGRAY);
+
+        next_frame().await
+    }
+}
+            </code>
+          </pre>
+        </div>
+        <div>4. Run with <code>cargo run</code></div>
+        <div>5. Dig into the <a href="/docs">docs</a></div>
+        <div><p><a href="https://github.com/not-fl3/macroquad?tab=readme-ov-file#setting-up-a-macroquad-project">Learn more in the GitHub README.</a></p></div>
+      </div>
     </div>
-    <div>4. Run with <code>cargo run</code></div>
-    <div>5. Dig into the <a href="/docs">docs</a></div>
-    <div><p><a href="https://github.com/not-fl3/macroquad?tab=readme-ov-file#setting-up-a-macroquad-project">Learn more in the GitHub README.</a></p></div>
   </div>
 </section>
 
