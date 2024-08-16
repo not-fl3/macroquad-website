@@ -45,6 +45,6 @@ content = "Linux/Mac/Windows with no external system dependencies."
 
 [[extra.home.list]]
 title = "Batteries included"
-content = "UI, efficient 2D rendering, sound system - everything needed to make a 2D game included!"
+content = "UI, efficient 2D rendering, sound system—everything needed to make a 2D game included!"
 
 
