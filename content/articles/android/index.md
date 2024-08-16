@@ -299,7 +299,7 @@ It may be verified with
 apksigner verify my-app.apk
 
 ```
-[The official documentation on signing can be found here.](https://developer.android.com/studio/publish/app-signing.html#signing-manually).
+[The official documentation on signing can be found here.](https://developer.android.com/studio/publish/app-signing.html).
 
 ## NOTE: how to get `keytool`/`apksigner` with docker
 

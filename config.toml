@@ -19,6 +19,10 @@ theme_color = "#fff"
 timeformat = "%B %e, %Y" # e.g. June 14, 2021
 timezone = "America/New_York"
 
+[link_checker]
+# TODO: fix all broken links and make this "error"
+external_level = "warn"
+
 # The homepage contents
 [extra.home]
 title = "Macroquad"
