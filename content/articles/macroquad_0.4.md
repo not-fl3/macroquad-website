@@ -1,6 +1,6 @@
 +++
 title = "Macroquad 0.4 changelog"
-description = "Macroquad with Metal on IOS and other updates."
+description = "Macroquad with Metal on iOS and other updates."
 date = 2023-07-12T09:19:42+00:00
 updated = 2023-07-12T09:19:42+00:00
 draft = false
@@ -17,6 +17,7 @@ No more "Context" for event handlers.
 RenderingBackend is now owned by the client code, and for window manipulation miniquad now provide a static "window" module.
 
 For events, it looks like:
+
 ```diff
 impl EventHandler for Stage {
 -    fn update(&mut self, _ctx: &mut Context) {
@@ -24,29 +25,35 @@ impl EventHandler for Stage {
 ```
 
 For functions that used to be part of the context, it became:
+
 ```diff
 - ctx.screen_size();
 + window::screen_size()
 ```
 
-And for rendering functions, now its 
+And for rendering functions, now its
+
 ```rust
 let gl_context = GlContext::new();
 
 gl_context.begin_default_pass();
 ```
 
-In multiple places miniquad used to receive arguments like this: 
+In multiple places miniquad used to receive arguments like this:
+
 ```
 pub fn immutable<T>(ctx: &mut Context, buffer_type: BufferType, data: &[T]) -> Buffer;
 ```
-With rendering backend being a trait object, this is no longer possible. 
-Now it looks like this: 
+
+With rendering backend being a trait object, this is no longer possible.
+Now it looks like this:
+
 ```rust
 fn new_buffer_immutable(&mut self, buffer_type: BufferType, data: BufferSource) -> BufferId;
 ```
 
 On the call site, the change required is:
+
 ```diff
 - .. &indices);
 + BufferSource::slice(&indices));
@@ -56,7 +63,7 @@ On the call site, the change required is:
 
 `draw_texture_rec`  
 `widgets::InputField`  
-`ui::input_field`  
+`ui::input_field`
 
 # Thread safety
 
@@ -86,6 +93,7 @@ loop {
   next_frame().await;
 }
 ```
+
 this snipped used to be a memory leak. While it almost never a good idea to load new resources mid-frame, it was still very un-idiomatic.
 0.4 fixes this. All resources are just `Clone`, not `Copy` and they all acts like smart-pointers: `texture.clone()` is really really cheap, its okay to do a `.clone()` of any resource multiple times a frame: its just a pointer clone, not actual texture clone.
 
@@ -110,7 +118,7 @@ this snipped used to be a memory leak. While it almost never a good idea to load
     println!("{}", telemetry::textures_count());
 ```
 
-As an example of a cheap `.clone`: 
+As an example of a cheap `.clone`:
 
 ```
     loop {
@@ -148,4 +156,3 @@ With metal being opt-in feature this should be fine, at least until macroquad wi
                  mq::material::MaterialParams::default(),
              )
 ```
-

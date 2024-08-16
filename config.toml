@@ -30,15 +30,15 @@ repo_url = "https://github.com/not-fl3/macroquad"
 
 [[extra.home.list]]
 title = "HTML5"
-content = "First class browsers support, WebGL1 and IOS Safari supported."
+content = "First class browsers support, WebGL1 and iOS Safari supported."
 
 [[extra.home.list]]
 title = "Android"
 content = "Single command docker-powered android builds."
 
 [[extra.home.list]]
-title = "IOS"
-content = "Export to XCode project for IOS."
+title = "iOS"
+content = "Export to XCode project for iOS."
 
 [[extra.home.list]]
 title = "PC"
