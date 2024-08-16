@@ -8,4 +8,5 @@ The Macroquad website is built with the Zola static site generator and uses a he
 
 1. Fork & clone the repository
 2. Download [Zola](https://github.com/getzola/zola/releases), using the version specified in [`.github/worksflows/ci.yaml`](https://github.com/not-fl3/macroquad-website/blob/source/.github/workflows/ci.yaml)
-3. Run `./serve.sh` and develop locally
+3. Run `zola serve` to start up a local web server for the site
+4. Make changes develop locally

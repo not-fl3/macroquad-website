@@ -1,1 +1,0 @@
-zola serve --output-dir docs
