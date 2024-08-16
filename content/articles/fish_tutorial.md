@@ -91,7 +91,7 @@ If instead of a window, we have some errors: Maybe some native dependency is mis
 ```bash
 apt install libx11-dev libxi-dev libgl1-mesa-dev
 ```
-For more details, check the [build instructions](https://github.com/not-fl3/macroquad/#building-instructions).
+For more details, check the [build instructions](https://github.com/not-fl3/macroquad/?tab=readme-ov-file#build-instructions).
 
 ## Making game levels
 
@@ -434,7 +434,7 @@ async fn main() {
 
 ## Authentication and registration
 
-Macroquad uses the immediate mode gui concept for UI. Here we will skip GUI style setup (it may be found [here](https://github.com/heroiclabs/fishgame-macroquad/blob/master/src/gui.rs#L36)), and we will proceed to the UI logic instead.
+Macroquad uses the immediate mode gui concept for UI. Here we will skip GUI style setup (it may be found [here](https://github.com/heroiclabs/fishgame-macroquad/blob/25a9872b540035f2998f8624eba5423066d4715d/src/gui.rs#L34-L43)), and we will proceed to the UI logic instead.
 
 <img src="/fishgame_tutorial/login.png"  width="100%"/>
 
@@ -523,7 +523,7 @@ This will be addressed in the [Ready window](#Ready-window) section.
 
 You can use the Matchmaker to find other players. It is possible to match them using properties and a query that specifies the values the other players' properties should hold. In `nakama-rs` the Matchmaker is a `struct` and can be created using `Matchmaker::new()`. There are two types of properties, string properties and numeric properties that can be added with `matchmaker.add_string_property("name", "value")` and `matchmaker.add_numeric_property("rank", 1000.0)` respectively. Names of properties should be unique across both types.
 
-The query is a space-separated string using the [Bleve Query-String-Query Syntax](http://blevesearch.com/docs/Query-String-Query/). It is possible to add queries manually using `matchmaker.add_query_item("properties.region:Europe")` but `nakama-rs` provides a helper to construct the query string using the builder pattern. For now, terms, numeric ranges, required, optional and exclusion are supported. See [examples/matchmaker.rs](https://github.com/heroiclabs/nakama-rs/blob/master/examples/matchmaker.rs) for more examples.
+The query is a space-separated string using the [Bleve Query-String-Query Syntax](http://blevesearch.com/docs/Query-String-Query/). It is possible to add queries manually using `matchmaker.add_query_item("properties.region:Europe")` but `nakama-rs` provides a helper to construct the query string using the builder pattern. For now, terms, numeric ranges, required, optional and exclusion are supported.
 
 ```rust=
 // By default query items are optional. The Matchmaker will prefer
