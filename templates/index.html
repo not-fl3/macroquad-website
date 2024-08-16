@@ -63,5 +63,38 @@
   </div>
 </section>
 
-<p class=""></p>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+<section>
+  <div class="ui container">
+    <h2>Get Started with Macroquad</h2>
+
+    <div>1. Install Rust and create a new project with Cargo: <code>cargo init my_game</code></div>
+    <div>2. Add Macroquad: <code>cargo add macroquad</code></div>
+    <div>3. Start coding by adding the following to <code>src/main.rs</code>:
+      <pre>
+      use macroquad::prelude::*;
+
+      #[macroquad::main("MyGame")]
+      async fn main() {
+          loop {
+              clear_background(RED);
+
+              draw_line(40.0, 40.0, 100.0, 200.0, 15.0, BLUE);
+              draw_rectangle(screen_width() / 2.0 - 60.0, 100.0, 120.0, 60.0, GREEN);
+
+              draw_text("Hello, Macroquad!", 20.0, 20.0, 30.0, DARKGRAY);
+
+              next_frame().await
+          }
+      }
+      </pre>
+    </div>
+    <div>4. Run with <code>cargo run</code></div>
+    <div>5. Dig into the <a href="/docs">docs</a></div>
+    <div><p><a href="https://github.com/not-fl3/macroquad?tab=readme-ov-file#setting-up-a-macroquad-project">Learn more in the GitHub README.</a></p></div>
+  </div>
+</section>
+
 {% endblock content %}
