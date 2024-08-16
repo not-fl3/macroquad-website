@@ -24,7 +24,6 @@ timezone = "America/New_York"
 title = "Macroquad"
 lead = "Simple and easy to use game library for Rust programming language."
 url = "/examples"
-repo_version = "GitHub v0.3.1"
 repo_license = "Open-source MIT License."
 repo_url = "https://github.com/not-fl3/macroquad"
 
