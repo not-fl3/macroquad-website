@@ -49,7 +49,7 @@ ul {
   
 <div class="ui vertical stripe">
 <div class="ui container">
-  <p>Examples on how to use the Macroquad API. Click each image to run the example in your browser or click the GitHub icon to view the source code. Browsing and studying the examples are a great way to start learning Macroquad.</p>
+  <p>Examples on how to use the Macroquad API. Click an example to run it in your browser or click the GitHub icon to view the source code. Browsing and studying the examples are a great way to start learning Macroquad.</p>
 
 <ul class="ui stackable cards nolist four">
   {% for post in section.pages %}
@@ -64,7 +64,9 @@ ul {
         </i>
       </a>
       <div class="header">
-        {{ post.title }}
+        <a onclick="show_modal('{{ post.title }}', '{{ post.extra.gh_source }}', '{{ post.extra.screenshot }}', '{{post.extra.wasm_source}}')">
+          {{ post.title }}
+        </a>
       </div>
     </div>
   </li>
