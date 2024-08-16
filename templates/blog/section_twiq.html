@@ -6,6 +6,13 @@
 
 {% block content %}
 
+<div class="ui container">
+  <div class="row" id="article">
+    <p>Compilation of project and community updates from the *quad ecosystem.</p>
+    <p>Got your own *quad-related update? <a href="https://github.com/not-fl3/macroquad-website/tree/source/content/twiq/">Send a PR for the next week!</a></p>
+  </div>
+</div>
+
 {% for page in paginator.pages %}
 
 <div class = "ui container segment">
@@ -16,12 +23,4 @@
 
 {% endfor %}
 
-<div class = "ui container">
-    <div class="row" id="article">
-      Got your own *quad-related update?
-    </div>
-    <div class="row" id="article">
-      <a href="https://github.com/not-fl3/macroquad-website/tree/source/content/twiq/"> Send a PR for the next week!</a>
-    </div>
-</div>
 {% endblock content %}
