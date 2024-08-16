@@ -1,6 +1,6 @@
 +++
-title = "Macroquad on IOS"
-description = "Step by step quide in setting up development environment and building a game for IOS."
+title = "Macroquad on iOS"
+description = "Step by step quide in setting up development environment and building a game for iOS."
 date = 2022-10-31T09:19:42+00:00
 updated = 2022-10-31T10:19:42+00:00
 draft = false
@@ -33,9 +33,9 @@ EOF
 
 # Building for the simulator
 
-IOS application is just a normal folder, named like "MyGame.app". This folder contains the binary, a file with a metadata and all the resources.  
+iOS application is just a normal folder, named like "MyGame.app". This folder contains the binary, a file with a metadata and all the resources.  
 The binary is a normal, cargo-produced, binary and resources are normal files, just like on any other platform. There is no third-party post-processors, resource compilators or anything like this.  
-Create a folder, copy your binary and resources and it is a valid IOS application!
+Create a folder, copy your binary and resources and it is a valid iOS application!
 
 ```sh
 mkdir MyGame.app
@@ -88,19 +88,20 @@ xcrun simctl launch booted com.mygame
 
 `load_texture("texture.png")` or `load_file("someronfile.ron")` will work just fine.
 
-# Simulator logs 
+# Simulator logs
 
 ```sh
 xcrun simctl spawn booted log stream --predicate 'processImagePath endswith "mygame"'
 ```
 
-# Deploying on the real device with 
+# Deploying on the real device with
 
 The real device use exactly the same "application bundle" format - its a "Name.app" folder with a binary, Info.plist and resources.
 
 But real device use aarch64-apple-ios instead of x86_64-apple-ios and it requires the bundle to be signed.
 
 Which means - to install and run the app, following conditions should be met:
+
 - the bundle(Name.app folder) should contain a "embedded.mobileprovision" file
 - in iphone's settings, in General -> "VPN & Device Management" should be a record with your team name
 
@@ -124,6 +125,7 @@ It is a bit outdated, some CLI arguments are a bit different now, but, in genera
 
 On the first connection, both xcode and macos might complain about versions incompatibility.
 MacOs complains may be just ignored, but to make XCode recognise the device:
+
 - double check that there is a folder with Iphone's ios version here: `/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport`
 - if no - download the required file somewhere from the internet(there are a lot of repos on github with such a data).
 
@@ -133,15 +135,15 @@ The goal of this step - to see a new device available in `Xcode -> Window -> Dev
 
 Any(11+ at least) xcode could install provision files on any IOS device!
 
-On pre 16 iOs, the only requirement is a little file in "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport"
+On pre 16 iOS, the only requirement is a little file in "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport"
 
-Post iOs 16, iPhone should be in a "Developer mode" to be able to receive the provisions. However, the "Developer mode" toggle is hidden in the settings until device seen a mac with xcode 14 installed at least once. Yes, you need to physically connect your iPhone to any Mac with XCode 14 to get a toggle in the menu!
+Post iOS 16, iPhone should be in a "Developer mode" to be able to receive the provisions. However, the "Developer mode" toggle is hidden in the settings until device seen a mac with xcode 14 installed at least once. Yes, you need to physically connect your iPhone to any Mac with XCode 14 to get a toggle in the menu!
 
 There are, however, scatchy third-party tools("iCareFone 2" did it for me) to get this very toggle. With this toggle on, XCode11 with "16.2" in "DeviceSupport" folder can successefully install the provisions on the iphone.
 
 ### .mobileprovision file
 
-Purpose of this step - create an empty xcode project runnable on the iphone. This project will be never used for building anything, just to make xcode to download provision files from apple developer portal. 
+Purpose of this step - create an empty xcode project runnable on the iphone. This project will be never used for building anything, just to make xcode to download provision files from apple developer portal.
 
 First, login to the app store account. (it might be a free account, no need for the developer one). `xcode->preferences->account login create team`
 
@@ -172,7 +174,8 @@ First, get a team id (the team is a thing created in xcode in the previous step)
 > cat mygame_provisionsfetch.xcodeproj/project.pbxproj | grep DEVELOPMENT_TEAM
 DEVELOPMENT_TEAM = YOURID;
 ```
-*mygame_provisionsfetch.xcodeproj* is our dummy provisions-fetching project.
+
+_mygame_provisionsfetch.xcodeproj_ is our dummy provisions-fetching project.
 
 Than create a `.scent` file next to the `MyGame.app` folder:
 
@@ -210,7 +213,7 @@ EOF
 
 One way to find what to use for `MYTEAMID` is in the provisioning profile file. Look for `TeamIdentifier` in the output of this command:
 
-``` sh
+```sh
 security cms -D -i MyGame.app/embedded.mobileprovision
 ```
 
@@ -222,7 +225,7 @@ For `codesign` to be successful, it needs to know about the `application-identif
 
 The `application-identifier` is a concatenation of your team identifier (`MYTEAMID` above) and your bundle identifier. Create an XML file somewhere (e.g. in the crate root named `MyGame.entitlements.xml`) with this content:
 
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -297,3 +300,4 @@ ios-deploy -i HEXDEVICEID -b MyGame.app
 ```sh
 codesign --force --timestamp=none --sign VERYLONGHEXID --entitlements MyGame.entitlements.xml MyGame.app
 ```
+
