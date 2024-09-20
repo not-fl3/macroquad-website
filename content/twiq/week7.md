@@ -34,7 +34,7 @@ First look onto the gizmos API - a special, no context, no parametrisation way t
 ![gizmos](/week7/gizmo.gif)
 ![gizmos](/week7/gizmo2.gif)
 
-*[A new gizmo example](https://github.com/not-fl3/macroquad/blob/reimagine/examples/gizmos/main.rs)*
+*[A new gizmo example](https://github.com/not-fl3/macroquad/blob/0.5/examples/gizmos/main.rs)*
 
 
 ## non-exclusive immidiate mode

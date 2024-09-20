@@ -40,4 +40,4 @@ let text = scene.model(Text::new("HELLO 3D", 30), DrawParams::default());
 
 ![text 3d](/week12/text3d.gif)
 
-[Full example source](https://github.com/not-fl3/macroquad/blob/reimagine/examples/gltf/main.rs)
+[Full example source](https://github.com/not-fl3/macroquad/blob/0.5/examples/gltf/main.rs)

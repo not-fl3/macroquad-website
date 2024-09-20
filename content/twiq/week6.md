@@ -31,7 +31,7 @@ Thanks to [markmurphydev](https://github.com/markmurphydev) MacOs miniquad windo
 
 # Road to 3d macroquad
 
-A [new example](https://github.com/not-fl3/macroquad/blob/reimagine/examples/materials/main.rs) with a first take on a (very WIP) material system with customizable uniforms and shaders.
+A [new example](https://github.com/not-fl3/macroquad/blob/0.5/examples/materials/main.rs) with a first take on a (very WIP) material system with customizable uniforms and shaders.
 
 ![helmet](/week6/helmet.gif)
 

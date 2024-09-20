@@ -90,9 +90,9 @@ fn main() {
     macroquad::start(Default::default(), |ctx| game(ctx));
 }
 ```
-[basic_shapes_compat.rs](https://github.com/not-fl3/macroquad/blob/reimagine/examples/basic_shapes_compat.rs)
+[basic_shapes_compat.rs](https://github.com/not-fl3/macroquad/blob/0.5/examples/basic_shapes_compat.rs)
 
 
 While it is possible to use a new, more fine-graded API:
 
-[basic_shapes.rs](https://github.com/not-fl3/macroquad/blob/reimagine/examples/basic_shapes.rs)
+[basic_shapes.rs](https://github.com/not-fl3/macroquad/blob/0.5/examples/basic_shapes.rs)

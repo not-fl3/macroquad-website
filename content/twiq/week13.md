@@ -40,7 +40,7 @@ This week macroquad might have got a solution: just remove the camera alltogethe
     }
 ```
 
-[Full example source](https://github.com/not-fl3/macroquad/blob/reimagine/examples/camera.rs)
+[Full example source](https://github.com/not-fl3/macroquad/blob/0.5/examples/camera.rs)
 
 ## Rounded rectangle
 

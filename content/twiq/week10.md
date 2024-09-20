@@ -72,8 +72,8 @@ In macroquad `0.3` texture was a `Copy` handle. It would be never deleted unless
 
 In `macroquad-0.5` all this will be gone. `load_texture` will return an `Arc<Texture2d>`. draw_texture will require an `Arc<Texture2D>`. It is clear from the API that `draw_texture` might store a copy of an arc for some deferred operations. It is clear that `Texture2D` is, indeed, a Texture, not a handle, and that Arc is an Arc. All this sounds super obvious, but, somehow, it took 2 major versions to implement...
 
-[New texture example](https://github.com/not-fl3/macroquad/blob/reimagine/examples/texture.rs)
+[New texture example](https://github.com/not-fl3/macroquad/blob/0.5/examples/texture.rs)
 
-[New basic_shapes example](https://github.com/not-fl3/macroquad/blob/reimagine/examples/basic_shapes.rs)
+[New basic_shapes example](https://github.com/not-fl3/macroquad/blob/0.5/examples/basic_shapes.rs)
 
-[For the whole picture, new basic_shapes_compat example](https://github.com/not-fl3/macroquad/blob/reimagine/examples/basic_shapes.rs)
+[For the whole picture, new basic_shapes_compat example](https://github.com/not-fl3/macroquad/blob/0.5/examples/basic_shapes.rs)

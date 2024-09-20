@@ -36,8 +36,8 @@ Cons:
 
 This week macroquad-0.4 drawing functions got ported to the new API.
 
-[New texture example](https://github.com/not-fl3/macroquad/blob/reimagine/examples/texture.rs)
+[New texture example](https://github.com/not-fl3/macroquad/blob/0.5/examples/texture.rs)
 
-[New basic_shapes example](https://github.com/not-fl3/macroquad/blob/reimagine/examples/basic_shapes.rs)
+[New basic_shapes example](https://github.com/not-fl3/macroquad/blob/0.5/examples/basic_shapes.rs)
 
 This change might not look like such a big deal, but it was the last big roadblock for publishing macroquad-0.5-alpha and it took crazy amount of iterations.
