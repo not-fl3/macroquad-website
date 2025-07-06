@@ -88,7 +88,8 @@ fn main() {
 }
 ```
 
-```plugin.js
+plugin.js
+```js
 register_plugin = function (importObject) {
     importObject.env.hi_from_wasm = function (js_object) {
         console.log("hi")
