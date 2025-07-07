@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Macroquad">
+
+  <link rel="preload" as="font" href="https://macroquad.rs/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://macroquad.rs/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+  <link rel="stylesheet" type="text/css" href="https://macroquad.rs/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="https://macroquad.rs/fonts.css">
+
+  <style>
+    .ui, h1, h2, h3, h4, h5 {
+        font-family: "Jost",-apple-system,blinkmacsystemfont,"Segoe UI",roboto,"Helvetica Neue",arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+    }
+    .zola-anchor {
+        font-size: 1.25rem;
+        margin-left: -2rem;
+        margin-right: 0.75rem;
+        text-decoration: none;
+        border-bottom-color: transparent;
+        cursor: pointer;
+      }
+  </style>
+  <script
+    src="https://macroquad.rs/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://macroquad.rs/semantic.min.js"></script>
+
+
+
+  
+    
+  
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://macroquad.rs/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://macroquad.rs/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://macroquad.rs/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://macroquad.rs/site.webmanifest">
+  
+
+</head>
+
+<body class="home">
+  
+    
+<div class="ui borderless huge menu grid">
+  <a class=
+
+"item active"
+
+ href="/">
+    Macroquad
+  </a>
+  <a class=
+
+"item"
+
+  href="/examples">
+    Examples
+  </a>
+  <a class=
+
+"item"
+
+ href="/articles">
+    Articles
+  </a>
+  <a class=
+
+"item"
+
+ href="/twiq">
+    This Week in Quad
+  </a>
+  <a class=
+
+"item"
+
+ href="/docs">
+    Docs
+  </a>
+  
+
+    <a href="https://github.com/not-fl3/macroquad" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on('click','.item',function(e){
+        $('.ui .item').removeClass('active');
+        $(this).addClass('active');
+});
+});
+</script>
+
+
+  
+
+  
+<style type="text/css">
+  .eleven.wide.column {
+      font-size: 18px;
+  }
+  pre,
+  code,
+  kbd,
+  samp {
+      font-family: $font-family-monospace;
+      font-size: $font-size-sm;
+      border-radius: $border-radius;
+  }
+  
+  code {
+      background: #f7f7f7;
+      //color: $black;
+      padding: 0.25rem 0.5rem;
+  }
+  
+  pre {
+      margin: 2rem 0;
+  }
+  
+  pre code {
+      display: block;
+      overflow-x: auto;
+      line-height: $line-height-base;
+      padding: 1.25rem 1.5rem;
+      tab-size: 4;
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
+  }
+</style>
+
+<div class="ui grid stackable container">
+  <div class="row" id="article">
+    <div class="eleven wide centered column">
+      <h2 class="ui large header">
+        <div class="content">This Week in Quads #9</div>
+      </h2>
+      <div class="ui hidden divider"></div>
+      <h1 id="nanoserde"><a class="zola-anchor" href="#nanoserde" aria-label="Anchor link for: nanoserde">🔗</a>Nanoserde</h1>
+<h2 id="0-2-0-release-call-for-testing"><a class="zola-anchor" href="#0-2-0-release-call-for-testing" aria-label="Anchor link for: 0-2-0-release-call-for-testing">🔗</a>0.2.0 Release - Call for Testing</h2>
+<p>Nanoserde will be bumped to <code>v0.2.0</code> in the near future, with a pair of breaking change related to cargo features. Previously, there was no way to separate out the different formats (<code>json</code>, <code>binary</code>, etc.), with all of them compiled each time. After v0.2.0 is release, individual formats may be enabled/disabled through the use of the relevant cargo feature. The <code>no_std</code> feature has also been removed, and has been replaced by a <code>std</code> feature which gates both usage on stable rust and SerDe traits on <code>std::collections::{HashMap, HashSet}</code>. <a href="https://github.com/not-fl3/nanoserde/blob/142d80f11f74041fa0c69d16659887d993184d9d/README.md?plain=1#L55">See the documentation for details on both changes</a>.</p>
+<p>These changes are merged in, but have not yet been released to <code>crates-io</code>. If you rely on <code>nanoserde</code>, version <code>0.2.0-beta.0</code> has been released to allow testing prior to the version bump. There should be no other breaking changes beyond the ones described above, but please file an issue if that is not the case. </p>
+<h1 id="sloop"><a class="zola-anchor" href="#sloop" aria-label="Anchor link for: sloop">🔗</a><a href="https://github.com/not-fl3/sloop">Sloop</a></h1>
+<p><img src="/week9/sloop.gif" alt="sloop" /></p>
+<p><a href="https://github.com/not-fl3/sloop">Sloop</a> is a (very) experimental build system. It was an experiment on how hard would it be to build a fairly complex 3d game without cargo. Somehow it worked, and results were too interesting to keep it private.</p>
+<p>While it is not very practical(yet), <code>sloop</code> might be a good case study on building a fully custom build system on top of raw <code>rustc</code>, with no <code>cargo</code> involved.</p>
+<p><a href="https://mastodon.gamedev.place/@fedor/112873297227332511">A long mastodon thread on how it works</a>.</p>
+<p><a href="https://github.com/not-fl3/sloop-example-projects">A few example projects</a></p>
+<pre data-lang="rust" style="background-color:#ffffff;color:#323232;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-weight:bold;color:#a71d5d;">fn </span><span style="font-weight:bold;color:#795da3;">main</span><span>() -&gt; </span><span style="color:#0086b3;">Result</span><span>&lt;(), ()&gt; {
+</span><span>    </span><span style="font-weight:bold;color:#a71d5d;">let</span><span> libc </span><span style="font-weight:bold;color:#a71d5d;">= </span><span>sloop::DependencyBuilder::new(</span><span style="color:#183691;">&quot;deps/libc&quot;</span><span>)
+</span><span>        .</span><span style="color:#62a35c;">build</span><span>()</span><span style="font-weight:bold;color:#a71d5d;">?</span><span>;
+</span><span>    </span><span style="font-weight:bold;color:#a71d5d;">let</span><span> miniquad </span><span style="font-weight:bold;color:#a71d5d;">= </span><span>sloop::DependencyBuilder::new(</span><span style="color:#183691;">&quot;deps/miniquad&quot;</span><span>)
+</span><span>        .</span><span style="color:#62a35c;">with_dependency</span><span>(</span><span style="font-weight:bold;color:#a71d5d;">&amp;</span><span>libc)
+</span><span>        .</span><span style="color:#62a35c;">build</span><span>()</span><span style="font-weight:bold;color:#a71d5d;">?</span><span>;
+</span><span>
+</span><span>    sloop::Builder::new()
+</span><span>        .</span><span style="color:#62a35c;">binary</span><span>()
+</span><span>        .</span><span style="color:#62a35c;">name</span><span>(</span><span style="color:#183691;">&quot;TriangleOnTheSloop&quot;</span><span>)
+</span><span>        .</span><span style="color:#62a35c;">entrypoint</span><span>(</span><span style="color:#183691;">&quot;src/triangle.rs&quot;</span><span>)
+</span><span>        .</span><span style="color:#62a35c;">with_dependency</span><span>(</span><span style="font-weight:bold;color:#a71d5d;">&amp;</span><span>libc)
+</span><span>        .</span><span style="color:#62a35c;">with_dependency</span><span>(</span><span style="font-weight:bold;color:#a71d5d;">&amp;</span><span>miniquad)
+</span><span>        .</span><span style="color:#62a35c;">build</span><span>()
+</span><span>}
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#ffffff;color:#323232;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-weight:bold;color:#a71d5d;">&gt;</span><span> ls
+</span><span>build.rs  deps/  src/
+</span><span>
+</span><span style="font-weight:bold;color:#a71d5d;">&gt;</span><span> sloop
+</span><span>Building libc
+</span><span>Building miniquad
+</span><span>Building TriangleOnTheSloop src/triangle.rs
+</span><span>Done!
+</span><span>
+</span><span style="font-weight:bold;color:#a71d5d;">&gt;</span><span> ls
+</span><span>build.rs  deps/  src/  TriangleOnTheSloop</span><span style="font-weight:bold;color:#a71d5d;">*
+</span></code></pre>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+    
+<footer class="ui inverted vertical footer segment" style="padding: 2em 0em; margin-top: 3em;">
+	<div class="ui container" style="">
+		<div class="ui stackable inverted divided equal height stackable grid">
+			<div class="eight wide column">
+                <div class="ui inverted link list">
+                    <a class="item" href="/atom.xml">                <h4 class="ui inverted header">RSS Feed</h4>
+</a>
+                </div>
+            </div>
+            <div class="eight wide column">
+                <div class="ui inverted link list">
+                      <a class="item" href="https://github.com/not-fl3/macroquad-examples/">                <h4 class="ui inverted header">Page source</h4>
+                </div>
+            </div>
+		</div>
+	</div>
+</footer>
+
+  
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Macroquad">
+
+  <link rel="preload" as="font" href="https://macroquad.rs/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://macroquad.rs/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+  <link rel="stylesheet" type="text/css" href="https://macroquad.rs/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="https://macroquad.rs/fonts.css">
+
+  <style>
+    .ui, h1, h2, h3, h4, h5 {
+        font-family: "Jost",-apple-system,blinkmacsystemfont,"Segoe UI",roboto,"Helvetica Neue",arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+    }
+    .zola-anchor {
+        font-size: 1.25rem;
+        margin-left: -2rem;
+        margin-right: 0.75rem;
+        text-decoration: none;
+        border-bottom-color: transparent;
+        cursor: pointer;
+      }
+  </style>
+  <script
+    src="https://macroquad.rs/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://macroquad.rs/semantic.min.js"></script>
+
+
+
+  
+    
+  
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://macroquad.rs/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://macroquad.rs/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://macroquad.rs/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://macroquad.rs/site.webmanifest">
+  
+
+</head>
+
+<body class="home">
+  
+    
+<div class="ui borderless huge menu grid">
+  <a class=
+
+"item active"
+
+ href="/">
+    Macroquad
+  </a>
+  <a class=
+
+"item"
+
+  href="/examples">
+    Examples
+  </a>
+  <a class=
+
+"item"
+
+ href="/articles">
+    Articles
+  </a>
+  <a class=
+
+"item"
+
+ href="/twiq">
+    This Week in Quad
+  </a>
+  <a class=
+
+"item"
+
+ href="/docs">
+    Docs
+  </a>
+  
+
+    <a href="https://github.com/not-fl3/macroquad" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on('click','.item',function(e){
+        $('.ui .item').removeClass('active');
+        $(this).addClass('active');
+});
+});
+</script>
+
+
+  
+
+  
+<style type="text/css">
+  .eleven.wide.column {
+      font-size: 18px;
+  }
+  pre,
+  code,
+  kbd,
+  samp {
+      font-family: $font-family-monospace;
+      font-size: $font-size-sm;
+      border-radius: $border-radius;
+  }
+  
+  code {
+      background: #f7f7f7;
+      //color: $black;
+      padding: 0.25rem 0.5rem;
+  }
+  
+  pre {
+      margin: 2rem 0;
+  }
+  
+  pre code {
+      display: block;
+      overflow-x: auto;
+      line-height: $line-height-base;
+      padding: 1.25rem 1.5rem;
+      tab-size: 4;
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
+  }
+</style>
+
+<div class="ui grid stackable container">
+  <div class="row" id="article">
+    <div class="eleven wide centered column">
+      <h2 class="ui large header">
+        <div class="content">This Week in Quads #2</div>
+      </h2>
+      <div class="ui hidden divider"></div>
+      <h2 id="option-to-reduce-cpu-usage-to-zero-when-waiting-for-an-incoming-event"><a class="zola-anchor" href="#option-to-reduce-cpu-usage-to-zero-when-waiting-for-an-incoming-event" aria-label="Anchor link for: option-to-reduce-cpu-usage-to-zero-when-waiting-for-an-incoming-event">🔗</a>Option to reduce CPU usage to zero when waiting for an incoming event</h2>
+<p>Now its possible to halt rendering when waiting for the event.
+In other words, with <code>blocking_event_loop: true</code> the following code will not print <code>Frame update</code> all the time, while the button will be responsive and the &quot;animation&quot; will still be smooth.</p>
+<pre data-lang="rust" style="background-color:#ffffff;color:#323232;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-weight:bold;color:#a71d5d;">...
+</span><span>
+</span><span>#[macroquad::main(window_conf)]
+</span><span>async </span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style="font-weight:bold;color:#795da3;">main</span><span>() {
+</span><span>    </span><span style="font-weight:bold;color:#a71d5d;">let mut</span><span> timer_frames </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">0</span><span>;
+</span><span>    </span><span style="font-weight:bold;color:#a71d5d;">loop </span><span>{
+</span><span>        info!(</span><span style="color:#183691;">&quot;Frame updated&quot;</span><span>);
+</span><span>        </span><span style="color:#62a35c;">clear_background</span><span>(</span><span style="color:#0086b3;">LIGHTGRAY</span><span>);
+</span><span>        </span><span style="font-weight:bold;color:#a71d5d;">if </span><span>ui::root_ui().</span><span style="color:#62a35c;">button</span><span>(</span><span style="color:#0086b3;">None</span><span>, </span><span style="color:#183691;">&quot;Test&quot;</span><span>) {
+</span><span>            info!(</span><span style="color:#183691;">&quot;Button pressed&quot;</span><span>);
+</span><span>            timer_frames </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">50</span><span>;
+</span><span>        }
+</span><span>        </span><span style="font-weight:bold;color:#a71d5d;">if</span><span> timer_frames </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">0 </span><span>{
+</span><span>            timer_frames </span><span style="font-weight:bold;color:#a71d5d;">-= </span><span style="color:#0086b3;">1</span><span>;
+</span><span>            </span><span style="color:#62a35c;">draw_rectangle</span><span>(</span><span style="color:#0086b3;">0.0</span><span>, </span><span style="color:#0086b3;">100.0</span><span>, timer_frames </span><span style="font-weight:bold;color:#a71d5d;">as f32 * </span><span style="color:#0086b3;">20.0</span><span>, </span><span style="color:#0086b3;">60.0</span><span>, </span><span style="color:#0086b3;">GREEN</span><span>);
+</span><span>            macroquad::miniquad::window::schedule_update();
+</span><span>        }
+</span><span>        </span><span style="color:#62a35c;">next_frame</span><span>().await
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p><a href="https://github.com/not-fl3/miniquad/pull/437">PR with details</a></p>
+<h2 id="js-version-versioning-rework"><a class="zola-anchor" href="#js-version-versioning-rework" aria-label="Anchor link for: js-version-versioning-rework">🔗</a>JS version versioning rework</h2>
+<p>Since miniquad 0.3 pretty much all *quad based app started their life with this error.
+<img src="/week2/error.png" alt="error" /><br />
+<em>Version mismatch: gl.js version...</em></p>
+<p>There was no trivial fix due to the versioning scheme miniquad used to have: each js file was suppose to correspond to the exact crate version.
+Now rust code can explicitly say which JS version it needs, which accomodates a lot better a real world scneario when rust crates updates a lot more frequently than JS.</p>
+<p>Migration to a new scheme example:</p>
+<pre data-lang="diff" style="background-color:#ffffff;color:#323232;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="background-color:#ffecec;font-weight:bold;font-style:italic;color:#bd2c00;">---</span><span style="font-style:italic;color:#969896;"> a/js/audio.js
+</span><span style="background-color:#eaffea;font-weight:bold;font-style:italic;color:#55a532;">+++</span><span style="font-style:italic;color:#969896;"> b/js/audio.js
+</span><span style="font-weight:bold;font-style:italic;color:#969896;">@@ -189,4 +189,4 @@ function register_plugin(importObject) {
+</span><span>     importObject.env.audio_playback_set_volume = audio_playback_set_volume;
+</span><span> }
+</span><span> 
+</span><span style="background-color:#ffecec;color:#323232;">-miniquad_add_plugin({ register_plugin, version: &quot;0.1.0&quot;, name: &quot;macroquad_audio&quot; });
+</span><span style="background-color:#eaffea;font-weight:bold;color:#55a532;">+</span><span style="background-color:#eaffea;color:#323232;">miniquad_add_plugin({ register_plugin, version: 1, name: &quot;macroquad_audio&quot; });
+</span><span>diff --git a/src/web_snd.rs b/src/web_snd.rs
+</span><span>index 357ec30..8c61541 100644
+</span><span style="background-color:#ffecec;font-weight:bold;font-style:italic;color:#bd2c00;">---</span><span style="font-style:italic;color:#969896;"> a/src/web_snd.rs
+</span><span style="background-color:#eaffea;font-weight:bold;font-style:italic;color:#55a532;">+++</span><span style="font-style:italic;color:#969896;"> b/src/web_snd.rs
+</span><span style="font-weight:bold;font-style:italic;color:#969896;">@@ -14,11 +14,7 @@ extern &quot;C&quot; {
+</span><span> #[no_mangle]
+</span><span> pub extern &quot;C&quot; fn macroquad_audio_crate_version() -&gt; u32 {
+</span><span style="background-color:#ffecec;color:#323232;">-    let major = 0;
+</span><span style="background-color:#ffecec;color:#323232;">-    let minor = 1;
+</span><span style="background-color:#ffecec;color:#323232;">-    let patch = 0;
+</span><span style="background-color:#ffecec;color:#323232;">-
+</span><span style="background-color:#ffecec;color:#323232;">-    (major &lt;&lt; 24) + (minor &lt;&lt; 16) + patch
+</span><span style="background-color:#eaffea;font-weight:bold;color:#55a532;">+</span><span style="background-color:#eaffea;color:#323232;">    1
+</span><span> }
+</span></code></pre>
+<p><a href="https://github.com/not-fl3/miniquad/pull/436">PR with details</a></p>
+<h1 id="atlases-fix"><a class="zola-anchor" href="#atlases-fix" aria-label="Anchor link for: atlases-fix">🔗</a>Atlases fix</h1>
+<p>If <code>build_textures_atlas</code> sometimes leaded to weird visual artifacts - it might be fixed now.</p>
+<pre data-lang="rust" style="background-color:#ffffff;color:#323232;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-weight:bold;color:#a71d5d;">let</span><span> texture: Texture2D </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">load_texture</span><span>(</span><span style="color:#183691;">&quot;examples/ferris.png&quot;</span><span>).await.</span><span style="color:#62a35c;">unwrap</span><span>();
+</span><span>texture::build_textures_atlas();
+</span><span style="font-weight:bold;color:#a71d5d;">loop </span><span>{
+</span><span>    </span><span style="color:#62a35c;">clear_background</span><span>(</span><span style="color:#0086b3;">LIGHTGRAY</span><span>);
+</span><span>    </span><span style="color:#62a35c;">draw_texture</span><span>(</span><span style="font-weight:bold;color:#a71d5d;">&amp;</span><span>texture, </span><span style="color:#0086b3;">0.</span><span>, </span><span style="color:#0086b3;">0.</span><span>, </span><span style="color:#0086b3;">WHITE</span><span>);
+</span><span>    </span><span style="color:#62a35c;">next_frame</span><span>().await
+</span><span>}
+</span></code></pre>
+<p>Before<br />
+<img src="/week2/ferris2.png" alt="2" /></p>
+<p>After<br />
+<img src="/week2/ferris1.png" alt="1" /></p>
+<h1 id="road-to-3d-macroquad"><a class="zola-anchor" href="#road-to-3d-macroquad" aria-label="Anchor link for: road-to-3d-macroquad">🔗</a>Road to 3d macroquad</h1>
+<p>Main new macroquad promise: we are not limited to static batching anymore, it should be possible to explicitly batch geometry, draw directly or use instanced rendering.</p>
+<p>This is an attempt to reproduce <a href="https://www.goodboydigital.com/pixijs/bunnymark/">pixijs's bunnymark</a> with new macroquad's instanced rendering.</p>
+<p><a href="https://not-fl3.github.io/miniquad-samples/bunnies/index.html">Web build</a></p>
+<p><a href="https://github.com/not-fl3/quad-gl/blob/v0.4/examples/bunnymark.rs">Source</a></p>
+<p><img src="/week2/bunnies2.png" alt="basic-shapes" /></p>
+<p>On my t480 it gives ~20fps on 400k bunnies, while old, static-only macroquad was capable of 15fps at 20k bunnies.</p>
+<p>Next goal - make it actually usable, and add instanced rendering <a href="https://github.com/not-fl3/quad-gl/blob/v0.4/examples/basic_shapes.rs">normal shapes example</a>.</p>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+    
+<footer class="ui inverted vertical footer segment" style="padding: 2em 0em; margin-top: 3em;">
+	<div class="ui container" style="">
+		<div class="ui stackable inverted divided equal height stackable grid">
+			<div class="eight wide column">
+                <div class="ui inverted link list">
+                    <a class="item" href="/atom.xml">                <h4 class="ui inverted header">RSS Feed</h4>
+</a>
+                </div>
+            </div>
+            <div class="eight wide column">
+                <div class="ui inverted link list">
+                      <a class="item" href="https://github.com/not-fl3/macroquad-examples/">                <h4 class="ui inverted header">Page source</h4>
+                </div>
+            </div>
+		</div>
+	</div>
+</footer>
+
+  
+
+</body>
+</html>
